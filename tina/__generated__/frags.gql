@@ -1,0 +1,136 @@
+fragment HomepageParts on Homepage {
+  __typename
+  siteName
+  navCtaLabel
+  navLinks {
+    __typename
+    label
+    href
+  }
+  hero {
+    __typename
+    kicker
+    eyebrow
+    titleLead
+    titleAccent
+    description
+    primaryCtaLabel
+    secondaryCtaLabel
+    cursorLabel
+    cursorYear
+    modalTag
+    modalTitle
+    modalDescription
+    backgroundVideo {
+      __typename
+      url
+      path
+      bucket
+      mimeType
+      size
+      width
+      height
+      duration
+      posterUrl
+      title
+      alt
+    }
+    showreelVideo {
+      __typename
+      url
+      path
+      bucket
+      mimeType
+      size
+      width
+      height
+      duration
+      posterUrl
+      title
+      alt
+    }
+    scrollLabel
+  }
+  marqueeItems
+  servicesSection {
+    __typename
+    eyebrow
+    titleLine1
+    titleLine2
+    description
+    watchLabel
+    services {
+      __typename
+      num
+      name
+      count
+      desc
+      items {
+        __typename
+        tag
+        title
+        video {
+          __typename
+          url
+          path
+          bucket
+          mimeType
+          size
+          width
+          height
+          duration
+          posterUrl
+          title
+          alt
+        }
+      }
+    }
+  }
+  processSection {
+    __typename
+    eyebrow
+    title
+    steps {
+      __typename
+      num
+      title
+      text
+    }
+  }
+  testimonialsSection {
+    __typename
+    eyebrow
+    title
+    badge
+    items {
+      __typename
+      quote
+      name
+      role
+      badge
+    }
+  }
+  contactSection {
+    __typename
+    eyebrow
+    titleLead
+    titleAccent
+    titleTrail
+    description
+    ctaLabel
+    email
+    socialHandle
+  }
+  footer {
+    __typename
+    tagline
+    menuTitle
+    legalTitle
+    imprintLabel
+    imprintHref
+    privacyLabel
+    privacyHref
+    copyright
+    credits
+  }
+}

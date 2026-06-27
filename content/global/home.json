@@ -1,0 +1,514 @@
+{
+	"siteName": "You are the Light",
+	"navCtaLabel": "Projekt anfragen",
+	"navLinks": [
+		{
+			"label": "Leistungen",
+			"href": "#leistungen"
+		},
+		{
+			"label": "Werke",
+			"href": "#leistungen"
+		},
+		{
+			"label": "Ablauf",
+			"href": "#ablauf"
+		},
+		{
+			"label": "Kontakt",
+			"href": "#kontakt"
+		}
+	],
+	"hero": {
+		"kicker": "16:9 - Filmproduktion",
+		"eyebrow": "Image · Event · Produkt · Social",
+		"titleLead": "you are",
+		"titleAccent": "light",
+		"description": "Ich halte fest, was zaehlt - von Hochzeiten bis Dokumentationen, von Social Media bis Unternehmensvideos. Jeder Frame ist eine Chance, etwas Echtes zu zeigen.",
+		"primaryCtaLabel": "Arbeiten ansehen",
+		"secondaryCtaLabel": "Projekt anfragen",
+		"cursorLabel": "Showreel",
+		"cursorYear": "2025",
+		"modalTag": "Showreel",
+		"modalTitle": "2025",
+		"modalDescription": "Ein Querschnitt durch meine Arbeit der letzten Saison - Imagefilme, Events, Produkte und Social-Media-Clips, verdichtet zu einem Reel.",
+		"backgroundVideo": {
+			"url": "https://www.pexels.com/de-de/download/video/4763086/",
+			"path": "videos/hero/demo-showreel.mp4",
+			"bucket": "public",
+			"mimeType": "video/mp4",
+			"size": 0,
+			"width": 1920,
+			"height": 1080,
+			"duration": 0,
+			"posterUrl": "",
+			"title": "Hero Background",
+			"alt": "Abstrakter Hero-Hintergrund"
+		},
+		"showreelVideo": {
+			"url": "https://www.pexels.com/de-de/download/video/4763086/",
+			"path": "videos/showreel/demo-showreel.mp4",
+			"bucket": "public",
+			"mimeType": "video/mp4",
+			"size": 0,
+			"width": 1920,
+			"height": 1080,
+			"duration": 0,
+			"posterUrl": "",
+			"title": "Showreel 2025",
+			"alt": "Showreel 2025"
+		},
+		"scrollLabel": "Scroll"
+	},
+	"marqueeItems": ["Imagefilm", "Eventfilm", "Produktfilm", "Social Media", "Dokumentation", "Hochzeit"],
+	"servicesSection": {
+		"eyebrow": "(01) Leistungen & Werke",
+		"titleLine1": "Was ich fuer",
+		"titleLine2": "Sie tun kann",
+		"description": "Klappen Sie eine Leistung auf und sehen Sie direkt passende Arbeiten dazu. Jede Reihe laesst sich durchscrollen, ein Klick oeffnet den Film gross.",
+		"watchLabel": "Ansehen ↗",
+		"services": [
+			{
+				"num": "01",
+				"name": "Imagefilm",
+				"count": "08 Filme",
+				"desc": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofuer es arbeitet und wie es wahrgenommen werden soll.",
+				"items": [
+					{
+						"tag": "Studio Nord",
+						"title": "Markenportraet",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/imagefilm-markenportraet.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Imagefilm Markenportraet",
+							"alt": "Studio Nord Markenportraet"
+						}
+					},
+					{
+						"tag": "Manufaktur",
+						"title": "Handwerk",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/imagefilm-handwerk.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Imagefilm Handwerk",
+							"alt": "Manufaktur Handwerk"
+						}
+					},
+					{
+						"tag": "Tech Lab",
+						"title": "Innovation",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/imagefilm-innovation.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Imagefilm Innovation",
+							"alt": "Tech Lab Innovation"
+						}
+					},
+					{
+						"tag": "Heritage",
+						"title": "Tradition",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/imagefilm-tradition.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Imagefilm Tradition",
+							"alt": "Heritage Tradition"
+						}
+					}
+				]
+			},
+			{
+				"num": "02",
+				"name": "Eventfilm",
+				"count": "06 Filme",
+				"desc": "Haelt nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+				"items": [
+					{
+						"tag": "Open Air",
+						"title": "Sommerfest",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/eventfilm-sommerfest.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Eventfilm Sommerfest",
+							"alt": "Open Air Sommerfest"
+						}
+					},
+					{
+						"tag": "Award Night",
+						"title": "Gala",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/eventfilm-gala.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Eventfilm Gala",
+							"alt": "Award Night Gala"
+						}
+					},
+					{
+						"tag": "Keynote",
+						"title": "Konferenz",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/eventfilm-konferenz.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Eventfilm Konferenz",
+							"alt": "Keynote Konferenz"
+						}
+					},
+					{
+						"tag": "Launch",
+						"title": "Release",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/eventfilm-release.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Eventfilm Release",
+							"alt": "Launch Release"
+						}
+					}
+				]
+			},
+			{
+				"num": "03",
+				"name": "Produktfilm",
+				"count": "05 Filme",
+				"desc": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlaegt technische Lautstaerke.",
+				"items": [
+					{
+						"tag": "Closeup",
+						"title": "Objekt 01",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/produktfilm-objekt-01.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Produktfilm Objekt 01",
+							"alt": "Closeup Objekt 01"
+						}
+					},
+					{
+						"tag": "Lineup",
+						"title": "Serie",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/produktfilm-serie.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Produktfilm Serie",
+							"alt": "Lineup Serie"
+						}
+					},
+					{
+						"tag": "Makro",
+						"title": "Detail",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/produktfilm-detail.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Produktfilm Detail",
+							"alt": "Makro Detail"
+						}
+					},
+					{
+						"tag": "Reveal",
+						"title": "Unboxing",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/produktfilm-unboxing.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Produktfilm Unboxing",
+							"alt": "Reveal Unboxing"
+						}
+					}
+				]
+			},
+			{
+				"num": "04",
+				"name": "Social Media",
+				"count": "12 Reels",
+				"desc": "Lebt von Praesenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmaessig sichtbar bleibt.",
+				"items": [
+					{
+						"tag": "Atelier",
+						"title": "Reel",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/social-reel.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Social Media Reel",
+							"alt": "Atelier Reel"
+						}
+					},
+					{
+						"tag": "BTS",
+						"title": "Behind",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/social-behind.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Social Media Behind",
+							"alt": "BTS Behind"
+						}
+					},
+					{
+						"tag": "Hook",
+						"title": "Teaser",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/social-teaser.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Social Media Teaser",
+							"alt": "Hook Teaser"
+						}
+					},
+					{
+						"tag": "Cut",
+						"title": "Trend",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/social-trend.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Social Media Trend",
+							"alt": "Cut Trend"
+						}
+					}
+				]
+			},
+			{
+				"num": "05",
+				"name": "Hochzeit",
+				"count": "09 Filme",
+				"desc": "Ihr schoenster Tag, eingefangen mit Gespuer fuer Emotion und Detail - ein Film, den Sie ein Leben lang wieder ansehen.",
+				"items": [
+					{
+						"tag": "Toskana",
+						"title": "Sommer",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/hochzeit-sommer.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Hochzeit Sommer",
+							"alt": "Toskana Sommer"
+						}
+					},
+					{
+						"tag": "Berg",
+						"title": "Winter",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/hochzeit-winter.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Hochzeit Winter",
+							"alt": "Berg Winter"
+						}
+					},
+					{
+						"tag": "Hafen",
+						"title": "Sunset",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/hochzeit-sunset.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Hochzeit Sunset",
+							"alt": "Hafen Sunset"
+						}
+					},
+					{
+						"tag": "Garten",
+						"title": "Fruehling",
+						"video": {
+							"url": "https://www.pexels.com/de-de/download/video/4763086/",
+							"path": "videos/services/hochzeit-fruehling.mp4",
+							"bucket": "public",
+							"mimeType": "video/mp4",
+							"size": 0,
+							"width": 1920,
+							"height": 1080,
+							"duration": 0,
+							"posterUrl": "",
+							"title": "Hochzeit Fruehling",
+							"alt": "Garten Fruehling"
+						}
+					}
+				]
+			}
+		]
+	},
+	"processSection": {
+		"eyebrow": "(02) Ablauf",
+		"title": "So entsteht Ihr Film",
+		"steps": [
+			{
+				"num": "01",
+				"title": "Kennenlernen",
+				"text": "Wir sprechen ueber Ihre Idee, Ihr Ziel und Ihre Geschichte. Daraus entsteht ein klares Konzept."
+			},
+			{
+				"num": "02",
+				"title": "Konzept & Dreh",
+				"text": "Vom Storyboard bis zum Set: Jeder Frame wird vorbereitet und vor Ort mit Blick fuer das Echte eingefangen."
+			},
+			{
+				"num": "03",
+				"title": "Schnitt & Uebergabe",
+				"text": "Farbe, Schnitt und Ton geben dem Film seinen letzten Schliff. Sie erhalten alle benoetigten Formate."
+			}
+		]
+	},
+	"testimonialsSection": {
+		"eyebrow": "(03) Stimmen",
+		"title": "Kundenstimmen",
+		"badge": "Platzhalter",
+		"items": [
+			{
+				"quote": "Malte hat unsere Vision in Bewegung uebersetzt. Das Ergebnis war ehrlicher und staerker, als wir es uns vorgestellt hatten.",
+				"name": "Vorname Nachname",
+				"role": "Position · Unternehmen",
+				"badge": "Platzhalter"
+			},
+			{
+				"quote": "Professionell von der ersten Minute an. Jeder Frame sitzt - und genau das spueren Sie im fertigen Film.",
+				"name": "Vorname Nachname",
+				"role": "Position · Unternehmen",
+				"badge": "Platzhalter"
+			}
+		]
+	},
+	"contactSection": {
+		"eyebrow": "Kontakt",
+		"titleLead": "Lassen Sie uns Ihre",
+		"titleAccent": "Geschichte",
+		"titleTrail": "erzaehlen",
+		"description": "Kontaktieren Sie mich fuer Ihr naechstes Projekt und wir schaffen etwas Echtes.",
+		"ctaLabel": "Projekt anfragen",
+		"email": "hallo@maltemedia.de",
+		"socialHandle": "@maltemedia"
+	},
+	"footer": {
+		"tagline": "you are the light",
+		"menuTitle": "Menue",
+		"legalTitle": "Rechtliches",
+		"imprintLabel": "Impressum",
+		"imprintHref": "#",
+		"privacyLabel": "Datenschutz",
+		"privacyHref": "#",
+		"copyright": "© 2026 Malte Media - Alle Rechte vorbehalten",
+		"credits": "Gestaltet & umgesetzt von Malte Media"
+	}
+}

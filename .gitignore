@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+dist
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+github
+github.pub
+todo.txt
+.env
+.env.*

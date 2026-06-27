@@ -1,0 +1,36 @@
+{
+  "name": "youarethelight",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev --webpack\"",
+    "dev:self-hosted": "tinacms dev -c \"next dev --webpack\"",
+    "build": "tinacms build && next build --webpack",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.108.2",
+    "@tinacms/datalayer": "^2.0.25",
+    "@upstash/redis": "^1.38.0",
+    "next": "16.2.9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tinacms": "^3.9.3",
+    "tinacms-gitprovider-github": "^4.1.12",
+    "upstash-redis-level": "^1.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@tinacms/cli": "^2.5.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "16.2.9",
+    "postcss": "^8.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}

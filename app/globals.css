@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+
+:root {
+  --bg: #191919;
+  --surface: #202020;
+  --ink: #f4f1ea;
+  --muted: rgba(244, 241, 234, 0.62);
+  --faint: rgba(244, 241, 234, 0.34);
+  --line: rgba(244, 241, 234, 0.14);
+  --gold: #ffc648;
+  --stripe-a: #242424;
+  --stripe-b: #1c1c1c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Hanken Grotesk", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.font-display {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.font-mono-ui {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 1px;
+  width: 0;
+  background: var(--gold);
+  transition: width 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.navlink:hover::after,
+.navlink:focus-visible::after {
+  width: 100%;
+}
+
+.row-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 198, 72, 0.55) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.row-scroll::-webkit-scrollbar {
+  height: 7px;
+}
+
+.row-scroll::-webkit-scrollbar-track {
+  background: rgba(244, 241, 234, 0.06);
+  border-radius: 999px;
+}
+
+.row-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 198, 72, 0.5);
+  border-radius: 999px;
+}
+
+.row-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 198, 72, 0.8);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.btn-cta {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.35s;
+}
+
+.btn-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px -16px rgba(255, 198, 72, 0.7);
+}
+
+.vidcard video {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.vidcard:hover video {
+  transform: scale(1.07);
+}
+
+.vidcard:hover .card-overlay {
+  opacity: 1;
+}
+
+.vidcard:hover .play-dot {
+  transform: scale(1.12) rotate(360deg);
+}
+
+.play-dot {
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.marquee-track {
+  animation: marquee 34s linear infinite;
+}
+
+.pulse-y {
+  animation: cue 1.8s ease-in-out infinite;
+}
+
+.pulse-x {
+  animation: cue-x 1.8s ease-in-out infinite;
+}
+
+.hero-video {
+  animation: kenburns 24s ease-out both;
+}
+
+.menu-fade {
+  animation: fade-in 0.28s ease;
+}
+
+.modal-in {
+  animation: modal-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.accordion-in {
+  animation: accordion-open 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateY(7px);
+    opacity: 1;
+  }
+}
+
+@keyframes cue-x {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateX(8px);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes accordion-open {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.001);
+  }
+
+  to {
+    transform: scale(1.14);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
