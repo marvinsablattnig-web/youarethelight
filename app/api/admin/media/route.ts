@@ -23,7 +23,7 @@ export async function DELETE(request: Request) {
     body?.path || [body?.directory, body?.filename].filter(Boolean).join("/");
 
   if (!path) {
-    return NextResponse.json({ error: "Es wurde kein Storage-Pfad uebergeben." }, { status: 400 });
+    return NextResponse.json({ error: "Es wurde kein Storage-Pfad übergeben." }, { status: 400 });
   }
 
   try {
@@ -38,7 +38,7 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Asset konnte nicht geloescht werden." },
+      { error: error instanceof Error ? error.message : "Asset konnte nicht gelöscht werden." },
       { status: 500 },
     );
   }

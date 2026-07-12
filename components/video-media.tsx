@@ -1,9 +1,12 @@
+"use client";
+
 import {
   getVideoSourceType,
   getVideoUrl,
   getVimeoEmbedUrl,
   type VideoAsset,
 } from "@/lib/cms/media";
+import { useCookieConsent } from "@/lib/cookie-consent";
 
 type VideoMediaProps = {
   asset?: VideoAsset | null;
@@ -36,6 +39,7 @@ export function VideoMedia({
   pointerEventsNone,
   vimeoCover,
 }: VideoMediaProps) {
+  const { vimeoAllowed, acceptAll } = useCookieConsent();
   const sourceType = getVideoSourceType(asset);
 
   if (sourceType === "vimeo") {
@@ -49,6 +53,32 @@ export function VideoMedia({
 
     if (!src) {
       return null;
+    }
+
+    if (!vimeoAllowed) {
+      if (pointerEventsNone) {
+        return <div className={`${className} pointer-events-none bg-[color-mix(in_srgb,var(--surface)_90%,black)]`} />;
+      }
+
+      return (
+        <div
+          className={`${className} flex flex-col items-center justify-center gap-3 overflow-hidden bg-[color-mix(in_srgb,var(--surface)_90%,black)] p-4 text-center`}
+        >
+          <p className="font-mono-ui m-0 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--muted)]">
+            Externe Vimeo-Inhalte
+          </p>
+          <p className="m-0 max-w-[32ch] text-[13px] leading-[1.5] text-[var(--faint)]">
+            Zum Abspielen werden Cookies von Vimeo geladen.
+          </p>
+          <button
+            type="button"
+            onClick={acceptAll}
+            className="btn-cta rounded-full bg-[var(--gold)] px-5 py-2 text-[12px] font-semibold text-[var(--bg)]"
+          >
+            Video laden
+          </button>
+        </div>
+      );
     }
 
     return (

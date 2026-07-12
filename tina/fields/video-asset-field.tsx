@@ -158,7 +158,7 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
     }
 
     if (file.size > MAX_VIDEO_UPLOAD_BYTES) {
-      setError("Die Datei ist zu gross fuer den vordefinierten Upload-Flow.");
+      setError("Die Datei ist zu groß für den vordefinierten Upload-Flow.");
       return;
     }
 
@@ -276,13 +276,13 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
       const body = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        throw new Error(body.error || "Asset konnte nicht geloescht werden.");
+        throw new Error(body.error || "Asset konnte nicht gelöscht werden.");
       }
 
       input.onChange(null);
       await loadLibrary();
     } catch (deleteError) {
-      setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht geloescht werden.");
+      setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht gelöscht werden.");
     }
   };
 
@@ -308,7 +308,7 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
             />
           ) : (
             <div className="flex aspect-video w-full items-center justify-center bg-slate-950 px-4 text-center text-sm text-slate-300">
-              Vimeo-Link einfuegen, um die Vorschau zu sehen.
+              Vimeo-Link einfügen, um die Vorschau zu sehen.
             </div>
           )}
           <div className="grid gap-2 p-4 text-xs text-slate-600">
@@ -378,7 +378,7 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
       {currentSourceType === "upload" ? (
         <div className="flex flex-wrap gap-2">
           <label className="inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700">
-            {isUploading ? "Upload laeuft..." : "Video hochladen"}
+            {isUploading ? "Upload läuft..." : "Video hochladen"}
             <input
               type="file"
               accept="video/mp4,video/quicktime,video/webm,video/x-m4v"
@@ -418,7 +418,7 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
             className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-500"
           />
           {currentVimeoUrl && !extractVimeoVideoId(currentVimeoUrl) ? (
-            <p className="text-xs text-rose-600">Der Link enthaelt keine gueltige Vimeo-Video-ID.</p>
+            <p className="text-xs text-rose-600">Der Link enthält keine gültige Vimeo-Video-ID.</p>
           ) : null}
           {currentAsset ? (
             <button

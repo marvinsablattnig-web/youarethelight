@@ -1,4 +1,7 @@
+"use client";
+
 import { getImageUrl } from "@/lib/cms/media";
+import { useCookieConsent } from "@/lib/cookie-consent";
 import type { HomeContent } from "@/lib/home-content";
 
 type SiteFooterProps = {
@@ -6,22 +9,14 @@ type SiteFooterProps = {
 };
 
 export function SiteFooter({ content }: SiteFooterProps) {
+	const { openSettings } = useCookieConsent();
 	const logoUrl = getImageUrl(content.logo);
 
 	return (
-		<footer className="border-t border-[var(--line)] px-[clamp(20px,5vw,64px)] pb-10 pt-[clamp(48px,6vw,72px)]">
+		<footer className="relative z-10 bg-[var(--bg)] px-[clamp(20px,5vw,64px)] pb-10 pt-[clamp(48px,6vw,72px)]">
 			<div className="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-10">
-				<div className="max-w-[300px]">
-					<div className="font-mono-ui text-[13px] font-medium uppercase tracking-[0.2em]">
-						{logoUrl ? (
-							<img src={logoUrl} alt={content.logo?.alt || content.siteName} className="h-10 w-auto max-w-[220px] object-contain" />
-						) : (
-							content.siteName
-						)}
-					</div>
-					<p className="font-display mt-[14px] text-[30px] leading-none tracking-[0.02em] text-[var(--muted)]">
-						{content.footer.tagline}
-					</p>
+				<div className="flex max-w-[360px] items-center">
+					<img src={logoUrl || "/logo.svg"} alt={content.logo?.alt || content.siteName} className="h-full max-h-[220px] w-auto object-contain" />
 				</div>
 
 				<div className="flex flex-wrap gap-[clamp(40px,6vw,90px)]">
@@ -48,7 +43,12 @@ export function SiteFooter({ content }: SiteFooterProps) {
 
 			<div className="font-mono-ui mx-auto mt-[clamp(40px,5vw,60px)] flex max-w-[1240px] flex-wrap justify-between gap-4 border-t border-[var(--line)] pt-6 text-[11px] font-medium tracking-[0.06em] text-[var(--faint)]">
 				<span>{content.footer.copyright}</span>
-				<span>{content.footer.credits}</span>
+				<div className="flex flex-wrap items-center gap-4">
+					<button type="button" onClick={openSettings} className="underline underline-offset-4 hover:text-[var(--gold)]">
+						Cookie-Einstellungen
+					</button>
+					<span>{content.footer.credits}</span>
+				</div>
 			</div>
 		</footer>
 	);

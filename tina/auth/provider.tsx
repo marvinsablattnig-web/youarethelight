@@ -40,7 +40,7 @@ const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
         }
       } catch {
         if (isMounted) {
-          setError("Die aktuelle Session konnte nicht geprueft werden.");
+          setError("Die aktuelle Session konnte nicht geprüft werden.");
         }
       }
     };
@@ -114,8 +114,8 @@ const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
 
         {status === "sent" ? (
           <p className="mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200">
-            Der Link wurde verschickt. Oeffne die E-Mail auf diesem Geraet und folge dem
-            Login-Link zurueck in den Admin.
+            Der Link wurde verschickt. Öffne die E-Mail auf diesem Gerät und folge dem
+            Login-Link zurück in den Admin.
           </p>
         ) : null}
 

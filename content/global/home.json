@@ -35,7 +35,7 @@
     "eyebrow": "Image · Event · Produkt · Social",
     "titleLead": "you are",
     "titleAccent": "light",
-    "description": "Ich halte fest, was zaehlt - von Hochzeiten bis Dokumentationen, von Social Media bis Unternehmensvideos. Jeder Frame ist eine Chance, etwas Echtes zu zeigen.",
+    "description": "Ich halte fest, was zählt - von Hochzeiten bis Dokumentationen, von Social Media bis Unternehmensvideos. Jeder Frame ist eine Chance, etwas Echtes zu zeigen.",
     "primaryCtaLabel": "Arbeiten ansehen",
     "secondaryCtaLabel": "Projekt anfragen",
     "cursorLabel": "Showreel",
@@ -84,16 +84,16 @@
   ],
   "servicesSection": {
     "eyebrow": "Leistungen & Werke",
-    "titleLine1": "Was ich fuer",
+    "titleLine1": "Was ich für",
     "titleLine2": "Sie tun kann",
-    "description": "Klappen Sie eine Leistung auf und sehen Sie direkt passende Arbeiten dazu. Jede Reihe laesst sich durchscrollen, ein Klick oeffnet den Film gross.",
+    "description": "Klappen Sie eine Leistung auf und sehen Sie direkt passende Arbeiten dazu. Jede Reihe lässt sich durchscrollen, ein Klick öffnet den Film groß.",
     "watchLabel": "Ansehen ↗",
     "services": [
       {
         "num": "01",
         "name": "Imagefilm",
         "count": "08 Filme",
-        "desc": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofuer es arbeitet und wie es wahrgenommen werden soll.",
+        "desc": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
         "items": [
           {
             "tag": "Test",
@@ -121,8 +121,8 @@
           },
           {
             "tag": "Studio Nord",
-            "title": "Markenportraet",
-            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofuer es arbeitet und wie es wahrgenommen werden soll.",
+            "title": "Markenporträt",
+            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
             "video": {
               "sourceType": "vimeo",
               "url": "",
@@ -135,14 +135,14 @@
               "height": null,
               "duration": null,
               "posterUrl": "",
-              "title": "Imagefilm Markenportraet",
-              "alt": "Studio Nord Markenportraet"
+              "title": "Imagefilm Markenporträt",
+              "alt": "Studio Nord Markenporträt"
             }
           },
           {
             "tag": "Manufaktur",
             "title": "Handwerk",
-            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofuer es arbeitet und wie es wahrgenommen werden soll.",
+            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/imagefilm-handwerk.mp4",
@@ -160,7 +160,7 @@
           {
             "tag": "Tech Lab",
             "title": "Innovation",
-            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofuer es arbeitet und wie es wahrgenommen werden soll.",
+            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/imagefilm-innovation.mp4",
@@ -178,7 +178,7 @@
           {
             "tag": "Heritage",
             "title": "Tradition",
-            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofuer es arbeitet und wie es wahrgenommen werden soll.",
+            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/imagefilm-tradition.mp4",
@@ -199,12 +199,12 @@
         "num": "02",
         "name": "Eventfilm",
         "count": "06 Filme",
-        "desc": "Haelt nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+        "desc": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
         "items": [
           {
             "tag": "Open Air",
             "title": "Sommerfest",
-            "description": "Haelt nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+            "description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/eventfilm-sommerfest.mp4",
@@ -222,7 +222,7 @@
           {
             "tag": "Award Night",
             "title": "Gala",
-            "description": "Haelt nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+            "description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/eventfilm-gala.mp4",
@@ -240,7 +240,7 @@
           {
             "tag": "Keynote",
             "title": "Konferenz",
-            "description": "Haelt nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+            "description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/eventfilm-konferenz.mp4",
@@ -258,7 +258,7 @@
           {
             "tag": "Launch",
             "title": "Release",
-            "description": "Haelt nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+            "description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/eventfilm-release.mp4",
@@ -279,12 +279,12 @@
         "num": "03",
         "name": "Produktfilm",
         "count": "05 Filme",
-        "desc": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlaegt technische Lautstaerke.",
+        "desc": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
         "items": [
           {
             "tag": "Closeup",
             "title": "Objekt 01",
-            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlaegt technische Lautstaerke.",
+            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/produktfilm-objekt-01.mp4",
@@ -302,7 +302,7 @@
           {
             "tag": "Lineup",
             "title": "Serie",
-            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlaegt technische Lautstaerke.",
+            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/produktfilm-serie.mp4",
@@ -320,7 +320,7 @@
           {
             "tag": "Makro",
             "title": "Detail",
-            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlaegt technische Lautstaerke.",
+            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/produktfilm-detail.mp4",
@@ -338,7 +338,7 @@
           {
             "tag": "Reveal",
             "title": "Unboxing",
-            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlaegt technische Lautstaerke.",
+            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/produktfilm-unboxing.mp4",
@@ -359,12 +359,12 @@
         "num": "04",
         "name": "Social Media",
         "count": "12 Reels",
-        "desc": "Lebt von Praesenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmaessig sichtbar bleibt.",
+        "desc": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
         "items": [
           {
             "tag": "Atelier",
             "title": "Reel",
-            "description": "Lebt von Praesenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmaessig sichtbar bleibt.",
+            "description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/social-reel.mp4",
@@ -382,7 +382,7 @@
           {
             "tag": "BTS",
             "title": "Behind",
-            "description": "Lebt von Praesenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmaessig sichtbar bleibt.",
+            "description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/social-behind.mp4",
@@ -400,7 +400,7 @@
           {
             "tag": "Hook",
             "title": "Teaser",
-            "description": "Lebt von Praesenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmaessig sichtbar bleibt.",
+            "description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/social-teaser.mp4",
@@ -418,7 +418,7 @@
           {
             "tag": "Cut",
             "title": "Trend",
-            "description": "Lebt von Praesenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmaessig sichtbar bleibt.",
+            "description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
             "video": {
               "url": "https://www.pexels.com/de-de/download/video/4763086/",
               "path": "videos/services/social-trend.mp4",
@@ -444,12 +444,12 @@
       {
         "num": "01",
         "title": "Kennenlernen",
-        "text": "Wir sprechen ueber Ihre Idee, Ihr Ziel und Ihre Geschichte. Daraus entsteht ein klares Konzept."
+        "text": "Wir sprechen über Ihre Idee, Ihr Ziel und Ihre Geschichte. Daraus entsteht ein klares Konzept."
       },
       {
         "num": "02",
         "title": "Konzept & Dreh",
-        "text": "Vom Storyboard bis zum Set: Jeder Frame wird vorbereitet und vor Ort mit Blick fuer das Echte eingefangen."
+        "text": "Vom Storyboard bis zum Set: Jeder Frame wird vorbereitet und vor Ort mit Blick für das Echte eingefangen."
       },
       {
         "num": "03",
@@ -494,13 +494,13 @@
     "badge": "Platzhalter",
     "items": [
       {
-        "quote": "Beni hat unsere Vision in Bewegung uebersetzt. Das Ergebnis war ehrlicher und staerker, als wir es uns vorgestellt hatten.",
+        "quote": "Beni hat unsere Vision in Bewegung übersetzt. Das Ergebnis war ehrlicher und stärker, als wir es uns vorgestellt hatten.",
         "name": "Marvin Sablattnig",
         "role": "Malte Media",
         "badge": "10/10"
       },
       {
-        "quote": "Professionell von der ersten Minute an. Jeder Frame sitzt - und genau das spueren Sie im fertigen Film.",
+        "quote": "Professionell von der ersten Minute an. Jeder Frame sitzt - und genau das spüren Sie im fertigen Film.",
         "name": "Vorname Nachname",
         "role": "Position · Unternehmen",
         "badge": "Platzhalter"
@@ -532,8 +532,8 @@
     "eyebrow": "Kontakt",
     "titleLead": "Lassen Sie uns Ihre",
     "titleAccent": "Geschichte",
-    "titleTrail": "erzaehlen",
-    "description": "Kontaktieren Sie mich fuer Ihr naechstes Projekt und wir schaffen etwas Echtes.",
+    "titleTrail": "erzählen",
+    "description": "Kontaktieren Sie mich für Ihr nächstes Projekt und wir schaffen etwas Echtes.",
     "ctaLabel": "Projekt anfragen",
     "email": "office@youarehtelight.at",
     "backgroundType": "video",
@@ -572,7 +572,7 @@
   },
   "footer": {
     "tagline": "you are the light",
-    "menuTitle": "Menue",
+    "menuTitle": "Menü",
     "legalTitle": "Rechtliches",
     "imprintLabel": "Impressum",
     "imprintHref": "/impressum",

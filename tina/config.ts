@@ -46,7 +46,7 @@ const videoAssetFields = (): TinaField[] => [
   {
     type: "number",
     name: "size",
-    label: "Dateigroesse",
+    label: "Dateigröße",
   },
   {
     type: "number",
@@ -56,7 +56,7 @@ const videoAssetFields = (): TinaField[] => [
   {
     type: "number",
     name: "height",
-    label: "Hoehe",
+    label: "Höhe",
   },
   {
     type: "number",
@@ -114,7 +114,7 @@ const imageAssetFields = (): TinaField[] => [
   {
     type: "number",
     name: "size",
-    label: "Dateigroesse",
+    label: "Dateigröße",
   },
   {
     type: "number",
@@ -124,7 +124,7 @@ const imageAssetFields = (): TinaField[] => [
   {
     type: "number",
     name: "height",
-    label: "Hoehe",
+    label: "Höhe",
   },
   {
     type: "string",
@@ -354,7 +354,7 @@ export default defineConfig({
                   {
                     type: "string",
                     name: "count",
-                    label: "Zaehler",
+                    label: "Zähler",
                   },
                   {
                     type: "string",
@@ -459,7 +459,7 @@ export default defineConfig({
           {
             type: "object",
             name: "aboutSection",
-            label: "Ueber mich",
+            label: "Über mich",
             fields: [
               {
                 type: "string",
@@ -689,7 +689,7 @@ export default defineConfig({
               {
                 type: "string",
                 name: "menuTitle",
-                label: "Menue Titel",
+                label: "Menü Titel",
               },
               {
                 type: "string",

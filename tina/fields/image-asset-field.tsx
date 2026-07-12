@@ -108,7 +108,7 @@ export const ImageAssetField = ({ field, input }: ImageAssetFieldProps) => {
     }
 
     if (file.size > MAX_IMAGE_UPLOAD_BYTES) {
-      setError("Die Datei ist zu gross fuer den Bild-Upload.");
+      setError("Die Datei ist zu groß für den Bild-Upload.");
       return;
     }
 
@@ -204,13 +204,13 @@ export const ImageAssetField = ({ field, input }: ImageAssetFieldProps) => {
       const body = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        throw new Error(body.error || "Asset konnte nicht geloescht werden.");
+        throw new Error(body.error || "Asset konnte nicht gelöscht werden.");
       }
 
       input.onChange(null);
       await loadLibrary();
     } catch (deleteError) {
-      setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht geloescht werden.");
+      setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht gelöscht werden.");
     }
   };
 
@@ -223,7 +223,7 @@ export const ImageAssetField = ({ field, input }: ImageAssetFieldProps) => {
         </div>
         <div className="flex flex-wrap gap-2">
           <label className="inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700">
-            {isUploading ? "Upload laeuft..." : "Bild hochladen"}
+            {isUploading ? "Upload läuft..." : "Bild hochladen"}
             <input
               type="file"
               accept="image/jpeg,image/png,image/webp,image/svg+xml,image/avif"

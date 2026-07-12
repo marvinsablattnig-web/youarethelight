@@ -69,7 +69,7 @@ export const normalizeStorageDirectory = (directory: string) => {
       !cleaned.startsWith("videos/") &&
       !cleaned.startsWith("images/"))
   ) {
-    throw new Error("Ungueltiges Upload-Ziel.");
+    throw new Error("Ungültiges Upload-Ziel.");
   }
 
   return cleaned;

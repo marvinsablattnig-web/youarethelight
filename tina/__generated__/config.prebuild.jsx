@@ -339,7 +339,7 @@ var SupabaseLoginScreen = ({ handleAuthenticate }) => {
         }
       } catch {
         if (isMounted) {
-          setError("Die aktuelle Session konnte nicht geprueft werden.");
+          setError("Die aktuelle Session konnte nicht gepr\xFCft werden.");
         }
       }
     };
@@ -396,7 +396,7 @@ var SupabaseLoginScreen = ({ handleAuthenticate }) => {
         }
       )
     ] }),
-    status === "sent" ? jsx("p", { className: "mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200", children: "Der Link wurde verschickt. Oeffne die E-Mail auf diesem Geraet und folge dem Login-Link zurueck in den Admin." }) : null,
+    status === "sent" ? jsx("p", { className: "mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200", children: "Der Link wurde verschickt. \xD6ffne die E-Mail auf diesem Ger\xE4t und folge dem Login-Link zur\xFCck in den Admin." }) : null,
     error ? jsx("p", { className: "mt-4 rounded-2xl border border-rose-400/20 bg-rose-400/10 px-4 py-3 text-sm text-rose-200", children: error }) : null
   ] }) });
 };
@@ -546,7 +546,7 @@ var ImageAssetField = ({ field, input }) => {
       return;
     }
     if (file.size > MAX_IMAGE_UPLOAD_BYTES) {
-      setError("Die Datei ist zu gross fuer den Bild-Upload.");
+      setError("Die Datei ist zu gro\xDF f\xFCr den Bild-Upload.");
       return;
     }
     setError(null);
@@ -622,12 +622,12 @@ var ImageAssetField = ({ field, input }) => {
       });
       const body = await response.json();
       if (!response.ok) {
-        throw new Error(body.error || "Asset konnte nicht geloescht werden.");
+        throw new Error(body.error || "Asset konnte nicht gel\xF6scht werden.");
       }
       input.onChange(null);
       await loadLibrary();
     } catch (deleteError) {
-      setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht geloescht werden.");
+      setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht gel\xF6scht werden.");
     }
   };
   return jsxs2("div", { className: "space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4", children: [
@@ -638,7 +638,7 @@ var ImageAssetField = ({ field, input }) => {
       ] }),
       jsxs2("div", { className: "flex flex-wrap gap-2", children: [
         jsxs2("label", { className: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700", children: [
-          isUploading ? "Upload laeuft..." : "Bild hochladen",
+          isUploading ? "Upload l\xE4uft..." : "Bild hochladen",
           jsx2(
             "input",
             {
@@ -838,7 +838,7 @@ var VideoAssetField = ({ field, input }) => {
       return;
     }
     if (file.size > MAX_VIDEO_UPLOAD_BYTES) {
-      setError("Die Datei ist zu gross fuer den vordefinierten Upload-Flow.");
+      setError("Die Datei ist zu gro\xDF f\xFCr den vordefinierten Upload-Flow.");
       return;
     }
     setError(null);
@@ -933,12 +933,12 @@ var VideoAssetField = ({ field, input }) => {
       });
       const body = await response.json();
       if (!response.ok) {
-        throw new Error(body.error || "Asset konnte nicht geloescht werden.");
+        throw new Error(body.error || "Asset konnte nicht gel\xF6scht werden.");
       }
       input.onChange(null);
       await loadLibrary();
     } catch (deleteError) {
-      setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht geloescht werden.");
+      setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht gel\xF6scht werden.");
     }
   };
   const renderCurrentPreview = () => {
@@ -956,7 +956,7 @@ var VideoAssetField = ({ field, input }) => {
             allowFullScreen: true,
             className: "aspect-video w-full bg-black"
           }
-        ) : jsx3("div", { className: "flex aspect-video w-full items-center justify-center bg-slate-950 px-4 text-center text-sm text-slate-300", children: "Vimeo-Link einfuegen, um die Vorschau zu sehen." }),
+        ) : jsx3("div", { className: "flex aspect-video w-full items-center justify-center bg-slate-950 px-4 text-center text-sm text-slate-300", children: "Vimeo-Link einf\xFCgen, um die Vorschau zu sehen." }),
         jsxs3("div", { className: "grid gap-2 p-4 text-xs text-slate-600", children: [
           jsx3("p", { className: "font-medium text-slate-900", children: currentAsset.title || "Vimeo Video" }),
           jsx3("p", { className: "break-all", children: currentVimeoUrl || "Noch kein Vimeo-Link gesetzt." })
@@ -1015,7 +1015,7 @@ var VideoAssetField = ({ field, input }) => {
     ] }),
     currentSourceType === "upload" ? jsxs3("div", { className: "flex flex-wrap gap-2", children: [
       jsxs3("label", { className: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700", children: [
-        isUploading ? "Upload laeuft..." : "Video hochladen",
+        isUploading ? "Upload l\xE4uft..." : "Video hochladen",
         jsx3(
           "input",
           {
@@ -1058,7 +1058,7 @@ var VideoAssetField = ({ field, input }) => {
           className: "w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-500"
         }
       ),
-      currentVimeoUrl && !extractVimeoVideoId(currentVimeoUrl) ? jsx3("p", { className: "text-xs text-rose-600", children: "Der Link enthaelt keine gueltige Vimeo-Video-ID." }) : null,
+      currentVimeoUrl && !extractVimeoVideoId(currentVimeoUrl) ? jsx3("p", { className: "text-xs text-rose-600", children: "Der Link enth\xE4lt keine g\xFCltige Vimeo-Video-ID." }) : null,
       currentAsset ? jsx3(
         "button",
         {
@@ -1140,7 +1140,7 @@ var videoAssetFields = () => [
   {
     type: "number",
     name: "size",
-    label: "Dateigroesse"
+    label: "Dateigr\xF6\xDFe"
   },
   {
     type: "number",
@@ -1150,7 +1150,7 @@ var videoAssetFields = () => [
   {
     type: "number",
     name: "height",
-    label: "Hoehe"
+    label: "H\xF6he"
   },
   {
     type: "number",
@@ -1206,7 +1206,7 @@ var imageAssetFields = () => [
   {
     type: "number",
     name: "size",
-    label: "Dateigroesse"
+    label: "Dateigr\xF6\xDFe"
   },
   {
     type: "number",
@@ -1216,7 +1216,7 @@ var imageAssetFields = () => [
   {
     type: "number",
     name: "height",
-    label: "Hoehe"
+    label: "H\xF6he"
   },
   {
     type: "string",
@@ -1444,7 +1444,7 @@ var config_default = defineConfig({
                   {
                     type: "string",
                     name: "count",
-                    label: "Zaehler"
+                    label: "Z\xE4hler"
                   },
                   {
                     type: "string",
@@ -1549,7 +1549,7 @@ var config_default = defineConfig({
           {
             type: "object",
             name: "aboutSection",
-            label: "Ueber mich",
+            label: "\xDCber mich",
             fields: [
               {
                 type: "string",
@@ -1779,7 +1779,7 @@ var config_default = defineConfig({
               {
                 type: "string",
                 name: "menuTitle",
-                label: "Menue Titel"
+                label: "Men\xFC Titel"
               },
               {
                 type: "string",

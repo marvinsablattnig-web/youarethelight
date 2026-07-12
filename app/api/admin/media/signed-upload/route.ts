@@ -27,20 +27,20 @@ export async function POST(request: Request) {
   const body = (await request.json().catch(() => null)) as SignedUploadPayload | null;
 
   if (!body?.directory || !body.filename || !body.mimeType || typeof body.size !== "number") {
-    return NextResponse.json({ error: "Unvollstaendige Upload-Daten." }, { status: 400 });
+    return NextResponse.json({ error: "Unvollständige Upload-Daten." }, { status: 400 });
   }
 
   const isVideoUpload = isVideoMimeType(body.mimeType);
   const isImageUpload = isImageMimeType(body.mimeType);
 
   if (!isVideoUpload && !isImageUpload) {
-    return NextResponse.json({ error: "Dieser Dateityp ist fuer Uploads nicht erlaubt." }, { status: 415 });
+    return NextResponse.json({ error: "Dieser Dateityp ist für Uploads nicht erlaubt." }, { status: 415 });
   }
 
   const maxSize = isVideoUpload ? MAX_VIDEO_UPLOAD_BYTES : MAX_IMAGE_UPLOAD_BYTES;
 
   if (body.size <= 0 || body.size > maxSize) {
-    return NextResponse.json({ error: "Die Dateigroesse liegt ausserhalb des erlaubten Bereichs." }, { status: 413 });
+    return NextResponse.json({ error: "Die Dateigröße liegt außerhalb des erlaubten Bereichs." }, { status: 413 });
   }
 
   try {

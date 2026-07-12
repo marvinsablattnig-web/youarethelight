@@ -5,6 +5,7 @@ import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { tinaField } from "tinacms/dist/react";
 
 import { getImageUrl, getVideoSourceType, type VideoAsset } from "@/lib/cms/media";
+import { useCookieConsent } from "@/lib/cookie-consent";
 import type { HomeContent } from "@/lib/home-content";
 import type { HomepageQuery } from "@/tina/__generated__/types";
 import { MobileMenuToggle } from "./mobile-menu-toggle";
@@ -29,6 +30,7 @@ type PortfolioSiteProps = {
 };
 
 export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
+	const { openSettings: openCookieSettings } = useCookieConsent();
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [activeService, setActiveService] = useState<string | null>(content.servicesSection.services[0]?.name ?? null);
 	const [modal, setModal] = useState<ModalState>(null);
@@ -63,7 +65,6 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 	const testimonialsSectionDocument = tinaDocument.testimonialsSection;
 	const partnersSectionDocument = tinaDocument.partnersSection;
 	const contactSectionDocument = tinaDocument.contactSection;
-	const footerDocument = tinaDocument.footer;
 	const heroBackgroundVideoType = getVideoSourceType(content.hero.backgroundVideo);
 	const heroShowreelVideo = content.hero.showreelVideo ?? content.hero.backgroundVideo;
 	const logoUrl = getImageUrl(content.logo);
@@ -110,6 +111,15 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 
 		resetModalScroll();
 		openServiceModal(modalService, modalService.items[nextIndex], nextIndex);
+	};
+
+	const goToModalItem = (index: number) => {
+		if (!modalService || index < 0 || index >= modalService.items.length) {
+			return;
+		}
+
+		resetModalScroll();
+		openServiceModal(modalService, modalService.items[index], index);
 	};
 
 	const switchModalService = (serviceName: string) => {
@@ -478,13 +488,9 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 		}
 	};
 
-	const renderLogo = (className: string) => {
-		if (logoUrl) {
-			return <img src={logoUrl} alt={content.logo?.alt || content.siteName} className={className} />;
-		}
-
-		return <span>{content.siteName}</span>;
-	};
+	const renderLogo = (className: string, fallbackSrc = "/logo.svg") => (
+		<img src={logoUrl || fallbackSrc} alt={content.logo?.alt || content.siteName} className={className} />
+	);
 
 	function getVideoAspectRatio(video?: VideoAsset | null) {
 		if (!video?.width || !video?.height) {
@@ -523,7 +529,7 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 
 			<nav className="fixed inset-x-0 top-0 z-[80] flex items-center justify-between gap-6 bg-[color-mix(in_srgb,var(--bg)_80%,transparent)] px-[clamp(20px,5vw,64px)] py-4 backdrop-blur-[14px]">
 				<a href="#top" className="font-mono-ui text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--ink)] no-underline" data-tina-field={tinaField(tinaDocument, "logo")}>
-					{renderLogo("h-8 w-auto max-w-[180px] object-contain")}
+					{renderLogo("h-8 w-auto max-w-[180px] scale-150 object-contain", "/logo-wide.svg")}
 				</a>
 
 				<div className="hidden items-center gap-[clamp(16px,2.4vw,36px)] lg:flex">
@@ -539,7 +545,7 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 
 				<button
 					type="button"
-					aria-label="Menue oeffnen"
+					aria-label="Menü öffnen"
 					aria-expanded={menuOpen}
 					onClick={() => setMenuOpen(true)}
 					className="flex h-11 w-11 items-center justify-center bg-transparent p-0 text-[var(--ink)] opacity-90 transition hover:opacity-100 lg:hidden"
@@ -552,11 +558,11 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 				<div className="menu-fade fixed inset-0 z-[110] flex flex-col bg-[var(--bg)] px-[clamp(20px,7vw,40px)] pb-10 pt-[18px] lg:hidden">
 					<div className="flex items-center justify-between">
 						<span className="font-mono-ui text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--ink)]" data-tina-field={tinaField(tinaDocument, "logo")}>
-							{renderLogo("h-8 w-auto max-w-[160px] object-contain")}
+							{renderLogo("h-8 w-auto max-w-[160px] object-contain", "/logo-wide.svg")}
 						</span>
 						<button
 							type="button"
-							aria-label="Menue schliessen"
+							aria-label="Menü schließen"
 							onClick={() => setMenuOpen(false)}
 							className="flex h-11 w-11 items-center justify-center bg-transparent p-0 text-[var(--ink)] opacity-90 transition hover:opacity-100"
 						>
@@ -724,7 +730,7 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 													<div className="flex gap-2.5">
 														<button
 															type="button"
-															aria-label="Zurueck"
+															aria-label="Zurück"
 															disabled={!isOpen}
 															onClick={() => scrollRow(service.name, -1)}
 															className="flex h-[46px] w-[46px] items-center justify-center rounded-full border border-[var(--line)] bg-transparent text-base text-[var(--ink)] transition duration-300 ease-out hover:-translate-x-[3px] hover:border-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--bg)] disabled:pointer-events-none disabled:opacity-30"
@@ -1023,13 +1029,8 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 
 			<footer className="relative z-10 bg-[var(--bg)] px-[clamp(20px,5vw,64px)] pb-10 pt-[clamp(48px,6vw,72px)]">
 				<div className="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-10">
-					<div data-reveal className="reveal max-w-[300px]">
-						<div className="font-mono-ui text-[13px] font-medium uppercase tracking-[0.2em]" data-tina-field={tinaField(tinaDocument, "logo")}>
-							{renderLogo("h-10 w-auto max-w-[220px] object-contain")}
-						</div>
-						<p className="font-display mt-[14px] text-[30px] leading-none tracking-[0.02em] text-[var(--muted)]" data-tina-field={tinaField(footerDocument, "tagline")}>
-							{content.footer.tagline}
-						</p>
+					<div data-reveal className="reveal flex max-w-[360px] items-center" data-tina-field={tinaField(tinaDocument, "logo")}>
+						{renderLogo("h-full max-h-[220px] w-auto object-contain")}
 					</div>
 
 					<div data-reveal className="reveal flex flex-wrap gap-[clamp(40px,6vw,90px)]" style={{ transitionDelay: "0.08s" }}>
@@ -1056,7 +1057,12 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 
 				<div data-reveal className="reveal font-mono-ui mx-auto mt-[clamp(40px,5vw,60px)] flex max-w-[1240px] flex-wrap justify-between gap-4 border-t border-[var(--line)] pt-6 text-[11px] font-medium tracking-[0.06em] text-[var(--faint)]" style={{ transitionDelay: "0.14s" }}>
 					<span>{content.footer.copyright}</span>
-					<span>{content.footer.credits}</span>
+					<div className="flex flex-wrap items-center gap-4">
+						<button type="button" onClick={openCookieSettings} className="underline underline-offset-4 hover:text-[var(--gold)]">
+							Cookie-Einstellungen
+						</button>
+						<span>{content.footer.credits}</span>
+					</div>
 				</div>
 			</footer>
 
@@ -1071,12 +1077,12 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 										<button
 											type="button"
 											onClick={() => setModal(null)}
-											aria-label="Schliessen"
+											aria-label="Schließen"
 											className="absolute right-[clamp(18px,3vw,28px)] top-[clamp(18px,3vw,24px)] flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[var(--line)] text-[var(--ink)] transition hover:bg-[var(--ink)] hover:text-[var(--bg)]"
 										>
 											<X className="h-[18px] w-[18px]" />
 										</button>
-									<div className="flex flex-wrap items-end justify-between gap-4 pr-[112px] md:pr-[168px]">
+									<div className="flex flex-wrap items-center justify-between gap-4 pr-[112px] md:pr-[168px]">
 									<div>
 										{modalService ? (
 											<div className="flex flex-wrap items-center gap-2.5">
@@ -1103,14 +1109,14 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 										)}
 										<h3 className="font-display mt-1.5 text-[clamp(34px,5vw,64px)] tracking-[0.02em] text-[var(--ink)]">{modal.title}</h3>
 									</div>
-									<div className="absolute right-[clamp(18px,3vw,28px)] top-[calc(clamp(18px,3vw,24px)+52px)] flex items-center gap-2.5">
-										{modalHasItemNavigation ? (
-											<>
+									{modalHasItemNavigation && modalService ? (
+										<>
+											<div className="ml-auto hidden items-center gap-2.5 sm:flex">
 												<button
 													type="button"
 													onClick={() => stepModalItem(-1)}
 													disabled={(modal?.itemIndex ?? 0) <= 0}
-													aria-label="Zurueck"
+													aria-label="Zurück"
 													className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[var(--line)] text-[18px] leading-none text-[var(--ink)] transition hover:border-[var(--gold)] hover:text-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-35"
 												>
 													<ChevronLeft className="h-[18px] w-[18px]" />
@@ -1127,9 +1133,22 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 												>
 													<ChevronRight className="h-[18px] w-[18px]" />
 												</button>
-											</>
-										) : null}
-									</div>
+											</div>
+
+											<div className="ml-auto flex flex-wrap items-center gap-2 sm:hidden">
+												{modalService.items.map((item, index) => (
+													<button
+														key={`${item.title}-${index}`}
+														type="button"
+														onClick={() => goToModalItem(index)}
+														aria-label={`Video ${index + 1} von ${modalItemCount}`}
+														aria-current={index === (modal?.itemIndex ?? -1)}
+														className={`h-2.5 rounded-full transition-all duration-300 ${index === (modal?.itemIndex ?? -1) ? "w-6 bg-[var(--gold)]" : "w-2.5 bg-[color-mix(in_srgb,var(--ink)_25%,transparent)]"}`}
+													/>
+												))}
+											</div>
+										</>
+									) : null}
 								</div>
 							</div>
 							<div ref={modalScrollRef} className="modal-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain">

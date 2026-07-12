@@ -15,18 +15,13 @@ export function SiteHeader({ content, homeHref = "" }: SiteHeaderProps) {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const logoUrl = getImageUrl(content.logo);
 
-	const renderLogo = (className: string) =>
-		logoUrl ? (
-			<img src={logoUrl} alt={content.logo?.alt || content.siteName} className={className} />
-		) : (
-			content.siteName
-		);
+	const renderLogo = (className: string, fallbackSrc = "/logo.svg") => <img src={logoUrl || fallbackSrc} alt={content.logo?.alt || content.siteName} className={className} />;
 
 	return (
 		<>
 			<nav className="fixed inset-x-0 top-0 z-[80] flex items-center justify-between gap-6 bg-[color-mix(in_srgb,var(--bg)_80%,transparent)] px-[clamp(20px,5vw,64px)] py-4 backdrop-blur-[14px]">
-				<a href={homeHref || "#top"} className="font-mono-ui text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--ink)] no-underline">
-					{renderLogo("h-8 w-auto max-w-[180px] object-contain")}
+				<a href={homeHref || "#top"} className="font-mono-ui text-[13px]  font-medium uppercase tracking-[0.2em] text-[var(--ink)] no-underline">
+					{renderLogo("h-8 w-auto max-w-[180px] scale-150 object-contain", "/logo-wide.svg")}
 				</a>
 
 				<div className="hidden items-center gap-[clamp(16px,2.4vw,36px)] lg:flex">
@@ -40,13 +35,7 @@ export function SiteHeader({ content, homeHref = "" }: SiteHeaderProps) {
 					</a>
 				</div>
 
-				<button
-					type="button"
-					aria-label="Menue oeffnen"
-					aria-expanded={menuOpen}
-					onClick={() => setMenuOpen(true)}
-					className="flex h-11 w-11 items-center justify-center bg-transparent p-0 text-[var(--ink)] opacity-90 transition hover:opacity-100 lg:hidden"
-				>
+				<button type="button" aria-label="Menü öffnen" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)} className="flex h-11 w-11 items-center justify-center bg-transparent p-0 text-[var(--ink)] opacity-90 transition hover:opacity-100 lg:hidden">
 					<MobileMenuToggle open={false} className="h-8 w-8" />
 				</button>
 			</nav>
@@ -54,15 +43,8 @@ export function SiteHeader({ content, homeHref = "" }: SiteHeaderProps) {
 			{menuOpen ? (
 				<div className="menu-fade fixed inset-0 z-[110] flex flex-col bg-[var(--bg)] px-[clamp(20px,7vw,40px)] pb-10 pt-[18px] lg:hidden">
 					<div className="flex items-center justify-between">
-						<span className="font-mono-ui text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--ink)]">
-							{renderLogo("h-8 w-auto max-w-[160px] object-contain")}
-						</span>
-						<button
-							type="button"
-							aria-label="Menue schliessen"
-							onClick={() => setMenuOpen(false)}
-							className="flex h-11 w-11 items-center justify-center bg-transparent p-0 text-[var(--ink)] opacity-90 transition hover:opacity-100"
-						>
+						<span className="font-mono-ui text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--ink)]">{renderLogo("h-8 w-auto max-w-[160px] object-contain", "/logo-wide.svg")}</span>
+						<button type="button" aria-label="Menü schließen" onClick={() => setMenuOpen(false)} className="flex h-11 w-11 items-center justify-center bg-transparent p-0 text-[var(--ink)] opacity-90 transition hover:opacity-100">
 							<MobileMenuToggle open className="h-8 w-8" />
 						</button>
 					</div>

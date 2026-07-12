@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 
+import { CookieConsentBanner } from "@/components/cookie-consent-banner";
+import { CookieConsentProvider } from "@/lib/cookie-consent";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Malte Media | you are the light",
+  title: "youarethelight",
   description:
-    "Portfolio-Landingpage fuer Filmproduktion, Imagefilm, Eventfilm, Produktfilm und Social Media.",
+    "Portfolio-Landingpage für Filmproduktion, Imagefilm, Eventfilm, Produktfilm und Social Media.",
 };
 
 export default function RootLayout({
@@ -15,7 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className="bg-[var(--bg)] text-[var(--ink)] antialiased">{children}</body>
+      <body className="bg-[var(--bg)] text-[var(--ink)] antialiased">
+        <CookieConsentProvider>
+          {children}
+          <CookieConsentBanner />
+        </CookieConsentProvider>
+      </body>
     </html>
   );
 }

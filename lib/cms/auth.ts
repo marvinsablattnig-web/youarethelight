@@ -109,7 +109,7 @@ export const authenticateEditorToken = async (token: string): Promise<AuthResult
     if (error || !user) {
       return {
         ok: false,
-        error: "Ungueltige oder abgelaufene Session.",
+        error: "Ungültige oder abgelaufene Session.",
         status: 401,
       };
     }
