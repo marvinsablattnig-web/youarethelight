@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 
+import { getSupabaseAuthHeaders } from "../../lib/cms/media-browser";
 import {
   MAX_VIDEO_UPLOAD_BYTES,
+  extractVimeoVideoId,
   getDefaultMediaDirectory,
+  getVideoSourceType,
   getVideoUrl,
+  getVimeoEmbedUrl,
   type VideoAsset,
+  type VideoSourceType,
 } from "../../lib/cms/media";
 import { getSupabaseBrowserClient } from "../../lib/supabase/browser";
 
@@ -24,6 +29,7 @@ type VideoAssetFieldProps = {
 
 type LibraryItem = VideoAsset & {
   filename: string;
+  type?: "file" | "dir";
 };
 
 const formatFileSize = (size: number) => {
@@ -34,19 +40,21 @@ const formatFileSize = (size: number) => {
   return `${Math.max(1, Math.round(size / 1024))} KB`;
 };
 
-const getAuthHeaders = async () => {
-  const {
-    data: { session },
-  } = await getSupabaseBrowserClient().auth.getSession();
-
-  if (!session?.access_token) {
-    return {} as Record<string, string>;
-  }
-
-  return {
-    Authorization: `Bearer ${session.access_token}`,
-  } satisfies Record<string, string>;
-};
+const createVideoAsset = (sourceType: VideoSourceType): VideoAsset => ({
+  sourceType,
+  url: "",
+  vimeoUrl: "",
+  path: "",
+  bucket: "",
+  mimeType: sourceType === "vimeo" ? "video/vimeo" : "",
+  size: 0,
+  width: null,
+  height: null,
+  duration: null,
+  posterUrl: null,
+  alt: null,
+  title: null,
+});
 
 const readVideoMetadata = (file: File) =>
   new Promise<Pick<VideoAsset, "width" | "height" | "duration">>((resolve) => {
@@ -83,7 +91,37 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
   const [error, setError] = useState<string | null>(null);
 
   const currentAsset = input.value ?? null;
+  const currentSourceType = getVideoSourceType(currentAsset) ?? "upload";
   const directory = getDefaultMediaDirectory(field.name);
+  const currentVimeoUrl =
+    currentAsset?.vimeoUrl?.trim() || (currentSourceType === "vimeo" ? currentAsset?.url?.trim() || "" : "");
+  const currentVimeoPreview = getVimeoEmbedUrl(currentAsset, {
+    autoplay: true,
+    muted: true,
+    loop: true,
+    controls: false,
+    background: true,
+  });
+
+  const setSourceType = (sourceType: VideoSourceType) => {
+    setError(null);
+
+    if (sourceType === currentSourceType && currentAsset) {
+      input.onChange({
+        ...createVideoAsset(sourceType),
+        ...currentAsset,
+        sourceType,
+      });
+      return;
+    }
+
+    input.onChange({
+      ...createVideoAsset(sourceType),
+      title: currentAsset?.title ?? null,
+      alt: currentAsset?.alt ?? null,
+      posterUrl: currentAsset?.posterUrl ?? null,
+    });
+  };
 
   const loadLibrary = async () => {
     setError(null);
@@ -93,7 +131,7 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
       const response = await fetch(
         `/api/admin/media/list?directory=${encodeURIComponent(directory)}`,
         {
-          headers: await getAuthHeaders(),
+          headers: await getSupabaseAuthHeaders(),
         },
       );
 
@@ -103,7 +141,7 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
         throw new Error(body.error || "Die Media-Liste konnte nicht geladen werden.");
       }
 
-      setLibrary(body.items || []);
+      setLibrary((body.items || []).filter((item) => item.type !== "dir"));
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : "Die Media-Liste konnte nicht geladen werden.");
     } finally {
@@ -129,7 +167,7 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
 
     try {
       const metadata = await readVideoMetadata(file);
-      const authHeaders = await getAuthHeaders();
+      const authHeaders = await getSupabaseAuthHeaders();
       const signedUploadResponse = await fetch("/api/admin/media/signed-upload", {
         method: "POST",
         headers: {
@@ -174,7 +212,9 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
       }
 
       const nextAsset: VideoAsset = {
+        sourceType: "upload",
         url: signedUploadBody.publicUrl || "",
+        vimeoUrl: "",
         path: signedUploadBody.path || "",
         bucket: signedUploadBody.bucket || "public",
         mimeType: file.type,
@@ -196,8 +236,24 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
     }
   };
 
+  const onChangeVimeoUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextUrl = event.target.value;
+
+    input.onChange({
+      ...createVideoAsset("vimeo"),
+      ...currentAsset,
+      sourceType: "vimeo",
+      url: "",
+      vimeoUrl: nextUrl,
+      path: "",
+      bucket: "",
+      mimeType: "video/vimeo",
+      size: 0,
+    });
+  };
+
   const onDelete = async () => {
-    if (!currentAsset?.path) {
+    if (currentSourceType !== "upload" || !currentAsset?.path) {
       input.onChange(null);
       return;
     }
@@ -209,7 +265,7 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          ...(await getAuthHeaders()),
+          ...(await getSupabaseAuthHeaders()),
         },
         body: JSON.stringify({
           bucket: currentAsset.bucket,
@@ -230,6 +286,62 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
     }
   };
 
+  const renderCurrentPreview = () => {
+    if (!currentAsset) {
+      return (
+        <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-6 text-sm text-slate-500">
+          Noch kein Video gesetzt.
+        </div>
+      );
+    }
+
+    if (currentSourceType === "vimeo") {
+      return (
+        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+          {currentVimeoPreview ? (
+            <iframe
+              src={currentVimeoPreview}
+              title={currentAsset.title || "Vimeo Video"}
+              allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+              allowFullScreen
+              className="aspect-video w-full bg-black"
+            />
+          ) : (
+            <div className="flex aspect-video w-full items-center justify-center bg-slate-950 px-4 text-center text-sm text-slate-300">
+              Vimeo-Link einfuegen, um die Vorschau zu sehen.
+            </div>
+          )}
+          <div className="grid gap-2 p-4 text-xs text-slate-600">
+            <p className="font-medium text-slate-900">{currentAsset.title || "Vimeo Video"}</p>
+            <p className="break-all">{currentVimeoUrl || "Noch kein Vimeo-Link gesetzt."}</p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+        {getVideoUrl(currentAsset) ? (
+          <video
+            className="aspect-video w-full bg-black object-cover"
+            src={getVideoUrl(currentAsset) || undefined}
+            poster={currentAsset.posterUrl || undefined}
+            controls
+            preload="metadata"
+          />
+        ) : null}
+        <div className="grid gap-2 p-4 text-xs text-slate-600">
+          <p className="font-medium text-slate-900">{currentAsset.title || currentAsset.path}</p>
+          <p>{currentAsset.path}</p>
+          <p>
+            {currentAsset.mimeType} · {formatFileSize(currentAsset.size)}
+            {currentAsset.duration ? ` · ${currentAsset.duration.toFixed(1)}s` : ""}
+          </p>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -237,6 +349,33 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
           <p className="text-sm font-semibold text-slate-900">{field.label || "Video"}</p>
           <p className="text-xs text-slate-500">{field.description || directory}</p>
         </div>
+        <div className="inline-flex rounded-full border border-slate-300 bg-white p-1">
+          <button
+            type="button"
+            onClick={() => setSourceType("upload")}
+            className={`rounded-full px-3 py-2 text-xs font-semibold transition ${
+              currentSourceType === "upload"
+                ? "bg-slate-900 text-white"
+                : "text-slate-600 hover:text-slate-950"
+            }`}
+          >
+            Upload
+          </button>
+          <button
+            type="button"
+            onClick={() => setSourceType("vimeo")}
+            className={`rounded-full px-3 py-2 text-xs font-semibold transition ${
+              currentSourceType === "vimeo"
+                ? "bg-slate-900 text-white"
+                : "text-slate-600 hover:text-slate-950"
+            }`}
+          >
+            Vimeo Link
+          </button>
+        </div>
+      </div>
+
+      {currentSourceType === "upload" ? (
         <div className="flex flex-wrap gap-2">
           <label className="inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700">
             {isUploading ? "Upload laeuft..." : "Video hochladen"}
@@ -266,41 +405,48 @@ export const VideoAssetField = ({ field, input }: VideoAssetFieldProps) => {
             </button>
           ) : null}
         </div>
-      </div>
-
-      {currentAsset ? (
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
-          {getVideoUrl(currentAsset) ? (
-            <video
-              className="aspect-video w-full bg-black object-cover"
-              src={getVideoUrl(currentAsset) || undefined}
-              poster={currentAsset.posterUrl || undefined}
-              controls
-              preload="metadata"
-            />
-          ) : null}
-          <div className="grid gap-2 p-4 text-xs text-slate-600">
-            <p className="font-medium text-slate-900">{currentAsset.title || currentAsset.path}</p>
-            <p>{currentAsset.path}</p>
-            <p>
-              {currentAsset.mimeType} · {formatFileSize(currentAsset.size)}
-              {currentAsset.duration ? ` · ${currentAsset.duration.toFixed(1)}s` : ""}
-            </p>
-          </div>
-        </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-6 text-sm text-slate-500">
-          Noch kein Video gesetzt.
+        <div className="space-y-2">
+          <label className="block text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+            Vimeo URL
+          </label>
+          <input
+            type="url"
+            value={currentVimeoUrl}
+            onChange={onChangeVimeoUrl}
+            placeholder="https://vimeo.com/123456789"
+            className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-500"
+          />
+          {currentVimeoUrl && !extractVimeoVideoId(currentVimeoUrl) ? (
+            <p className="text-xs text-rose-600">Der Link enthaelt keine gueltige Vimeo-Video-ID.</p>
+          ) : null}
+          {currentAsset ? (
+            <button
+              type="button"
+              onClick={() => input.onChange(null)}
+              className="rounded-full border border-rose-200 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-400 hover:text-rose-700"
+            >
+              Entfernen
+            </button>
+          ) : null}
         </div>
       )}
 
-      {library.length > 0 ? (
+      {renderCurrentPreview()}
+
+      {currentSourceType === "upload" && library.length > 0 ? (
         <div className="grid gap-3 md:grid-cols-2">
           {library.map((item) => (
             <button
               key={item.path}
               type="button"
-              onClick={() => input.onChange(item)}
+              onClick={() =>
+                input.onChange({
+                  ...item,
+                  sourceType: "upload",
+                  vimeoUrl: "",
+                })
+              }
               className="overflow-hidden rounded-2xl border border-slate-200 bg-white text-left transition hover:border-slate-400"
             >
               {getVideoUrl(item) ? (

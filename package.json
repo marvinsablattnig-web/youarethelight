@@ -14,6 +14,8 @@
     "@supabase/supabase-js": "^2.108.2",
     "@tinacms/datalayer": "^2.0.25",
     "@upstash/redis": "^1.38.0",
+    "lottie-react": "^2.4.1",
+    "lucide-react": "^1.21.0",
     "next": "16.2.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

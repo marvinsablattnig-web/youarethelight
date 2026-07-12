@@ -1,6 +1,7 @@
 import { defineConfig, LocalAuthProvider, type TinaField } from "tinacms";
 
 import { SupabaseTinaAuthProvider } from "./auth/provider";
+import { ImageAssetField } from "./fields/image-asset-field";
 import { VideoAssetField } from "./fields/video-asset-field";
 
 const branch =
@@ -14,33 +15,38 @@ const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 const videoAssetFields = (): TinaField[] => [
   {
     type: "string",
+    name: "sourceType",
+    label: "Quelle",
+  },
+  {
+    type: "string",
     name: "url",
     label: "Public URL",
-    required: true,
+  },
+  {
+    type: "string",
+    name: "vimeoUrl",
+    label: "Vimeo URL",
   },
   {
     type: "string",
     name: "path",
     label: "Storage Path",
-    required: true,
   },
   {
     type: "string",
     name: "bucket",
     label: "Bucket",
-    required: true,
   },
   {
     type: "string",
     name: "mimeType",
     label: "MIME Type",
-    required: true,
   },
   {
     type: "number",
     name: "size",
     label: "Dateigroesse",
-    required: true,
   },
   {
     type: "number",
@@ -84,6 +90,64 @@ const videoAssetField = (name: string, label: string): TinaField => ({
   },
 });
 
+const imageAssetFields = (): TinaField[] => [
+  {
+    type: "string",
+    name: "url",
+    label: "Public URL",
+  },
+  {
+    type: "string",
+    name: "path",
+    label: "Storage Path",
+  },
+  {
+    type: "string",
+    name: "bucket",
+    label: "Bucket",
+  },
+  {
+    type: "string",
+    name: "mimeType",
+    label: "MIME Type",
+  },
+  {
+    type: "number",
+    name: "size",
+    label: "Dateigroesse",
+  },
+  {
+    type: "number",
+    name: "width",
+    label: "Breite",
+  },
+  {
+    type: "number",
+    name: "height",
+    label: "Hoehe",
+  },
+  {
+    type: "string",
+    name: "title",
+    label: "Titel",
+  },
+  {
+    type: "string",
+    name: "alt",
+    label: "Alt Text",
+  },
+];
+
+const imageAssetField = (name: string, label: string): TinaField => ({
+  type: "object",
+  name,
+  label,
+  fields: imageAssetFields(),
+  ui: {
+    component: ImageAssetField as never,
+  },
+});
+
 export default defineConfig({
   branch,
   authProvider: isLocal ? new LocalAuthProvider() : new SupabaseTinaAuthProvider(),
@@ -93,9 +157,9 @@ export default defineConfig({
     publicFolder: "public",
   },
   media: {
-    tina: {
-      mediaRoot: "",
-      publicFolder: "public",
+    loadCustomStore: async () => {
+      const pack = await import("./media/supabase-media-store");
+      return pack.SupabaseMediaStore;
     },
   },
   schema: {
@@ -110,6 +174,7 @@ export default defineConfig({
         },
         ui: {
           global: true,
+          router: () => "/",
           allowedActions: {
             create: false,
             delete: false,
@@ -123,6 +188,7 @@ export default defineConfig({
             label: "Seitenname",
             required: true,
           },
+          imageAssetField("logo", "Logo"),
           {
             type: "string",
             name: "navCtaLabel",
@@ -314,6 +380,32 @@ export default defineConfig({
                         name: "title",
                         label: "Titel",
                       },
+                      {
+                        type: "string",
+                        name: "description",
+                        label: "Beschreibung unter dem Video",
+                        ui: {
+                          component: "textarea",
+                        },
+                      },
+                      {
+                        type: "object",
+                        name: "links",
+                        label: "Zusatzlinks",
+                        list: true,
+                        fields: [
+                          {
+                            type: "string",
+                            name: "label",
+                            label: "Text",
+                          },
+                          {
+                            type: "string",
+                            name: "href",
+                            label: "URL",
+                          },
+                        ],
+                      },
                       videoAssetField("video", "Video"),
                     ],
                   },
@@ -359,6 +451,50 @@ export default defineConfig({
                     ui: {
                       component: "textarea",
                     },
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "aboutSection",
+            label: "Ueber mich",
+            fields: [
+              {
+                type: "string",
+                name: "eyebrow",
+                label: "Eyebrow",
+              },
+              {
+                type: "string",
+                name: "title",
+                label: "Titel",
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Beschreibung",
+                ui: {
+                  component: "textarea",
+                },
+              },
+              imageAssetField("photo", "Portraitfoto"),
+              {
+                type: "object",
+                name: "facts",
+                label: "Fakten",
+                list: true,
+                fields: [
+                  {
+                    type: "string",
+                    name: "label",
+                    label: "Label",
+                  },
+                  {
+                    type: "string",
+                    name: "value",
+                    label: "Wert",
                   },
                 ],
               },
@@ -419,6 +555,42 @@ export default defineConfig({
           },
           {
             type: "object",
+            name: "partnersSection",
+            label: "Partner",
+            fields: [
+              {
+                type: "string",
+                name: "eyebrow",
+                label: "Eyebrow",
+              },
+              {
+                type: "string",
+                name: "title",
+                label: "Titel",
+              },
+              {
+                type: "object",
+                name: "logos",
+                label: "Logos",
+                list: true,
+                fields: [
+                  {
+                    type: "string",
+                    name: "name",
+                    label: "Name",
+                  },
+                  {
+                    type: "string",
+                    name: "href",
+                    label: "Link (optional)",
+                  },
+                  imageAssetField("logo", "Logo"),
+                ],
+              },
+            ],
+          },
+          {
+            type: "object",
             name: "contactSection",
             label: "Kontakt",
             fields: [
@@ -462,8 +634,45 @@ export default defineConfig({
               },
               {
                 type: "string",
-                name: "socialHandle",
-                label: "Social Handle",
+                name: "backgroundType",
+                label: "Hintergrundtyp",
+                options: [
+                  {
+                    label: "Kein Hintergrund",
+                    value: "none",
+                  },
+                  {
+                    label: "Bild",
+                    value: "image",
+                  },
+                  {
+                    label: "Video",
+                    value: "video",
+                  },
+                ],
+                ui: {
+                  component: "select",
+                },
+              },
+              imageAssetField("backgroundImage", "Hintergrundbild"),
+              videoAssetField("backgroundVideo", "Hintergrundvideo"),
+              {
+                type: "object",
+                name: "socialLinks",
+                label: "Social Links",
+                list: true,
+                fields: [
+                  {
+                    type: "string",
+                    name: "label",
+                    label: "Label",
+                  },
+                  {
+                    type: "string",
+                    name: "href",
+                    label: "URL",
+                  },
+                ],
               },
             ],
           },

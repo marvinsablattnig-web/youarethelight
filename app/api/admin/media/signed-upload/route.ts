@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 
 import {
+  MAX_IMAGE_UPLOAD_BYTES,
   MAX_VIDEO_UPLOAD_BYTES,
   buildStoragePath,
   getStorageBucket,
+  isImageMimeType,
   isVideoMimeType,
 } from "@/lib/cms/media";
 import { getSupabaseAdminClient, requireEditorFromHeaders } from "@/lib/cms/auth";
@@ -28,11 +30,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unvollstaendige Upload-Daten." }, { status: 400 });
   }
 
-  if (!isVideoMimeType(body.mimeType)) {
-    return NextResponse.json({ error: "Dieser Dateityp ist fuer Video-Uploads nicht erlaubt." }, { status: 415 });
+  const isVideoUpload = isVideoMimeType(body.mimeType);
+  const isImageUpload = isImageMimeType(body.mimeType);
+
+  if (!isVideoUpload && !isImageUpload) {
+    return NextResponse.json({ error: "Dieser Dateityp ist fuer Uploads nicht erlaubt." }, { status: 415 });
   }
 
-  if (body.size <= 0 || body.size > MAX_VIDEO_UPLOAD_BYTES) {
+  const maxSize = isVideoUpload ? MAX_VIDEO_UPLOAD_BYTES : MAX_IMAGE_UPLOAD_BYTES;
+
+  if (body.size <= 0 || body.size > maxSize) {
     return NextResponse.json({ error: "Die Dateigroesse liegt ausserhalb des erlaubten Bereichs." }, { status: 413 });
   }
 

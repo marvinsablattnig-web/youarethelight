@@ -2,15 +2,17 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #191919;
-  --surface: #202020;
+  --bg: #0a0a0a;
+  --surface: #101010;
   --ink: #f4f1ea;
   --muted: rgba(244, 241, 234, 0.62);
   --faint: rgba(244, 241, 234, 0.34);
   --line: rgba(244, 241, 234, 0.14);
   --gold: #ffc648;
-  --stripe-a: #242424;
-  --stripe-b: #1c1c1c;
+  --stripe-a: #141414;
+  --stripe-b: #0c0c0c;
+  --motion-snap: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --motion-silk: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -19,14 +21,17 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   font-family: "Hanken Grotesk", system-ui, sans-serif;
   background: var(--bg);
   color: var(--ink);
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
@@ -58,12 +63,23 @@ select {
   height: 1px;
   width: 0;
   background: var(--gold);
-  transition: width 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: width 0.45s var(--motion-snap);
 }
 
 .navlink:hover::after,
 .navlink:focus-visible::after {
   width: 100%;
+}
+
+.navlink {
+  transition:
+    color 0.35s var(--motion-snap),
+    transform 0.35s var(--motion-snap);
+}
+
+.navlink:hover,
+.navlink:focus-visible {
+  transform: translateY(-1px);
 }
 
 .row-scroll {
@@ -90,12 +106,43 @@ select {
   background: rgba(255, 198, 72, 0.8);
 }
 
+.modal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 198, 72, 0.36) rgba(244, 241, 234, 0.04);
+}
+
+.modal-scroll::-webkit-scrollbar {
+  width: 9px;
+}
+
+.modal-scroll::-webkit-scrollbar-track {
+  background: rgba(244, 241, 234, 0.04);
+}
+
+.modal-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 198, 72, 0.5),
+    rgba(255, 198, 72, 0.24)
+  );
+  border: 2px solid rgba(25, 25, 25, 0.16);
+  border-radius: 999px;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 198, 72, 0.64),
+    rgba(255, 198, 72, 0.34)
+  );
+}
+
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(32px) scale(0.985);
   transition:
-    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    opacity 1s var(--motion-silk),
+    transform 1s var(--motion-silk);
 }
 
 .reveal.is-visible {
@@ -105,33 +152,123 @@ select {
 
 .btn-cta {
   transition:
-    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
-    box-shadow 0.35s;
+    transform 0.38s var(--motion-snap),
+    box-shadow 0.38s var(--motion-snap),
+    filter 0.38s var(--motion-snap);
+  box-shadow: 0 10px 22px -18px rgba(255, 198, 72, 0.55);
 }
 
 .btn-cta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 30px -16px rgba(255, 198, 72, 0.7);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 36px -18px rgba(255, 198, 72, 0.75);
+  filter: saturate(1.08);
 }
 
-.vidcard video {
+.vidcard video,
+.vidcard iframe,
+.contact-media {
   transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.vidcard:hover video {
+.vidcard:hover video,
+.vidcard:hover iframe,
+.contact-media:hover {
   transform: scale(1.07);
+}
+
+.vidcard {
+  transition:
+    transform 0.45s var(--motion-snap),
+    box-shadow 0.45s var(--motion-snap),
+    border-color 0.45s var(--motion-snap);
 }
 
 .vidcard:hover .card-overlay {
   opacity: 1;
 }
 
-.vidcard:hover .play-dot {
-  transform: scale(1.12) rotate(360deg);
+.play-dot {
+  transition:
+    background-color 0.35s var(--motion-snap),
+    color 0.35s var(--motion-snap);
 }
 
-.play-dot {
-  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+.lift-card {
+  transition:
+    transform 0.42s var(--motion-snap),
+    box-shadow 0.42s var(--motion-snap),
+    border-color 0.42s var(--motion-snap),
+    background-color 0.42s var(--motion-snap);
+}
+
+.lift-card:hover,
+.lift-card.is-active {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--gold) 38%, transparent);
+  box-shadow: 0 24px 44px -28px rgba(0, 0, 0, 0.72);
+}
+
+.step-card {
+  border: 1px solid transparent;
+  transition:
+    transform 0.42s var(--motion-snap),
+    box-shadow 0.42s var(--motion-snap),
+    border-color 0.42s var(--motion-snap),
+    background-color 0.42s var(--motion-snap);
+}
+
+.step-card:hover,
+.step-card:focus-visible,
+.step-card.is-active {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--gold) 55%, transparent);
+  background-color: color-mix(in srgb, var(--gold) 5%, transparent);
+  box-shadow: 0 0 46px -12px color-mix(in srgb, var(--gold) 65%, transparent);
+}
+
+.soft-link {
+  transition:
+    color 0.35s var(--motion-snap),
+    transform 0.35s var(--motion-snap),
+    letter-spacing 0.35s var(--motion-snap);
+}
+
+.soft-link:hover,
+.soft-link:focus-visible {
+  transform: translateX(3px);
+}
+
+.accordion-shell {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 0.62s var(--motion-silk),
+    opacity 0.4s var(--motion-snap);
+  opacity: 0;
+}
+
+.accordion-shell.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.accordion-panel {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.accordion-content {
+  opacity: 0;
+  transform: translateY(-14px);
+  transition:
+    opacity 0.46s var(--motion-snap),
+    transform 0.46s var(--motion-snap);
+}
+
+.accordion-shell.is-open .accordion-content {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.06s;
 }
 
 .marquee-track {
@@ -151,15 +288,42 @@ select {
 }
 
 .menu-fade {
-  animation: fade-in 0.28s ease;
+  animation: fade-in 0.32s var(--motion-snap);
 }
 
 .modal-in {
-  animation: modal-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  animation: modal-in 0.52s var(--motion-silk);
 }
 
-.accordion-in {
-  animation: accordion-open 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal.is-visible,
+  .accordion-content,
+  .accordion-shell,
+  .btn-cta,
+  .vidcard,
+  .soft-link,
+  .lift-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .accordion-shell {
+    grid-template-rows: 1fr;
+  }
 }
 
 @keyframes marquee {
@@ -211,19 +375,7 @@ select {
 @keyframes modal-in {
   from {
     opacity: 0;
-    transform: translateY(24px) scale(0.96);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes accordion-open {
-  from {
-    opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(26px) scale(0.965);
   }
 
   to {

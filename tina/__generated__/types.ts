@@ -165,6 +165,19 @@ export type CollectionDocumentsArgs = {
 
 export type DocumentNode = Homepage | Folder;
 
+export type HomepageLogo = {
+  __typename?: 'HomepageLogo';
+  url?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+  bucket?: Maybe<Scalars['String']['output']>;
+  mimeType?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  height?: Maybe<Scalars['Float']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  alt?: Maybe<Scalars['String']['output']>;
+};
+
 export type HomepageNavLinks = {
   __typename?: 'HomepageNavLinks';
   label: Scalars['String']['output'];
@@ -173,11 +186,13 @@ export type HomepageNavLinks = {
 
 export type HomepageHeroBackgroundVideo = {
   __typename?: 'HomepageHeroBackgroundVideo';
-  url: Scalars['String']['output'];
-  path: Scalars['String']['output'];
-  bucket: Scalars['String']['output'];
-  mimeType: Scalars['String']['output'];
-  size: Scalars['Float']['output'];
+  sourceType?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  vimeoUrl?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+  bucket?: Maybe<Scalars['String']['output']>;
+  mimeType?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
   width?: Maybe<Scalars['Float']['output']>;
   height?: Maybe<Scalars['Float']['output']>;
   duration?: Maybe<Scalars['Float']['output']>;
@@ -188,11 +203,13 @@ export type HomepageHeroBackgroundVideo = {
 
 export type HomepageHeroShowreelVideo = {
   __typename?: 'HomepageHeroShowreelVideo';
-  url: Scalars['String']['output'];
-  path: Scalars['String']['output'];
-  bucket: Scalars['String']['output'];
-  mimeType: Scalars['String']['output'];
-  size: Scalars['Float']['output'];
+  sourceType?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  vimeoUrl?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+  bucket?: Maybe<Scalars['String']['output']>;
+  mimeType?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
   width?: Maybe<Scalars['Float']['output']>;
   height?: Maybe<Scalars['Float']['output']>;
   duration?: Maybe<Scalars['Float']['output']>;
@@ -220,13 +237,21 @@ export type HomepageHero = {
   scrollLabel?: Maybe<Scalars['String']['output']>;
 };
 
+export type HomepageServicesSectionServicesItemsLinks = {
+  __typename?: 'HomepageServicesSectionServicesItemsLinks';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
 export type HomepageServicesSectionServicesItemsVideo = {
   __typename?: 'HomepageServicesSectionServicesItemsVideo';
-  url: Scalars['String']['output'];
-  path: Scalars['String']['output'];
-  bucket: Scalars['String']['output'];
-  mimeType: Scalars['String']['output'];
-  size: Scalars['Float']['output'];
+  sourceType?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  vimeoUrl?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+  bucket?: Maybe<Scalars['String']['output']>;
+  mimeType?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
   width?: Maybe<Scalars['Float']['output']>;
   height?: Maybe<Scalars['Float']['output']>;
   duration?: Maybe<Scalars['Float']['output']>;
@@ -239,6 +264,8 @@ export type HomepageServicesSectionServicesItems = {
   __typename?: 'HomepageServicesSectionServicesItems';
   tag?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  links?: Maybe<Array<Maybe<HomepageServicesSectionServicesItemsLinks>>>;
   video?: Maybe<HomepageServicesSectionServicesItemsVideo>;
 };
 
@@ -275,6 +302,34 @@ export type HomepageProcessSection = {
   steps?: Maybe<Array<Maybe<HomepageProcessSectionSteps>>>;
 };
 
+export type HomepageAboutSectionPhoto = {
+  __typename?: 'HomepageAboutSectionPhoto';
+  url?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+  bucket?: Maybe<Scalars['String']['output']>;
+  mimeType?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  height?: Maybe<Scalars['Float']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  alt?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageAboutSectionFacts = {
+  __typename?: 'HomepageAboutSectionFacts';
+  label?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageAboutSection = {
+  __typename?: 'HomepageAboutSection';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  photo?: Maybe<HomepageAboutSectionPhoto>;
+  facts?: Maybe<Array<Maybe<HomepageAboutSectionFacts>>>;
+};
+
 export type HomepageTestimonialsSectionItems = {
   __typename?: 'HomepageTestimonialsSectionItems';
   quote?: Maybe<Scalars['String']['output']>;
@@ -291,6 +346,69 @@ export type HomepageTestimonialsSection = {
   items?: Maybe<Array<Maybe<HomepageTestimonialsSectionItems>>>;
 };
 
+export type HomepagePartnersSectionLogosLogo = {
+  __typename?: 'HomepagePartnersSectionLogosLogo';
+  url?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+  bucket?: Maybe<Scalars['String']['output']>;
+  mimeType?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  height?: Maybe<Scalars['Float']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  alt?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepagePartnersSectionLogos = {
+  __typename?: 'HomepagePartnersSectionLogos';
+  name?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+  logo?: Maybe<HomepagePartnersSectionLogosLogo>;
+};
+
+export type HomepagePartnersSection = {
+  __typename?: 'HomepagePartnersSection';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  logos?: Maybe<Array<Maybe<HomepagePartnersSectionLogos>>>;
+};
+
+export type HomepageContactSectionBackgroundImage = {
+  __typename?: 'HomepageContactSectionBackgroundImage';
+  url?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+  bucket?: Maybe<Scalars['String']['output']>;
+  mimeType?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  height?: Maybe<Scalars['Float']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  alt?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageContactSectionBackgroundVideo = {
+  __typename?: 'HomepageContactSectionBackgroundVideo';
+  sourceType?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  vimeoUrl?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+  bucket?: Maybe<Scalars['String']['output']>;
+  mimeType?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  height?: Maybe<Scalars['Float']['output']>;
+  duration?: Maybe<Scalars['Float']['output']>;
+  posterUrl?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  alt?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageContactSectionSocialLinks = {
+  __typename?: 'HomepageContactSectionSocialLinks';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
 export type HomepageContactSection = {
   __typename?: 'HomepageContactSection';
   eyebrow?: Maybe<Scalars['String']['output']>;
@@ -300,7 +418,10 @@ export type HomepageContactSection = {
   description?: Maybe<Scalars['String']['output']>;
   ctaLabel?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
-  socialHandle?: Maybe<Scalars['String']['output']>;
+  backgroundType?: Maybe<Scalars['String']['output']>;
+  backgroundImage?: Maybe<HomepageContactSectionBackgroundImage>;
+  backgroundVideo?: Maybe<HomepageContactSectionBackgroundVideo>;
+  socialLinks?: Maybe<Array<Maybe<HomepageContactSectionSocialLinks>>>;
 };
 
 export type HomepageFooter = {
@@ -319,13 +440,16 @@ export type HomepageFooter = {
 export type Homepage = Node & Document & {
   __typename?: 'Homepage';
   siteName: Scalars['String']['output'];
+  logo?: Maybe<HomepageLogo>;
   navCtaLabel: Scalars['String']['output'];
   navLinks?: Maybe<Array<Maybe<HomepageNavLinks>>>;
   hero?: Maybe<HomepageHero>;
   marqueeItems?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   servicesSection?: Maybe<HomepageServicesSection>;
   processSection?: Maybe<HomepageProcessSection>;
+  aboutSection?: Maybe<HomepageAboutSection>;
   testimonialsSection?: Maybe<HomepageTestimonialsSection>;
+  partnersSection?: Maybe<HomepagePartnersSection>;
   contactSection?: Maybe<HomepageContactSection>;
   footer?: Maybe<HomepageFooter>;
   id: Scalars['ID']['output'];
@@ -340,11 +464,6 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type HomepageNavLinksFilter = {
-  label?: InputMaybe<StringFilter>;
-  href?: InputMaybe<StringFilter>;
-};
-
 export type NumberFilter = {
   lt?: InputMaybe<Scalars['Float']['input']>;
   lte?: InputMaybe<Scalars['Float']['input']>;
@@ -355,8 +474,27 @@ export type NumberFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
-export type HomepageHeroBackgroundVideoFilter = {
+export type HomepageLogoFilter = {
   url?: InputMaybe<StringFilter>;
+  path?: InputMaybe<StringFilter>;
+  bucket?: InputMaybe<StringFilter>;
+  mimeType?: InputMaybe<StringFilter>;
+  size?: InputMaybe<NumberFilter>;
+  width?: InputMaybe<NumberFilter>;
+  height?: InputMaybe<NumberFilter>;
+  title?: InputMaybe<StringFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type HomepageNavLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type HomepageHeroBackgroundVideoFilter = {
+  sourceType?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+  vimeoUrl?: InputMaybe<StringFilter>;
   path?: InputMaybe<StringFilter>;
   bucket?: InputMaybe<StringFilter>;
   mimeType?: InputMaybe<StringFilter>;
@@ -370,7 +508,9 @@ export type HomepageHeroBackgroundVideoFilter = {
 };
 
 export type HomepageHeroShowreelVideoFilter = {
+  sourceType?: InputMaybe<StringFilter>;
   url?: InputMaybe<StringFilter>;
+  vimeoUrl?: InputMaybe<StringFilter>;
   path?: InputMaybe<StringFilter>;
   bucket?: InputMaybe<StringFilter>;
   mimeType?: InputMaybe<StringFilter>;
@@ -401,8 +541,15 @@ export type HomepageHeroFilter = {
   scrollLabel?: InputMaybe<StringFilter>;
 };
 
+export type HomepageServicesSectionServicesItemsLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
 export type HomepageServicesSectionServicesItemsVideoFilter = {
+  sourceType?: InputMaybe<StringFilter>;
   url?: InputMaybe<StringFilter>;
+  vimeoUrl?: InputMaybe<StringFilter>;
   path?: InputMaybe<StringFilter>;
   bucket?: InputMaybe<StringFilter>;
   mimeType?: InputMaybe<StringFilter>;
@@ -418,6 +565,8 @@ export type HomepageServicesSectionServicesItemsVideoFilter = {
 export type HomepageServicesSectionServicesItemsFilter = {
   tag?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  links?: InputMaybe<HomepageServicesSectionServicesItemsLinksFilter>;
   video?: InputMaybe<HomepageServicesSectionServicesItemsVideoFilter>;
 };
 
@@ -450,6 +599,31 @@ export type HomepageProcessSectionFilter = {
   steps?: InputMaybe<HomepageProcessSectionStepsFilter>;
 };
 
+export type HomepageAboutSectionPhotoFilter = {
+  url?: InputMaybe<StringFilter>;
+  path?: InputMaybe<StringFilter>;
+  bucket?: InputMaybe<StringFilter>;
+  mimeType?: InputMaybe<StringFilter>;
+  size?: InputMaybe<NumberFilter>;
+  width?: InputMaybe<NumberFilter>;
+  height?: InputMaybe<NumberFilter>;
+  title?: InputMaybe<StringFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type HomepageAboutSectionFactsFilter = {
+  label?: InputMaybe<StringFilter>;
+  value?: InputMaybe<StringFilter>;
+};
+
+export type HomepageAboutSectionFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  photo?: InputMaybe<HomepageAboutSectionPhotoFilter>;
+  facts?: InputMaybe<HomepageAboutSectionFactsFilter>;
+};
+
 export type HomepageTestimonialsSectionItemsFilter = {
   quote?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
@@ -464,6 +638,63 @@ export type HomepageTestimonialsSectionFilter = {
   items?: InputMaybe<HomepageTestimonialsSectionItemsFilter>;
 };
 
+export type HomepagePartnersSectionLogosLogoFilter = {
+  url?: InputMaybe<StringFilter>;
+  path?: InputMaybe<StringFilter>;
+  bucket?: InputMaybe<StringFilter>;
+  mimeType?: InputMaybe<StringFilter>;
+  size?: InputMaybe<NumberFilter>;
+  width?: InputMaybe<NumberFilter>;
+  height?: InputMaybe<NumberFilter>;
+  title?: InputMaybe<StringFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type HomepagePartnersSectionLogosFilter = {
+  name?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+  logo?: InputMaybe<HomepagePartnersSectionLogosLogoFilter>;
+};
+
+export type HomepagePartnersSectionFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  logos?: InputMaybe<HomepagePartnersSectionLogosFilter>;
+};
+
+export type HomepageContactSectionBackgroundImageFilter = {
+  url?: InputMaybe<StringFilter>;
+  path?: InputMaybe<StringFilter>;
+  bucket?: InputMaybe<StringFilter>;
+  mimeType?: InputMaybe<StringFilter>;
+  size?: InputMaybe<NumberFilter>;
+  width?: InputMaybe<NumberFilter>;
+  height?: InputMaybe<NumberFilter>;
+  title?: InputMaybe<StringFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type HomepageContactSectionBackgroundVideoFilter = {
+  sourceType?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+  vimeoUrl?: InputMaybe<StringFilter>;
+  path?: InputMaybe<StringFilter>;
+  bucket?: InputMaybe<StringFilter>;
+  mimeType?: InputMaybe<StringFilter>;
+  size?: InputMaybe<NumberFilter>;
+  width?: InputMaybe<NumberFilter>;
+  height?: InputMaybe<NumberFilter>;
+  duration?: InputMaybe<NumberFilter>;
+  posterUrl?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type HomepageContactSectionSocialLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
 export type HomepageContactSectionFilter = {
   eyebrow?: InputMaybe<StringFilter>;
   titleLead?: InputMaybe<StringFilter>;
@@ -472,7 +703,10 @@ export type HomepageContactSectionFilter = {
   description?: InputMaybe<StringFilter>;
   ctaLabel?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
-  socialHandle?: InputMaybe<StringFilter>;
+  backgroundType?: InputMaybe<StringFilter>;
+  backgroundImage?: InputMaybe<HomepageContactSectionBackgroundImageFilter>;
+  backgroundVideo?: InputMaybe<HomepageContactSectionBackgroundVideoFilter>;
+  socialLinks?: InputMaybe<HomepageContactSectionSocialLinksFilter>;
 };
 
 export type HomepageFooterFilter = {
@@ -489,13 +723,16 @@ export type HomepageFooterFilter = {
 
 export type HomepageFilter = {
   siteName?: InputMaybe<StringFilter>;
+  logo?: InputMaybe<HomepageLogoFilter>;
   navCtaLabel?: InputMaybe<StringFilter>;
   navLinks?: InputMaybe<HomepageNavLinksFilter>;
   hero?: InputMaybe<HomepageHeroFilter>;
   marqueeItems?: InputMaybe<StringFilter>;
   servicesSection?: InputMaybe<HomepageServicesSectionFilter>;
   processSection?: InputMaybe<HomepageProcessSectionFilter>;
+  aboutSection?: InputMaybe<HomepageAboutSectionFilter>;
   testimonialsSection?: InputMaybe<HomepageTestimonialsSectionFilter>;
+  partnersSection?: InputMaybe<HomepagePartnersSectionFilter>;
   contactSection?: InputMaybe<HomepageContactSectionFilter>;
   footer?: InputMaybe<HomepageFooterFilter>;
 };
@@ -578,13 +815,27 @@ export type DocumentMutation = {
   homepage?: InputMaybe<HomepageMutation>;
 };
 
+export type HomepageLogoMutation = {
+  url?: InputMaybe<Scalars['String']['input']>;
+  path?: InputMaybe<Scalars['String']['input']>;
+  bucket?: InputMaybe<Scalars['String']['input']>;
+  mimeType?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Float']['input']>;
+  width?: InputMaybe<Scalars['Float']['input']>;
+  height?: InputMaybe<Scalars['Float']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomepageNavLinksMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   href?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HomepageHeroBackgroundVideoMutation = {
+  sourceType?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+  vimeoUrl?: InputMaybe<Scalars['String']['input']>;
   path?: InputMaybe<Scalars['String']['input']>;
   bucket?: InputMaybe<Scalars['String']['input']>;
   mimeType?: InputMaybe<Scalars['String']['input']>;
@@ -598,7 +849,9 @@ export type HomepageHeroBackgroundVideoMutation = {
 };
 
 export type HomepageHeroShowreelVideoMutation = {
+  sourceType?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+  vimeoUrl?: InputMaybe<Scalars['String']['input']>;
   path?: InputMaybe<Scalars['String']['input']>;
   bucket?: InputMaybe<Scalars['String']['input']>;
   mimeType?: InputMaybe<Scalars['String']['input']>;
@@ -629,8 +882,15 @@ export type HomepageHeroMutation = {
   scrollLabel?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type HomepageServicesSectionServicesItemsLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomepageServicesSectionServicesItemsVideoMutation = {
+  sourceType?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+  vimeoUrl?: InputMaybe<Scalars['String']['input']>;
   path?: InputMaybe<Scalars['String']['input']>;
   bucket?: InputMaybe<Scalars['String']['input']>;
   mimeType?: InputMaybe<Scalars['String']['input']>;
@@ -646,6 +906,8 @@ export type HomepageServicesSectionServicesItemsVideoMutation = {
 export type HomepageServicesSectionServicesItemsMutation = {
   tag?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  links?: InputMaybe<Array<InputMaybe<HomepageServicesSectionServicesItemsLinksMutation>>>;
   video?: InputMaybe<HomepageServicesSectionServicesItemsVideoMutation>;
 };
 
@@ -678,6 +940,31 @@ export type HomepageProcessSectionMutation = {
   steps?: InputMaybe<Array<InputMaybe<HomepageProcessSectionStepsMutation>>>;
 };
 
+export type HomepageAboutSectionPhotoMutation = {
+  url?: InputMaybe<Scalars['String']['input']>;
+  path?: InputMaybe<Scalars['String']['input']>;
+  bucket?: InputMaybe<Scalars['String']['input']>;
+  mimeType?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Float']['input']>;
+  width?: InputMaybe<Scalars['Float']['input']>;
+  height?: InputMaybe<Scalars['Float']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageAboutSectionFactsMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageAboutSectionMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  photo?: InputMaybe<HomepageAboutSectionPhotoMutation>;
+  facts?: InputMaybe<Array<InputMaybe<HomepageAboutSectionFactsMutation>>>;
+};
+
 export type HomepageTestimonialsSectionItemsMutation = {
   quote?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -692,6 +979,63 @@ export type HomepageTestimonialsSectionMutation = {
   items?: InputMaybe<Array<InputMaybe<HomepageTestimonialsSectionItemsMutation>>>;
 };
 
+export type HomepagePartnersSectionLogosLogoMutation = {
+  url?: InputMaybe<Scalars['String']['input']>;
+  path?: InputMaybe<Scalars['String']['input']>;
+  bucket?: InputMaybe<Scalars['String']['input']>;
+  mimeType?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Float']['input']>;
+  width?: InputMaybe<Scalars['Float']['input']>;
+  height?: InputMaybe<Scalars['Float']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepagePartnersSectionLogosMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+  logo?: InputMaybe<HomepagePartnersSectionLogosLogoMutation>;
+};
+
+export type HomepagePartnersSectionMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  logos?: InputMaybe<Array<InputMaybe<HomepagePartnersSectionLogosMutation>>>;
+};
+
+export type HomepageContactSectionBackgroundImageMutation = {
+  url?: InputMaybe<Scalars['String']['input']>;
+  path?: InputMaybe<Scalars['String']['input']>;
+  bucket?: InputMaybe<Scalars['String']['input']>;
+  mimeType?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Float']['input']>;
+  width?: InputMaybe<Scalars['Float']['input']>;
+  height?: InputMaybe<Scalars['Float']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageContactSectionBackgroundVideoMutation = {
+  sourceType?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  vimeoUrl?: InputMaybe<Scalars['String']['input']>;
+  path?: InputMaybe<Scalars['String']['input']>;
+  bucket?: InputMaybe<Scalars['String']['input']>;
+  mimeType?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Float']['input']>;
+  width?: InputMaybe<Scalars['Float']['input']>;
+  height?: InputMaybe<Scalars['Float']['input']>;
+  duration?: InputMaybe<Scalars['Float']['input']>;
+  posterUrl?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageContactSectionSocialLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomepageContactSectionMutation = {
   eyebrow?: InputMaybe<Scalars['String']['input']>;
   titleLead?: InputMaybe<Scalars['String']['input']>;
@@ -700,7 +1044,10 @@ export type HomepageContactSectionMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
   ctaLabel?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
-  socialHandle?: InputMaybe<Scalars['String']['input']>;
+  backgroundType?: InputMaybe<Scalars['String']['input']>;
+  backgroundImage?: InputMaybe<HomepageContactSectionBackgroundImageMutation>;
+  backgroundVideo?: InputMaybe<HomepageContactSectionBackgroundVideoMutation>;
+  socialLinks?: InputMaybe<Array<InputMaybe<HomepageContactSectionSocialLinksMutation>>>;
 };
 
 export type HomepageFooterMutation = {
@@ -717,25 +1064,28 @@ export type HomepageFooterMutation = {
 
 export type HomepageMutation = {
   siteName?: InputMaybe<Scalars['String']['input']>;
+  logo?: InputMaybe<HomepageLogoMutation>;
   navCtaLabel?: InputMaybe<Scalars['String']['input']>;
   navLinks?: InputMaybe<Array<InputMaybe<HomepageNavLinksMutation>>>;
   hero?: InputMaybe<HomepageHeroMutation>;
   marqueeItems?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   servicesSection?: InputMaybe<HomepageServicesSectionMutation>;
   processSection?: InputMaybe<HomepageProcessSectionMutation>;
+  aboutSection?: InputMaybe<HomepageAboutSectionMutation>;
   testimonialsSection?: InputMaybe<HomepageTestimonialsSectionMutation>;
+  partnersSection?: InputMaybe<HomepagePartnersSectionMutation>;
   contactSection?: InputMaybe<HomepageContactSectionMutation>;
   footer?: InputMaybe<HomepageFooterMutation>;
 };
 
-export type HomepagePartsFragment = { __typename: 'Homepage', siteName: string, navCtaLabel: string, marqueeItems?: Array<string | null> | null, navLinks?: Array<{ __typename: 'HomepageNavLinks', label: string, href: string } | null> | null, hero?: { __typename: 'HomepageHero', kicker?: string | null, eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, description?: string | null, primaryCtaLabel?: string | null, secondaryCtaLabel?: string | null, cursorLabel?: string | null, cursorYear?: string | null, modalTag?: string | null, modalTitle?: string | null, modalDescription?: string | null, scrollLabel?: string | null, backgroundVideo?: { __typename: 'HomepageHeroBackgroundVideo', url: string, path: string, bucket: string, mimeType: string, size: number, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null, showreelVideo?: { __typename: 'HomepageHeroShowreelVideo', url: string, path: string, bucket: string, mimeType: string, size: number, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null, servicesSection?: { __typename: 'HomepageServicesSection', eyebrow?: string | null, titleLine1?: string | null, titleLine2?: string | null, description?: string | null, watchLabel?: string | null, services?: Array<{ __typename: 'HomepageServicesSectionServices', num?: string | null, name: string, count?: string | null, desc?: string | null, items?: Array<{ __typename: 'HomepageServicesSectionServicesItems', tag?: string | null, title?: string | null, video?: { __typename: 'HomepageServicesSectionServicesItemsVideo', url: string, path: string, bucket: string, mimeType: string, size: number, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null> | null } | null> | null } | null, processSection?: { __typename: 'HomepageProcessSection', eyebrow?: string | null, title?: string | null, steps?: Array<{ __typename: 'HomepageProcessSectionSteps', num?: string | null, title?: string | null, text?: string | null } | null> | null } | null, testimonialsSection?: { __typename: 'HomepageTestimonialsSection', eyebrow?: string | null, title?: string | null, badge?: string | null, items?: Array<{ __typename: 'HomepageTestimonialsSectionItems', quote?: string | null, name?: string | null, role?: string | null, badge?: string | null } | null> | null } | null, contactSection?: { __typename: 'HomepageContactSection', eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, titleTrail?: string | null, description?: string | null, ctaLabel?: string | null, email?: string | null, socialHandle?: string | null } | null, footer?: { __typename: 'HomepageFooter', tagline?: string | null, menuTitle?: string | null, legalTitle?: string | null, imprintLabel?: string | null, imprintHref?: string | null, privacyLabel?: string | null, privacyHref?: string | null, copyright?: string | null, credits?: string | null } | null };
+export type HomepagePartsFragment = { __typename: 'Homepage', siteName: string, navCtaLabel: string, marqueeItems?: Array<string | null> | null, logo?: { __typename: 'HomepageLogo', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null, navLinks?: Array<{ __typename: 'HomepageNavLinks', label: string, href: string } | null> | null, hero?: { __typename: 'HomepageHero', kicker?: string | null, eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, description?: string | null, primaryCtaLabel?: string | null, secondaryCtaLabel?: string | null, cursorLabel?: string | null, cursorYear?: string | null, modalTag?: string | null, modalTitle?: string | null, modalDescription?: string | null, scrollLabel?: string | null, backgroundVideo?: { __typename: 'HomepageHeroBackgroundVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null, showreelVideo?: { __typename: 'HomepageHeroShowreelVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null, servicesSection?: { __typename: 'HomepageServicesSection', eyebrow?: string | null, titleLine1?: string | null, titleLine2?: string | null, description?: string | null, watchLabel?: string | null, services?: Array<{ __typename: 'HomepageServicesSectionServices', num?: string | null, name: string, count?: string | null, desc?: string | null, items?: Array<{ __typename: 'HomepageServicesSectionServicesItems', tag?: string | null, title?: string | null, description?: string | null, links?: Array<{ __typename: 'HomepageServicesSectionServicesItemsLinks', label?: string | null, href?: string | null } | null> | null, video?: { __typename: 'HomepageServicesSectionServicesItemsVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null> | null } | null> | null } | null, processSection?: { __typename: 'HomepageProcessSection', eyebrow?: string | null, title?: string | null, steps?: Array<{ __typename: 'HomepageProcessSectionSteps', num?: string | null, title?: string | null, text?: string | null } | null> | null } | null, aboutSection?: { __typename: 'HomepageAboutSection', eyebrow?: string | null, title?: string | null, description?: string | null, photo?: { __typename: 'HomepageAboutSectionPhoto', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null, facts?: Array<{ __typename: 'HomepageAboutSectionFacts', label?: string | null, value?: string | null } | null> | null } | null, testimonialsSection?: { __typename: 'HomepageTestimonialsSection', eyebrow?: string | null, title?: string | null, badge?: string | null, items?: Array<{ __typename: 'HomepageTestimonialsSectionItems', quote?: string | null, name?: string | null, role?: string | null, badge?: string | null } | null> | null } | null, partnersSection?: { __typename: 'HomepagePartnersSection', eyebrow?: string | null, title?: string | null, logos?: Array<{ __typename: 'HomepagePartnersSectionLogos', name?: string | null, href?: string | null, logo?: { __typename: 'HomepagePartnersSectionLogosLogo', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null } | null> | null } | null, contactSection?: { __typename: 'HomepageContactSection', eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, titleTrail?: string | null, description?: string | null, ctaLabel?: string | null, email?: string | null, backgroundType?: string | null, backgroundImage?: { __typename: 'HomepageContactSectionBackgroundImage', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null, backgroundVideo?: { __typename: 'HomepageContactSectionBackgroundVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null, socialLinks?: Array<{ __typename: 'HomepageContactSectionSocialLinks', label?: string | null, href?: string | null } | null> | null } | null, footer?: { __typename: 'HomepageFooter', tagline?: string | null, menuTitle?: string | null, legalTitle?: string | null, imprintLabel?: string | null, imprintHref?: string | null, privacyLabel?: string | null, privacyHref?: string | null, copyright?: string | null, credits?: string | null } | null };
 
 export type HomepageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type HomepageQuery = { __typename?: 'Query', homepage: { __typename: 'Homepage', id: string, siteName: string, navCtaLabel: string, marqueeItems?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, navLinks?: Array<{ __typename: 'HomepageNavLinks', label: string, href: string } | null> | null, hero?: { __typename: 'HomepageHero', kicker?: string | null, eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, description?: string | null, primaryCtaLabel?: string | null, secondaryCtaLabel?: string | null, cursorLabel?: string | null, cursorYear?: string | null, modalTag?: string | null, modalTitle?: string | null, modalDescription?: string | null, scrollLabel?: string | null, backgroundVideo?: { __typename: 'HomepageHeroBackgroundVideo', url: string, path: string, bucket: string, mimeType: string, size: number, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null, showreelVideo?: { __typename: 'HomepageHeroShowreelVideo', url: string, path: string, bucket: string, mimeType: string, size: number, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null, servicesSection?: { __typename: 'HomepageServicesSection', eyebrow?: string | null, titleLine1?: string | null, titleLine2?: string | null, description?: string | null, watchLabel?: string | null, services?: Array<{ __typename: 'HomepageServicesSectionServices', num?: string | null, name: string, count?: string | null, desc?: string | null, items?: Array<{ __typename: 'HomepageServicesSectionServicesItems', tag?: string | null, title?: string | null, video?: { __typename: 'HomepageServicesSectionServicesItemsVideo', url: string, path: string, bucket: string, mimeType: string, size: number, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null> | null } | null> | null } | null, processSection?: { __typename: 'HomepageProcessSection', eyebrow?: string | null, title?: string | null, steps?: Array<{ __typename: 'HomepageProcessSectionSteps', num?: string | null, title?: string | null, text?: string | null } | null> | null } | null, testimonialsSection?: { __typename: 'HomepageTestimonialsSection', eyebrow?: string | null, title?: string | null, badge?: string | null, items?: Array<{ __typename: 'HomepageTestimonialsSectionItems', quote?: string | null, name?: string | null, role?: string | null, badge?: string | null } | null> | null } | null, contactSection?: { __typename: 'HomepageContactSection', eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, titleTrail?: string | null, description?: string | null, ctaLabel?: string | null, email?: string | null, socialHandle?: string | null } | null, footer?: { __typename: 'HomepageFooter', tagline?: string | null, menuTitle?: string | null, legalTitle?: string | null, imprintLabel?: string | null, imprintHref?: string | null, privacyLabel?: string | null, privacyHref?: string | null, copyright?: string | null, credits?: string | null } | null } };
+export type HomepageQuery = { __typename?: 'Query', homepage: { __typename: 'Homepage', id: string, siteName: string, navCtaLabel: string, marqueeItems?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, logo?: { __typename: 'HomepageLogo', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null, navLinks?: Array<{ __typename: 'HomepageNavLinks', label: string, href: string } | null> | null, hero?: { __typename: 'HomepageHero', kicker?: string | null, eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, description?: string | null, primaryCtaLabel?: string | null, secondaryCtaLabel?: string | null, cursorLabel?: string | null, cursorYear?: string | null, modalTag?: string | null, modalTitle?: string | null, modalDescription?: string | null, scrollLabel?: string | null, backgroundVideo?: { __typename: 'HomepageHeroBackgroundVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null, showreelVideo?: { __typename: 'HomepageHeroShowreelVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null, servicesSection?: { __typename: 'HomepageServicesSection', eyebrow?: string | null, titleLine1?: string | null, titleLine2?: string | null, description?: string | null, watchLabel?: string | null, services?: Array<{ __typename: 'HomepageServicesSectionServices', num?: string | null, name: string, count?: string | null, desc?: string | null, items?: Array<{ __typename: 'HomepageServicesSectionServicesItems', tag?: string | null, title?: string | null, description?: string | null, links?: Array<{ __typename: 'HomepageServicesSectionServicesItemsLinks', label?: string | null, href?: string | null } | null> | null, video?: { __typename: 'HomepageServicesSectionServicesItemsVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null> | null } | null> | null } | null, processSection?: { __typename: 'HomepageProcessSection', eyebrow?: string | null, title?: string | null, steps?: Array<{ __typename: 'HomepageProcessSectionSteps', num?: string | null, title?: string | null, text?: string | null } | null> | null } | null, aboutSection?: { __typename: 'HomepageAboutSection', eyebrow?: string | null, title?: string | null, description?: string | null, photo?: { __typename: 'HomepageAboutSectionPhoto', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null, facts?: Array<{ __typename: 'HomepageAboutSectionFacts', label?: string | null, value?: string | null } | null> | null } | null, testimonialsSection?: { __typename: 'HomepageTestimonialsSection', eyebrow?: string | null, title?: string | null, badge?: string | null, items?: Array<{ __typename: 'HomepageTestimonialsSectionItems', quote?: string | null, name?: string | null, role?: string | null, badge?: string | null } | null> | null } | null, partnersSection?: { __typename: 'HomepagePartnersSection', eyebrow?: string | null, title?: string | null, logos?: Array<{ __typename: 'HomepagePartnersSectionLogos', name?: string | null, href?: string | null, logo?: { __typename: 'HomepagePartnersSectionLogosLogo', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null } | null> | null } | null, contactSection?: { __typename: 'HomepageContactSection', eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, titleTrail?: string | null, description?: string | null, ctaLabel?: string | null, email?: string | null, backgroundType?: string | null, backgroundImage?: { __typename: 'HomepageContactSectionBackgroundImage', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null, backgroundVideo?: { __typename: 'HomepageContactSectionBackgroundVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null, socialLinks?: Array<{ __typename: 'HomepageContactSectionSocialLinks', label?: string | null, href?: string | null } | null> | null } | null, footer?: { __typename: 'HomepageFooter', tagline?: string | null, menuTitle?: string | null, legalTitle?: string | null, imprintLabel?: string | null, imprintHref?: string | null, privacyLabel?: string | null, privacyHref?: string | null, copyright?: string | null, credits?: string | null } | null } };
 
 export type HomepageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -747,12 +1097,24 @@ export type HomepageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomepageConnectionQuery = { __typename?: 'Query', homepageConnection: { __typename?: 'HomepageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomepageConnectionEdges', cursor: string, node?: { __typename: 'Homepage', id: string, siteName: string, navCtaLabel: string, marqueeItems?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, navLinks?: Array<{ __typename: 'HomepageNavLinks', label: string, href: string } | null> | null, hero?: { __typename: 'HomepageHero', kicker?: string | null, eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, description?: string | null, primaryCtaLabel?: string | null, secondaryCtaLabel?: string | null, cursorLabel?: string | null, cursorYear?: string | null, modalTag?: string | null, modalTitle?: string | null, modalDescription?: string | null, scrollLabel?: string | null, backgroundVideo?: { __typename: 'HomepageHeroBackgroundVideo', url: string, path: string, bucket: string, mimeType: string, size: number, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null, showreelVideo?: { __typename: 'HomepageHeroShowreelVideo', url: string, path: string, bucket: string, mimeType: string, size: number, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null, servicesSection?: { __typename: 'HomepageServicesSection', eyebrow?: string | null, titleLine1?: string | null, titleLine2?: string | null, description?: string | null, watchLabel?: string | null, services?: Array<{ __typename: 'HomepageServicesSectionServices', num?: string | null, name: string, count?: string | null, desc?: string | null, items?: Array<{ __typename: 'HomepageServicesSectionServicesItems', tag?: string | null, title?: string | null, video?: { __typename: 'HomepageServicesSectionServicesItemsVideo', url: string, path: string, bucket: string, mimeType: string, size: number, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null> | null } | null> | null } | null, processSection?: { __typename: 'HomepageProcessSection', eyebrow?: string | null, title?: string | null, steps?: Array<{ __typename: 'HomepageProcessSectionSteps', num?: string | null, title?: string | null, text?: string | null } | null> | null } | null, testimonialsSection?: { __typename: 'HomepageTestimonialsSection', eyebrow?: string | null, title?: string | null, badge?: string | null, items?: Array<{ __typename: 'HomepageTestimonialsSectionItems', quote?: string | null, name?: string | null, role?: string | null, badge?: string | null } | null> | null } | null, contactSection?: { __typename: 'HomepageContactSection', eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, titleTrail?: string | null, description?: string | null, ctaLabel?: string | null, email?: string | null, socialHandle?: string | null } | null, footer?: { __typename: 'HomepageFooter', tagline?: string | null, menuTitle?: string | null, legalTitle?: string | null, imprintLabel?: string | null, imprintHref?: string | null, privacyLabel?: string | null, privacyHref?: string | null, copyright?: string | null, credits?: string | null } | null } | null } | null> | null } };
+export type HomepageConnectionQuery = { __typename?: 'Query', homepageConnection: { __typename?: 'HomepageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomepageConnectionEdges', cursor: string, node?: { __typename: 'Homepage', id: string, siteName: string, navCtaLabel: string, marqueeItems?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, logo?: { __typename: 'HomepageLogo', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null, navLinks?: Array<{ __typename: 'HomepageNavLinks', label: string, href: string } | null> | null, hero?: { __typename: 'HomepageHero', kicker?: string | null, eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, description?: string | null, primaryCtaLabel?: string | null, secondaryCtaLabel?: string | null, cursorLabel?: string | null, cursorYear?: string | null, modalTag?: string | null, modalTitle?: string | null, modalDescription?: string | null, scrollLabel?: string | null, backgroundVideo?: { __typename: 'HomepageHeroBackgroundVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null, showreelVideo?: { __typename: 'HomepageHeroShowreelVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null, servicesSection?: { __typename: 'HomepageServicesSection', eyebrow?: string | null, titleLine1?: string | null, titleLine2?: string | null, description?: string | null, watchLabel?: string | null, services?: Array<{ __typename: 'HomepageServicesSectionServices', num?: string | null, name: string, count?: string | null, desc?: string | null, items?: Array<{ __typename: 'HomepageServicesSectionServicesItems', tag?: string | null, title?: string | null, description?: string | null, links?: Array<{ __typename: 'HomepageServicesSectionServicesItemsLinks', label?: string | null, href?: string | null } | null> | null, video?: { __typename: 'HomepageServicesSectionServicesItemsVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null } | null> | null } | null> | null } | null, processSection?: { __typename: 'HomepageProcessSection', eyebrow?: string | null, title?: string | null, steps?: Array<{ __typename: 'HomepageProcessSectionSteps', num?: string | null, title?: string | null, text?: string | null } | null> | null } | null, aboutSection?: { __typename: 'HomepageAboutSection', eyebrow?: string | null, title?: string | null, description?: string | null, photo?: { __typename: 'HomepageAboutSectionPhoto', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null, facts?: Array<{ __typename: 'HomepageAboutSectionFacts', label?: string | null, value?: string | null } | null> | null } | null, testimonialsSection?: { __typename: 'HomepageTestimonialsSection', eyebrow?: string | null, title?: string | null, badge?: string | null, items?: Array<{ __typename: 'HomepageTestimonialsSectionItems', quote?: string | null, name?: string | null, role?: string | null, badge?: string | null } | null> | null } | null, partnersSection?: { __typename: 'HomepagePartnersSection', eyebrow?: string | null, title?: string | null, logos?: Array<{ __typename: 'HomepagePartnersSectionLogos', name?: string | null, href?: string | null, logo?: { __typename: 'HomepagePartnersSectionLogosLogo', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null } | null> | null } | null, contactSection?: { __typename: 'HomepageContactSection', eyebrow?: string | null, titleLead?: string | null, titleAccent?: string | null, titleTrail?: string | null, description?: string | null, ctaLabel?: string | null, email?: string | null, backgroundType?: string | null, backgroundImage?: { __typename: 'HomepageContactSectionBackgroundImage', url?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, title?: string | null, alt?: string | null } | null, backgroundVideo?: { __typename: 'HomepageContactSectionBackgroundVideo', sourceType?: string | null, url?: string | null, vimeoUrl?: string | null, path?: string | null, bucket?: string | null, mimeType?: string | null, size?: number | null, width?: number | null, height?: number | null, duration?: number | null, posterUrl?: string | null, title?: string | null, alt?: string | null } | null, socialLinks?: Array<{ __typename: 'HomepageContactSectionSocialLinks', label?: string | null, href?: string | null } | null> | null } | null, footer?: { __typename: 'HomepageFooter', tagline?: string | null, menuTitle?: string | null, legalTitle?: string | null, imprintLabel?: string | null, imprintHref?: string | null, privacyLabel?: string | null, privacyHref?: string | null, copyright?: string | null, credits?: string | null } | null } | null } | null> | null } };
 
 export const HomepagePartsFragmentDoc = gql`
     fragment HomepageParts on Homepage {
   __typename
   siteName
+  logo {
+    __typename
+    url
+    path
+    bucket
+    mimeType
+    size
+    width
+    height
+    title
+    alt
+  }
   navCtaLabel
   navLinks {
     __typename
@@ -775,7 +1137,9 @@ export const HomepagePartsFragmentDoc = gql`
     modalDescription
     backgroundVideo {
       __typename
+      sourceType
       url
+      vimeoUrl
       path
       bucket
       mimeType
@@ -789,7 +1153,9 @@ export const HomepagePartsFragmentDoc = gql`
     }
     showreelVideo {
       __typename
+      sourceType
       url
+      vimeoUrl
       path
       bucket
       mimeType
@@ -821,9 +1187,17 @@ export const HomepagePartsFragmentDoc = gql`
         __typename
         tag
         title
+        description
+        links {
+          __typename
+          label
+          href
+        }
         video {
           __typename
+          sourceType
           url
+          vimeoUrl
           path
           bucket
           mimeType
@@ -849,6 +1223,29 @@ export const HomepagePartsFragmentDoc = gql`
       text
     }
   }
+  aboutSection {
+    __typename
+    eyebrow
+    title
+    description
+    photo {
+      __typename
+      url
+      path
+      bucket
+      mimeType
+      size
+      width
+      height
+      title
+      alt
+    }
+    facts {
+      __typename
+      label
+      value
+    }
+  }
   testimonialsSection {
     __typename
     eyebrow
@@ -862,6 +1259,28 @@ export const HomepagePartsFragmentDoc = gql`
       badge
     }
   }
+  partnersSection {
+    __typename
+    eyebrow
+    title
+    logos {
+      __typename
+      name
+      href
+      logo {
+        __typename
+        url
+        path
+        bucket
+        mimeType
+        size
+        width
+        height
+        title
+        alt
+      }
+    }
+  }
   contactSection {
     __typename
     eyebrow
@@ -871,7 +1290,40 @@ export const HomepagePartsFragmentDoc = gql`
     description
     ctaLabel
     email
-    socialHandle
+    backgroundType
+    backgroundImage {
+      __typename
+      url
+      path
+      bucket
+      mimeType
+      size
+      width
+      height
+      title
+      alt
+    }
+    backgroundVideo {
+      __typename
+      sourceType
+      url
+      vimeoUrl
+      path
+      bucket
+      mimeType
+      size
+      width
+      height
+      duration
+      posterUrl
+      title
+      alt
+    }
+    socialLinks {
+      __typename
+      label
+      href
+    }
   }
   footer {
     __typename

@@ -1,39 +1,314 @@
+var __defProp = Object.defineProperty;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __esm = (fn, res) => function __init() {
+  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+
+// lib/supabase/browser.ts
+import { createClient } from "@supabase/supabase-js";
+var browserClient, requirePublicEnv, getSupabaseBrowserClient;
+var init_browser = __esm({
+  "lib/supabase/browser.ts"() {
+    "use strict";
+    browserClient = null;
+    requirePublicEnv = (name) => {
+      const value = process.env[name];
+      if (!value) {
+        throw new Error(`Missing required public environment variable: ${name}`);
+      }
+      return value;
+    };
+    getSupabaseBrowserClient = () => {
+      if (browserClient) {
+        return browserClient;
+      }
+      browserClient = createClient(
+        requirePublicEnv("NEXT_PUBLIC_SUPABASE_URL"),
+        requirePublicEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
+        {
+          auth: {
+            autoRefreshToken: true,
+            persistSession: true,
+            detectSessionInUrl: true
+          }
+        }
+      );
+      return browserClient;
+    };
+  }
+});
+
+// lib/cms/media-browser.ts
+var getSupabaseAuthHeaders;
+var init_media_browser = __esm({
+  "lib/cms/media-browser.ts"() {
+    "use strict";
+    init_browser();
+    getSupabaseAuthHeaders = async () => {
+      const {
+        data: { session }
+      } = await getSupabaseBrowserClient().auth.getSession();
+      if (!session?.access_token) {
+        return {};
+      }
+      return {
+        Authorization: `Bearer ${session.access_token}`
+      };
+    };
+  }
+});
+
+// lib/cms/media.ts
+var MAX_VIDEO_UPLOAD_BYTES, MAX_IMAGE_UPLOAD_BYTES, VIDEO_DIRECTORY_BY_FIELD, IMAGE_DIRECTORY_BY_FIELD, getDefaultMediaDirectory, getDefaultImageDirectory, extractVimeoVideoId, getVideoSourceType, getVideoUrl, getVimeoUrl, getVimeoEmbedUrl, getImageUrl;
+var init_media = __esm({
+  "lib/cms/media.ts"() {
+    "use strict";
+    MAX_VIDEO_UPLOAD_BYTES = 250 * 1024 * 1024;
+    MAX_IMAGE_UPLOAD_BYTES = 10 * 1024 * 1024;
+    VIDEO_DIRECTORY_BY_FIELD = {
+      backgroundVideo: "videos/hero",
+      showreelVideo: "videos/showreel",
+      video: "videos/services"
+    };
+    IMAGE_DIRECTORY_BY_FIELD = {
+      logo: "images/logo"
+    };
+    getDefaultMediaDirectory = (fieldName) => VIDEO_DIRECTORY_BY_FIELD[fieldName] ?? "videos/uploads";
+    getDefaultImageDirectory = (fieldName) => IMAGE_DIRECTORY_BY_FIELD[fieldName] ?? "images/uploads";
+    extractVimeoVideoId = (value) => {
+      const trimmed = value?.trim();
+      if (!trimmed) {
+        return null;
+      }
+      if (/^\d+$/.test(trimmed)) {
+        return trimmed;
+      }
+      try {
+        const parsed = new URL(trimmed);
+        const hostname = parsed.hostname.replace(/^www\./, "");
+        if (!hostname.endsWith("vimeo.com")) {
+          return null;
+        }
+        const segments = parsed.pathname.split("/").filter(Boolean);
+        for (let index = segments.length - 1; index >= 0; index -= 1) {
+          if (/^\d+$/.test(segments[index])) {
+            return segments[index];
+          }
+        }
+      } catch {
+        return null;
+      }
+      return null;
+    };
+    getVideoSourceType = (asset) => {
+      if (!asset) {
+        return null;
+      }
+      if (asset.sourceType === "upload" || asset.sourceType === "vimeo") {
+        return asset.sourceType;
+      }
+      if (extractVimeoVideoId(asset.vimeoUrl || asset.url)) {
+        return "vimeo";
+      }
+      if (asset.url?.trim() || asset.path?.trim()) {
+        return "upload";
+      }
+      return null;
+    };
+    getVideoUrl = (asset) => {
+      if (getVideoSourceType(asset) === "vimeo") {
+        return null;
+      }
+      const url = asset?.url?.trim();
+      return url ? url : null;
+    };
+    getVimeoUrl = (asset) => {
+      const explicitUrl = asset?.vimeoUrl?.trim();
+      if (explicitUrl) {
+        return explicitUrl;
+      }
+      const fallbackUrl = asset?.url?.trim();
+      return extractVimeoVideoId(fallbackUrl) ? fallbackUrl : null;
+    };
+    getVimeoEmbedUrl = (asset, options) => {
+      const videoId = extractVimeoVideoId(getVimeoUrl(asset));
+      if (!videoId) {
+        return null;
+      }
+      const url = new URL(`https://player.vimeo.com/video/${videoId}`);
+      if (options?.background) {
+        url.searchParams.set("background", "1");
+        url.searchParams.set("autopause", "0");
+      }
+      if (options?.autoplay) {
+        url.searchParams.set("autoplay", "1");
+      }
+      if (options?.muted) {
+        url.searchParams.set("muted", "1");
+      }
+      if (options?.loop) {
+        url.searchParams.set("loop", "1");
+      }
+      if (options?.controls === false) {
+        url.searchParams.set("controls", "0");
+      }
+      url.searchParams.set("title", "0");
+      url.searchParams.set("byline", "0");
+      url.searchParams.set("portrait", "0");
+      return url.toString();
+    };
+    getImageUrl = (asset) => {
+      const url = asset?.url?.trim();
+      return url ? url : null;
+    };
+  }
+});
+
+// tina/media/supabase-media-store.ts
+var supabase_media_store_exports = {};
+__export(supabase_media_store_exports, {
+  SupabaseMediaStore: () => SupabaseMediaStore
+});
+var DEFAULT_MANAGER_DIRECTORY, DEFAULT_UPLOAD_DIRECTORY, resolveManagerDirectory, resolveUploadDirectory, SupabaseMediaStore;
+var init_supabase_media_store = __esm({
+  "tina/media/supabase-media-store.ts"() {
+    "use strict";
+    init_media_browser();
+    init_media();
+    init_browser();
+    DEFAULT_MANAGER_DIRECTORY = "videos";
+    DEFAULT_UPLOAD_DIRECTORY = "videos/uploads";
+    resolveManagerDirectory = (directory) => {
+      const trimmed = directory?.trim().replace(/^\/+|\/+$/g, "");
+      if (!trimmed) {
+        return DEFAULT_MANAGER_DIRECTORY;
+      }
+      return trimmed;
+    };
+    resolveUploadDirectory = (directory) => {
+      const trimmed = directory?.trim().replace(/^\/+|\/+$/g, "");
+      if (!trimmed || trimmed === DEFAULT_MANAGER_DIRECTORY) {
+        return DEFAULT_UPLOAD_DIRECTORY;
+      }
+      return trimmed;
+    };
+    SupabaseMediaStore = class {
+      constructor() {
+        this.accept = "video/*";
+        this.maxSize = MAX_VIDEO_UPLOAD_BYTES;
+      }
+      async persist(files) {
+        const authHeaders = await getSupabaseAuthHeaders();
+        const uploaded = await Promise.all(
+          files.map(async ({ directory, file }) => {
+            const uploadDirectory = resolveUploadDirectory(directory);
+            const signedUploadResponse = await fetch("/api/admin/media/signed-upload", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                ...authHeaders
+              },
+              body: JSON.stringify({
+                directory: uploadDirectory,
+                filename: file.name,
+                mimeType: file.type,
+                size: file.size
+              })
+            });
+            const signedUploadBody = await signedUploadResponse.json();
+            if (!signedUploadResponse.ok) {
+              throw new Error(signedUploadBody.error || "Upload-URL konnte nicht erstellt werden.");
+            }
+            const supabase = getSupabaseBrowserClient();
+            const bucket = signedUploadBody.bucket || "public";
+            const path = signedUploadBody.path || "";
+            const token = signedUploadBody.token || "";
+            const { error } = await supabase.storage.from(bucket).uploadToSignedUrl(path, token, file, {
+              contentType: file.type,
+              upsert: false
+            });
+            if (error) {
+              throw new Error(error.message);
+            }
+            const filename = path.split("/").pop() || file.name;
+            return {
+              id: path,
+              type: "file",
+              filename,
+              directory: uploadDirectory,
+              sourceType: "upload",
+              src: signedUploadBody.publicUrl || "",
+              thumbnails: signedUploadBody.publicUrl ? {
+                "75x75": signedUploadBody.publicUrl,
+                "400x400": signedUploadBody.publicUrl
+              } : void 0
+            };
+          })
+        );
+        return uploaded;
+      }
+      async delete(media) {
+        const item = media;
+        const path = item.path || item.id || [item.directory, item.filename].filter(Boolean).join("/");
+        const response = await fetch("/api/admin/media", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            ...await getSupabaseAuthHeaders()
+          },
+          body: JSON.stringify({
+            bucket: item.bucket,
+            path
+          })
+        });
+        if (!response.ok) {
+          const body = await response.json().catch(() => null);
+          throw new Error(body?.error || "Asset konnte nicht geloescht werden.");
+        }
+      }
+      async list(options) {
+        const params = new URLSearchParams();
+        const directory = resolveManagerDirectory(options?.directory);
+        params.set("directory", directory);
+        if (options?.limit) {
+          params.set("limit", String(options.limit));
+        }
+        if (options?.offset) {
+          params.set("offset", String(options.offset));
+        }
+        if (options?.filesOnly) {
+          params.set("filesOnly", "true");
+        }
+        const response = await fetch(`/api/admin/media/list?${params.toString()}`, {
+          headers: await getSupabaseAuthHeaders()
+        });
+        const body = await response.json();
+        if (!response.ok) {
+          throw new Error(body.error || "Media-Liste konnte nicht geladen werden.");
+        }
+        return {
+          items: body.items || [],
+          nextOffset: body.nextOffset
+        };
+      }
+      parse(media) {
+        return media.src || "";
+      }
+    };
+  }
+});
+
 // tina/config.ts
 import { defineConfig, LocalAuthProvider } from "tinacms";
 
 // tina/auth/provider.tsx
+init_browser();
 import { useEffect, useState } from "react";
 import { AbstractAuthProvider } from "tinacms";
-
-// lib/supabase/browser.ts
-import { createClient } from "@supabase/supabase-js";
-var browserClient = null;
-var requirePublicEnv = (name) => {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Missing required public environment variable: ${name}`);
-  }
-  return value;
-};
-var getSupabaseBrowserClient = () => {
-  if (browserClient) {
-    return browserClient;
-  }
-  browserClient = createClient(
-    requirePublicEnv("NEXT_PUBLIC_SUPABASE_URL"),
-    requirePublicEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
-    {
-      auth: {
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: true
-      }
-    }
-  );
-  return browserClient;
-};
-
-// tina/auth/provider.tsx
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 var getAccessToken = async () => {
   const {
@@ -202,23 +477,11 @@ var SupabaseTinaAuthProvider = class extends AbstractAuthProvider {
   }
 };
 
-// tina/fields/video-asset-field.tsx
+// tina/fields/image-asset-field.tsx
+init_media_browser();
+init_media();
+init_browser();
 import { useState as useState2 } from "react";
-
-// lib/cms/media.ts
-var MAX_VIDEO_UPLOAD_BYTES = 250 * 1024 * 1024;
-var VIDEO_DIRECTORY_BY_FIELD = {
-  backgroundVideo: "videos/hero",
-  showreelVideo: "videos/showreel",
-  video: "videos/services"
-};
-var getDefaultMediaDirectory = (fieldName) => VIDEO_DIRECTORY_BY_FIELD[fieldName] ?? "videos/uploads";
-var getVideoUrl = (asset) => {
-  const url = asset?.url?.trim();
-  return url ? url : null;
-};
-
-// tina/fields/video-asset-field.tsx
 import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
 var formatFileSize = (size) => {
   if (size >= 1024 * 1024) {
@@ -226,17 +489,271 @@ var formatFileSize = (size) => {
   }
   return `${Math.max(1, Math.round(size / 1024))} KB`;
 };
-var getAuthHeaders = async () => {
-  const {
-    data: { session }
-  } = await getSupabaseBrowserClient().auth.getSession();
-  if (!session?.access_token) {
-    return {};
-  }
-  return {
-    Authorization: `Bearer ${session.access_token}`
+var readImageMetadata = (file) => new Promise((resolve) => {
+  const objectUrl = URL.createObjectURL(file);
+  const image = new Image();
+  const cleanup = () => {
+    URL.revokeObjectURL(objectUrl);
   };
+  image.onload = () => {
+    cleanup();
+    resolve({
+      width: image.naturalWidth || null,
+      height: image.naturalHeight || null
+    });
+  };
+  image.onerror = () => {
+    cleanup();
+    resolve({
+      width: null,
+      height: null
+    });
+  };
+  image.src = objectUrl;
+});
+var ImageAssetField = ({ field, input }) => {
+  const [isUploading, setIsUploading] = useState2(false);
+  const [isLoadingLibrary, setIsLoadingLibrary] = useState2(false);
+  const [library, setLibrary] = useState2([]);
+  const [error, setError] = useState2(null);
+  const currentAsset = input.value ?? null;
+  const directory = getDefaultImageDirectory(field.name);
+  const loadLibrary = async () => {
+    setError(null);
+    setIsLoadingLibrary(true);
+    try {
+      const response = await fetch(
+        `/api/admin/media/list?directory=${encodeURIComponent(directory)}`,
+        {
+          headers: await getSupabaseAuthHeaders()
+        }
+      );
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(body.error || "Die Media-Liste konnte nicht geladen werden.");
+      }
+      setLibrary((body.items || []).filter((item) => item.type !== "dir"));
+    } catch (loadError) {
+      setError(loadError instanceof Error ? loadError.message : "Die Media-Liste konnte nicht geladen werden.");
+    } finally {
+      setIsLoadingLibrary(false);
+    }
+  };
+  const onUpload = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) {
+      return;
+    }
+    if (file.size > MAX_IMAGE_UPLOAD_BYTES) {
+      setError("Die Datei ist zu gross fuer den Bild-Upload.");
+      return;
+    }
+    setError(null);
+    setIsUploading(true);
+    try {
+      const metadata = await readImageMetadata(file);
+      const authHeaders = await getSupabaseAuthHeaders();
+      const signedUploadResponse = await fetch("/api/admin/media/signed-upload", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeaders
+        },
+        body: JSON.stringify({
+          directory,
+          filename: file.name,
+          mimeType: file.type,
+          size: file.size
+        })
+      });
+      const signedUploadBody = await signedUploadResponse.json();
+      if (!signedUploadResponse.ok) {
+        throw new Error(signedUploadBody.error || "Upload-URL konnte nicht erzeugt werden.");
+      }
+      const supabase = getSupabaseBrowserClient();
+      const { error: uploadError } = await supabase.storage.from(signedUploadBody.bucket || "public").uploadToSignedUrl(
+        signedUploadBody.path || "",
+        signedUploadBody.token || "",
+        file,
+        {
+          contentType: file.type,
+          upsert: false
+        }
+      );
+      if (uploadError) {
+        throw new Error(uploadError.message);
+      }
+      input.onChange({
+        url: signedUploadBody.publicUrl || "",
+        path: signedUploadBody.path || "",
+        bucket: signedUploadBody.bucket || "public",
+        mimeType: file.type,
+        size: file.size,
+        width: metadata.width ?? null,
+        height: metadata.height ?? null,
+        alt: file.name.replace(/\.[^.]+$/, ""),
+        title: file.name.replace(/\.[^.]+$/, "")
+      });
+      await loadLibrary();
+    } catch (uploadError) {
+      setError(uploadError instanceof Error ? uploadError.message : "Upload fehlgeschlagen.");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+  const onDelete = async () => {
+    if (!currentAsset?.path) {
+      input.onChange(null);
+      return;
+    }
+    setError(null);
+    try {
+      const response = await fetch("/api/admin/media", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          ...await getSupabaseAuthHeaders()
+        },
+        body: JSON.stringify({
+          bucket: currentAsset.bucket,
+          path: currentAsset.path
+        })
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(body.error || "Asset konnte nicht geloescht werden.");
+      }
+      input.onChange(null);
+      await loadLibrary();
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht geloescht werden.");
+    }
+  };
+  return jsxs2("div", { className: "space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4", children: [
+    jsxs2("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
+      jsxs2("div", { children: [
+        jsx2("p", { className: "text-sm font-semibold text-slate-900", children: field.label || "Bild" }),
+        jsx2("p", { className: "text-xs text-slate-500", children: field.description || directory })
+      ] }),
+      jsxs2("div", { className: "flex flex-wrap gap-2", children: [
+        jsxs2("label", { className: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700", children: [
+          isUploading ? "Upload laeuft..." : "Bild hochladen",
+          jsx2(
+            "input",
+            {
+              type: "file",
+              accept: "image/jpeg,image/png,image/webp,image/svg+xml,image/avif",
+              className: "hidden",
+              disabled: isUploading,
+              onChange: onUpload
+            }
+          )
+        ] }),
+        jsx2(
+          "button",
+          {
+            type: "button",
+            onClick: () => void loadLibrary(),
+            disabled: isLoadingLibrary,
+            className: "rounded-full border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-500 hover:text-slate-950 disabled:opacity-60",
+            children: isLoadingLibrary ? "Lade Library..." : "Library laden"
+          }
+        ),
+        currentAsset ? jsx2(
+          "button",
+          {
+            type: "button",
+            onClick: () => void onDelete(),
+            className: "rounded-full border border-rose-200 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-400 hover:text-rose-700",
+            children: "Entfernen"
+          }
+        ) : null
+      ] })
+    ] }),
+    currentAsset ? jsxs2("div", { className: "overflow-hidden rounded-2xl border border-slate-200 bg-white", children: [
+      getImageUrl(currentAsset) ? jsx2(
+        "img",
+        {
+          className: "max-h-40 w-full bg-white object-contain",
+          src: getImageUrl(currentAsset) || void 0,
+          alt: currentAsset.alt || currentAsset.title || "Logo"
+        }
+      ) : null,
+      jsxs2("div", { className: "grid gap-2 p-4 text-xs text-slate-600", children: [
+        jsx2("p", { className: "font-medium text-slate-900", children: currentAsset.title || currentAsset.path }),
+        jsx2("p", { children: currentAsset.path }),
+        jsxs2("p", { children: [
+          currentAsset.mimeType,
+          " \xB7 ",
+          formatFileSize(currentAsset.size)
+        ] })
+      ] })
+    ] }) : jsx2("div", { className: "rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-6 text-sm text-slate-500", children: "Noch kein Bild gesetzt." }),
+    library.length > 0 ? jsx2("div", { className: "grid gap-3 md:grid-cols-2", children: library.map((item) => jsxs2(
+      "button",
+      {
+        type: "button",
+        onClick: () => input.onChange({
+          url: item.url,
+          path: item.path,
+          bucket: item.bucket,
+          mimeType: item.mimeType,
+          size: item.size,
+          width: item.width ?? null,
+          height: item.height ?? null,
+          title: item.title ?? null,
+          alt: item.alt ?? null
+        }),
+        className: "overflow-hidden rounded-2xl border border-slate-200 bg-white text-left transition hover:border-slate-400",
+        children: [
+          getImageUrl(item) ? jsx2(
+            "img",
+            {
+              className: "aspect-[3/2] w-full bg-white object-contain",
+              src: getImageUrl(item) || void 0,
+              alt: item.alt || item.title || item.filename
+            }
+          ) : null,
+          jsxs2("div", { className: "p-3 text-xs text-slate-600", children: [
+            jsx2("p", { className: "font-medium text-slate-900", children: item.title || item.filename }),
+            jsx2("p", { className: "mt-1", children: item.path })
+          ] })
+        ]
+      },
+      item.path
+    )) }) : null,
+    error ? jsx2("p", { className: "rounded-2xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700", children: error }) : null
+  ] });
 };
+
+// tina/fields/video-asset-field.tsx
+init_media_browser();
+init_media();
+init_browser();
+import { useState as useState3 } from "react";
+import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
+var formatFileSize2 = (size) => {
+  if (size >= 1024 * 1024) {
+    return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+  }
+  return `${Math.max(1, Math.round(size / 1024))} KB`;
+};
+var createVideoAsset = (sourceType) => ({
+  sourceType,
+  url: "",
+  vimeoUrl: "",
+  path: "",
+  bucket: "",
+  mimeType: sourceType === "vimeo" ? "video/vimeo" : "",
+  size: 0,
+  width: null,
+  height: null,
+  duration: null,
+  posterUrl: null,
+  alt: null,
+  title: null
+});
 var readVideoMetadata = (file) => new Promise((resolve) => {
   const objectUrl = URL.createObjectURL(file);
   const video = document.createElement("video");
@@ -261,12 +778,38 @@ var readVideoMetadata = (file) => new Promise((resolve) => {
   };
 });
 var VideoAssetField = ({ field, input }) => {
-  const [isUploading, setIsUploading] = useState2(false);
-  const [isLoadingLibrary, setIsLoadingLibrary] = useState2(false);
-  const [library, setLibrary] = useState2([]);
-  const [error, setError] = useState2(null);
+  const [isUploading, setIsUploading] = useState3(false);
+  const [isLoadingLibrary, setIsLoadingLibrary] = useState3(false);
+  const [library, setLibrary] = useState3([]);
+  const [error, setError] = useState3(null);
   const currentAsset = input.value ?? null;
+  const currentSourceType = getVideoSourceType(currentAsset) ?? "upload";
   const directory = getDefaultMediaDirectory(field.name);
+  const currentVimeoUrl = currentAsset?.vimeoUrl?.trim() || (currentSourceType === "vimeo" ? currentAsset?.url?.trim() || "" : "");
+  const currentVimeoPreview = getVimeoEmbedUrl(currentAsset, {
+    autoplay: true,
+    muted: true,
+    loop: true,
+    controls: false,
+    background: true
+  });
+  const setSourceType = (sourceType) => {
+    setError(null);
+    if (sourceType === currentSourceType && currentAsset) {
+      input.onChange({
+        ...createVideoAsset(sourceType),
+        ...currentAsset,
+        sourceType
+      });
+      return;
+    }
+    input.onChange({
+      ...createVideoAsset(sourceType),
+      title: currentAsset?.title ?? null,
+      alt: currentAsset?.alt ?? null,
+      posterUrl: currentAsset?.posterUrl ?? null
+    });
+  };
   const loadLibrary = async () => {
     setError(null);
     setIsLoadingLibrary(true);
@@ -274,14 +817,14 @@ var VideoAssetField = ({ field, input }) => {
       const response = await fetch(
         `/api/admin/media/list?directory=${encodeURIComponent(directory)}`,
         {
-          headers: await getAuthHeaders()
+          headers: await getSupabaseAuthHeaders()
         }
       );
       const body = await response.json();
       if (!response.ok) {
         throw new Error(body.error || "Die Media-Liste konnte nicht geladen werden.");
       }
-      setLibrary(body.items || []);
+      setLibrary((body.items || []).filter((item) => item.type !== "dir"));
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : "Die Media-Liste konnte nicht geladen werden.");
     } finally {
@@ -302,7 +845,7 @@ var VideoAssetField = ({ field, input }) => {
     setIsUploading(true);
     try {
       const metadata = await readVideoMetadata(file);
-      const authHeaders = await getAuthHeaders();
+      const authHeaders = await getSupabaseAuthHeaders();
       const signedUploadResponse = await fetch("/api/admin/media/signed-upload", {
         method: "POST",
         headers: {
@@ -334,7 +877,9 @@ var VideoAssetField = ({ field, input }) => {
         throw new Error(uploadError.message);
       }
       const nextAsset = {
+        sourceType: "upload",
         url: signedUploadBody.publicUrl || "",
+        vimeoUrl: "",
         path: signedUploadBody.path || "",
         bucket: signedUploadBody.bucket || "public",
         mimeType: file.type,
@@ -354,8 +899,22 @@ var VideoAssetField = ({ field, input }) => {
       setIsUploading(false);
     }
   };
+  const onChangeVimeoUrl = (event) => {
+    const nextUrl = event.target.value;
+    input.onChange({
+      ...createVideoAsset("vimeo"),
+      ...currentAsset,
+      sourceType: "vimeo",
+      url: "",
+      vimeoUrl: nextUrl,
+      path: "",
+      bucket: "",
+      mimeType: "video/vimeo",
+      size: 0
+    });
+  };
   const onDelete = async () => {
-    if (!currentAsset?.path) {
+    if (currentSourceType !== "upload" || !currentAsset?.path) {
       input.onChange(null);
       return;
     }
@@ -365,7 +924,7 @@ var VideoAssetField = ({ field, input }) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          ...await getAuthHeaders()
+          ...await getSupabaseAuthHeaders()
         },
         body: JSON.stringify({
           bucket: currentAsset.bucket,
@@ -382,49 +941,30 @@ var VideoAssetField = ({ field, input }) => {
       setError(deleteError instanceof Error ? deleteError.message : "Asset konnte nicht geloescht werden.");
     }
   };
-  return jsxs2("div", { className: "space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4", children: [
-    jsxs2("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
-      jsxs2("div", { children: [
-        jsx2("p", { className: "text-sm font-semibold text-slate-900", children: field.label || "Video" }),
-        jsx2("p", { className: "text-xs text-slate-500", children: field.description || directory })
-      ] }),
-      jsxs2("div", { className: "flex flex-wrap gap-2", children: [
-        jsxs2("label", { className: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700", children: [
-          isUploading ? "Upload laeuft..." : "Video hochladen",
-          jsx2(
-            "input",
-            {
-              type: "file",
-              accept: "video/mp4,video/quicktime,video/webm,video/x-m4v",
-              className: "hidden",
-              disabled: isUploading,
-              onChange: onUpload
-            }
-          )
-        ] }),
-        jsx2(
-          "button",
+  const renderCurrentPreview = () => {
+    if (!currentAsset) {
+      return jsx3("div", { className: "rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-6 text-sm text-slate-500", children: "Noch kein Video gesetzt." });
+    }
+    if (currentSourceType === "vimeo") {
+      return jsxs3("div", { className: "overflow-hidden rounded-2xl border border-slate-200 bg-white", children: [
+        currentVimeoPreview ? jsx3(
+          "iframe",
           {
-            type: "button",
-            onClick: () => void loadLibrary(),
-            disabled: isLoadingLibrary,
-            className: "rounded-full border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-500 hover:text-slate-950 disabled:opacity-60",
-            children: isLoadingLibrary ? "Lade Library..." : "Library laden"
+            src: currentVimeoPreview,
+            title: currentAsset.title || "Vimeo Video",
+            allow: "autoplay; fullscreen; picture-in-picture; encrypted-media",
+            allowFullScreen: true,
+            className: "aspect-video w-full bg-black"
           }
-        ),
-        currentAsset ? jsx2(
-          "button",
-          {
-            type: "button",
-            onClick: () => void onDelete(),
-            className: "rounded-full border border-rose-200 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-400 hover:text-rose-700",
-            children: "Entfernen"
-          }
-        ) : null
-      ] })
-    ] }),
-    currentAsset ? jsxs2("div", { className: "overflow-hidden rounded-2xl border border-slate-200 bg-white", children: [
-      getVideoUrl(currentAsset) ? jsx2(
+        ) : jsx3("div", { className: "flex aspect-video w-full items-center justify-center bg-slate-950 px-4 text-center text-sm text-slate-300", children: "Vimeo-Link einfuegen, um die Vorschau zu sehen." }),
+        jsxs3("div", { className: "grid gap-2 p-4 text-xs text-slate-600", children: [
+          jsx3("p", { className: "font-medium text-slate-900", children: currentAsset.title || "Vimeo Video" }),
+          jsx3("p", { className: "break-all", children: currentVimeoUrl || "Noch kein Vimeo-Link gesetzt." })
+        ] })
+      ] });
+    }
+    return jsxs3("div", { className: "overflow-hidden rounded-2xl border border-slate-200 bg-white", children: [
+      getVideoUrl(currentAsset) ? jsx3(
         "video",
         {
           className: "aspect-video w-full bg-black object-cover",
@@ -434,25 +974,114 @@ var VideoAssetField = ({ field, input }) => {
           preload: "metadata"
         }
       ) : null,
-      jsxs2("div", { className: "grid gap-2 p-4 text-xs text-slate-600", children: [
-        jsx2("p", { className: "font-medium text-slate-900", children: currentAsset.title || currentAsset.path }),
-        jsx2("p", { children: currentAsset.path }),
-        jsxs2("p", { children: [
+      jsxs3("div", { className: "grid gap-2 p-4 text-xs text-slate-600", children: [
+        jsx3("p", { className: "font-medium text-slate-900", children: currentAsset.title || currentAsset.path }),
+        jsx3("p", { children: currentAsset.path }),
+        jsxs3("p", { children: [
           currentAsset.mimeType,
           " \xB7 ",
-          formatFileSize(currentAsset.size),
+          formatFileSize2(currentAsset.size),
           currentAsset.duration ? ` \xB7 ${currentAsset.duration.toFixed(1)}s` : ""
         ] })
       ] })
-    ] }) : jsx2("div", { className: "rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-6 text-sm text-slate-500", children: "Noch kein Video gesetzt." }),
-    library.length > 0 ? jsx2("div", { className: "grid gap-3 md:grid-cols-2", children: library.map((item) => jsxs2(
+    ] });
+  };
+  return jsxs3("div", { className: "space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4", children: [
+    jsxs3("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
+      jsxs3("div", { children: [
+        jsx3("p", { className: "text-sm font-semibold text-slate-900", children: field.label || "Video" }),
+        jsx3("p", { className: "text-xs text-slate-500", children: field.description || directory })
+      ] }),
+      jsxs3("div", { className: "inline-flex rounded-full border border-slate-300 bg-white p-1", children: [
+        jsx3(
+          "button",
+          {
+            type: "button",
+            onClick: () => setSourceType("upload"),
+            className: `rounded-full px-3 py-2 text-xs font-semibold transition ${currentSourceType === "upload" ? "bg-slate-900 text-white" : "text-slate-600 hover:text-slate-950"}`,
+            children: "Upload"
+          }
+        ),
+        jsx3(
+          "button",
+          {
+            type: "button",
+            onClick: () => setSourceType("vimeo"),
+            className: `rounded-full px-3 py-2 text-xs font-semibold transition ${currentSourceType === "vimeo" ? "bg-slate-900 text-white" : "text-slate-600 hover:text-slate-950"}`,
+            children: "Vimeo Link"
+          }
+        )
+      ] })
+    ] }),
+    currentSourceType === "upload" ? jsxs3("div", { className: "flex flex-wrap gap-2", children: [
+      jsxs3("label", { className: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700", children: [
+        isUploading ? "Upload laeuft..." : "Video hochladen",
+        jsx3(
+          "input",
+          {
+            type: "file",
+            accept: "video/mp4,video/quicktime,video/webm,video/x-m4v",
+            className: "hidden",
+            disabled: isUploading,
+            onChange: onUpload
+          }
+        )
+      ] }),
+      jsx3(
+        "button",
+        {
+          type: "button",
+          onClick: () => void loadLibrary(),
+          disabled: isLoadingLibrary,
+          className: "rounded-full border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-500 hover:text-slate-950 disabled:opacity-60",
+          children: isLoadingLibrary ? "Lade Library..." : "Library laden"
+        }
+      ),
+      currentAsset ? jsx3(
+        "button",
+        {
+          type: "button",
+          onClick: () => void onDelete(),
+          className: "rounded-full border border-rose-200 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-400 hover:text-rose-700",
+          children: "Entfernen"
+        }
+      ) : null
+    ] }) : jsxs3("div", { className: "space-y-2", children: [
+      jsx3("label", { className: "block text-xs font-semibold uppercase tracking-[0.12em] text-slate-500", children: "Vimeo URL" }),
+      jsx3(
+        "input",
+        {
+          type: "url",
+          value: currentVimeoUrl,
+          onChange: onChangeVimeoUrl,
+          placeholder: "https://vimeo.com/123456789",
+          className: "w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-500"
+        }
+      ),
+      currentVimeoUrl && !extractVimeoVideoId(currentVimeoUrl) ? jsx3("p", { className: "text-xs text-rose-600", children: "Der Link enthaelt keine gueltige Vimeo-Video-ID." }) : null,
+      currentAsset ? jsx3(
+        "button",
+        {
+          type: "button",
+          onClick: () => input.onChange(null),
+          className: "rounded-full border border-rose-200 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-400 hover:text-rose-700",
+          children: "Entfernen"
+        }
+      ) : null
+    ] }),
+    renderCurrentPreview(),
+    currentSourceType === "upload" && library.length > 0 ? jsx3("div", { className: "grid gap-3 md:grid-cols-2", children: library.map((item) => jsxs3(
       "button",
       {
         type: "button",
-        onClick: () => input.onChange(item),
+        onClick: () => input.onChange({
+          ...item,
+          sourceType: "upload",
+          vimeoUrl: ""
+        }),
         className: "overflow-hidden rounded-2xl border border-slate-200 bg-white text-left transition hover:border-slate-400",
         children: [
-          getVideoUrl(item) ? jsx2(
+          getVideoUrl(item) ? jsx3(
             "video",
             {
               className: "aspect-video w-full bg-black object-cover",
@@ -462,15 +1091,15 @@ var VideoAssetField = ({ field, input }) => {
               preload: "metadata"
             }
           ) : null,
-          jsxs2("div", { className: "p-3 text-xs text-slate-600", children: [
-            jsx2("p", { className: "font-medium text-slate-900", children: item.title || item.filename }),
-            jsx2("p", { className: "mt-1", children: item.path })
+          jsxs3("div", { className: "p-3 text-xs text-slate-600", children: [
+            jsx3("p", { className: "font-medium text-slate-900", children: item.title || item.filename }),
+            jsx3("p", { className: "mt-1", children: item.path })
           ] })
         ]
       },
       item.path
     )) }) : null,
-    error ? jsx2("p", { className: "rounded-2xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700", children: error }) : null
+    error ? jsx3("p", { className: "rounded-2xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700", children: error }) : null
   ] });
 };
 
@@ -480,33 +1109,38 @@ var isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 var videoAssetFields = () => [
   {
     type: "string",
+    name: "sourceType",
+    label: "Quelle"
+  },
+  {
+    type: "string",
     name: "url",
-    label: "Public URL",
-    required: true
+    label: "Public URL"
+  },
+  {
+    type: "string",
+    name: "vimeoUrl",
+    label: "Vimeo URL"
   },
   {
     type: "string",
     name: "path",
-    label: "Storage Path",
-    required: true
+    label: "Storage Path"
   },
   {
     type: "string",
     name: "bucket",
-    label: "Bucket",
-    required: true
+    label: "Bucket"
   },
   {
     type: "string",
     name: "mimeType",
-    label: "MIME Type",
-    required: true
+    label: "MIME Type"
   },
   {
     type: "number",
     name: "size",
-    label: "Dateigroesse",
-    required: true
+    label: "Dateigroesse"
   },
   {
     type: "number",
@@ -548,6 +1182,62 @@ var videoAssetField = (name, label) => ({
     component: VideoAssetField
   }
 });
+var imageAssetFields = () => [
+  {
+    type: "string",
+    name: "url",
+    label: "Public URL"
+  },
+  {
+    type: "string",
+    name: "path",
+    label: "Storage Path"
+  },
+  {
+    type: "string",
+    name: "bucket",
+    label: "Bucket"
+  },
+  {
+    type: "string",
+    name: "mimeType",
+    label: "MIME Type"
+  },
+  {
+    type: "number",
+    name: "size",
+    label: "Dateigroesse"
+  },
+  {
+    type: "number",
+    name: "width",
+    label: "Breite"
+  },
+  {
+    type: "number",
+    name: "height",
+    label: "Hoehe"
+  },
+  {
+    type: "string",
+    name: "title",
+    label: "Titel"
+  },
+  {
+    type: "string",
+    name: "alt",
+    label: "Alt Text"
+  }
+];
+var imageAssetField = (name, label) => ({
+  type: "object",
+  name,
+  label,
+  fields: imageAssetFields(),
+  ui: {
+    component: ImageAssetField
+  }
+});
 var config_default = defineConfig({
   branch,
   authProvider: isLocal ? new LocalAuthProvider() : new SupabaseTinaAuthProvider(),
@@ -557,9 +1247,9 @@ var config_default = defineConfig({
     publicFolder: "public"
   },
   media: {
-    tina: {
-      mediaRoot: "",
-      publicFolder: "public"
+    loadCustomStore: async () => {
+      const pack = await Promise.resolve().then(() => (init_supabase_media_store(), supabase_media_store_exports));
+      return pack.SupabaseMediaStore;
     }
   },
   schema: {
@@ -574,6 +1264,7 @@ var config_default = defineConfig({
         },
         ui: {
           global: true,
+          router: () => "/",
           allowedActions: {
             create: false,
             delete: false,
@@ -587,6 +1278,7 @@ var config_default = defineConfig({
             label: "Seitenname",
             required: true
           },
+          imageAssetField("logo", "Logo"),
           {
             type: "string",
             name: "navCtaLabel",
@@ -778,6 +1470,32 @@ var config_default = defineConfig({
                         name: "title",
                         label: "Titel"
                       },
+                      {
+                        type: "string",
+                        name: "description",
+                        label: "Beschreibung unter dem Video",
+                        ui: {
+                          component: "textarea"
+                        }
+                      },
+                      {
+                        type: "object",
+                        name: "links",
+                        label: "Zusatzlinks",
+                        list: true,
+                        fields: [
+                          {
+                            type: "string",
+                            name: "label",
+                            label: "Text"
+                          },
+                          {
+                            type: "string",
+                            name: "href",
+                            label: "URL"
+                          }
+                        ]
+                      },
                       videoAssetField("video", "Video")
                     ]
                   }
@@ -823,6 +1541,50 @@ var config_default = defineConfig({
                     ui: {
                       component: "textarea"
                     }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            type: "object",
+            name: "aboutSection",
+            label: "Ueber mich",
+            fields: [
+              {
+                type: "string",
+                name: "eyebrow",
+                label: "Eyebrow"
+              },
+              {
+                type: "string",
+                name: "title",
+                label: "Titel"
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Beschreibung",
+                ui: {
+                  component: "textarea"
+                }
+              },
+              imageAssetField("photo", "Portraitfoto"),
+              {
+                type: "object",
+                name: "facts",
+                label: "Fakten",
+                list: true,
+                fields: [
+                  {
+                    type: "string",
+                    name: "label",
+                    label: "Label"
+                  },
+                  {
+                    type: "string",
+                    name: "value",
+                    label: "Wert"
                   }
                 ]
               }
@@ -883,6 +1645,42 @@ var config_default = defineConfig({
           },
           {
             type: "object",
+            name: "partnersSection",
+            label: "Partner",
+            fields: [
+              {
+                type: "string",
+                name: "eyebrow",
+                label: "Eyebrow"
+              },
+              {
+                type: "string",
+                name: "title",
+                label: "Titel"
+              },
+              {
+                type: "object",
+                name: "logos",
+                label: "Logos",
+                list: true,
+                fields: [
+                  {
+                    type: "string",
+                    name: "name",
+                    label: "Name"
+                  },
+                  {
+                    type: "string",
+                    name: "href",
+                    label: "Link (optional)"
+                  },
+                  imageAssetField("logo", "Logo")
+                ]
+              }
+            ]
+          },
+          {
+            type: "object",
             name: "contactSection",
             label: "Kontakt",
             fields: [
@@ -926,8 +1724,45 @@ var config_default = defineConfig({
               },
               {
                 type: "string",
-                name: "socialHandle",
-                label: "Social Handle"
+                name: "backgroundType",
+                label: "Hintergrundtyp",
+                options: [
+                  {
+                    label: "Kein Hintergrund",
+                    value: "none"
+                  },
+                  {
+                    label: "Bild",
+                    value: "image"
+                  },
+                  {
+                    label: "Video",
+                    value: "video"
+                  }
+                ],
+                ui: {
+                  component: "select"
+                }
+              },
+              imageAssetField("backgroundImage", "Hintergrundbild"),
+              videoAssetField("backgroundVideo", "Hintergrundvideo"),
+              {
+                type: "object",
+                name: "socialLinks",
+                label: "Social Links",
+                list: true,
+                fields: [
+                  {
+                    type: "string",
+                    name: "label",
+                    label: "Label"
+                  },
+                  {
+                    type: "string",
+                    name: "href",
+                    label: "URL"
+                  }
+                ]
               }
             ]
           },

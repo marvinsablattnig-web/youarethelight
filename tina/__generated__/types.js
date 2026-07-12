@@ -9,6 +9,18 @@ export const HomepagePartsFragmentDoc = gql`
     fragment HomepageParts on Homepage {
   __typename
   siteName
+  logo {
+    __typename
+    url
+    path
+    bucket
+    mimeType
+    size
+    width
+    height
+    title
+    alt
+  }
   navCtaLabel
   navLinks {
     __typename
@@ -31,7 +43,9 @@ export const HomepagePartsFragmentDoc = gql`
     modalDescription
     backgroundVideo {
       __typename
+      sourceType
       url
+      vimeoUrl
       path
       bucket
       mimeType
@@ -45,7 +59,9 @@ export const HomepagePartsFragmentDoc = gql`
     }
     showreelVideo {
       __typename
+      sourceType
       url
+      vimeoUrl
       path
       bucket
       mimeType
@@ -77,9 +93,17 @@ export const HomepagePartsFragmentDoc = gql`
         __typename
         tag
         title
+        description
+        links {
+          __typename
+          label
+          href
+        }
         video {
           __typename
+          sourceType
           url
+          vimeoUrl
           path
           bucket
           mimeType
@@ -105,6 +129,29 @@ export const HomepagePartsFragmentDoc = gql`
       text
     }
   }
+  aboutSection {
+    __typename
+    eyebrow
+    title
+    description
+    photo {
+      __typename
+      url
+      path
+      bucket
+      mimeType
+      size
+      width
+      height
+      title
+      alt
+    }
+    facts {
+      __typename
+      label
+      value
+    }
+  }
   testimonialsSection {
     __typename
     eyebrow
@@ -118,6 +165,28 @@ export const HomepagePartsFragmentDoc = gql`
       badge
     }
   }
+  partnersSection {
+    __typename
+    eyebrow
+    title
+    logos {
+      __typename
+      name
+      href
+      logo {
+        __typename
+        url
+        path
+        bucket
+        mimeType
+        size
+        width
+        height
+        title
+        alt
+      }
+    }
+  }
   contactSection {
     __typename
     eyebrow
@@ -127,7 +196,40 @@ export const HomepagePartsFragmentDoc = gql`
     description
     ctaLabel
     email
-    socialHandle
+    backgroundType
+    backgroundImage {
+      __typename
+      url
+      path
+      bucket
+      mimeType
+      size
+      width
+      height
+      title
+      alt
+    }
+    backgroundVideo {
+      __typename
+      sourceType
+      url
+      vimeoUrl
+      path
+      bucket
+      mimeType
+      size
+      width
+      height
+      duration
+      posterUrl
+      title
+      alt
+    }
+    socialLinks {
+      __typename
+      label
+      href
+    }
   }
   footer {
     __typename

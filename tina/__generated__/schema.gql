@@ -87,17 +87,31 @@ type Collection {
 
 union DocumentNode = Homepage | Folder
 
+type HomepageLogo {
+  url: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  title: String
+  alt: String
+}
+
 type HomepageNavLinks {
   label: String!
   href: String!
 }
 
 type HomepageHeroBackgroundVideo {
-  url: String!
-  path: String!
-  bucket: String!
-  mimeType: String!
-  size: Float!
+  sourceType: String
+  url: String
+  vimeoUrl: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
   width: Float
   height: Float
   duration: Float
@@ -107,11 +121,13 @@ type HomepageHeroBackgroundVideo {
 }
 
 type HomepageHeroShowreelVideo {
-  url: String!
-  path: String!
-  bucket: String!
-  mimeType: String!
-  size: Float!
+  sourceType: String
+  url: String
+  vimeoUrl: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
   width: Float
   height: Float
   duration: Float
@@ -138,12 +154,19 @@ type HomepageHero {
   scrollLabel: String
 }
 
+type HomepageServicesSectionServicesItemsLinks {
+  label: String
+  href: String
+}
+
 type HomepageServicesSectionServicesItemsVideo {
-  url: String!
-  path: String!
-  bucket: String!
-  mimeType: String!
-  size: Float!
+  sourceType: String
+  url: String
+  vimeoUrl: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
   width: Float
   height: Float
   duration: Float
@@ -155,6 +178,8 @@ type HomepageServicesSectionServicesItemsVideo {
 type HomepageServicesSectionServicesItems {
   tag: String
   title: String
+  description: String
+  links: [HomepageServicesSectionServicesItemsLinks]
   video: HomepageServicesSectionServicesItemsVideo
 }
 
@@ -187,6 +212,31 @@ type HomepageProcessSection {
   steps: [HomepageProcessSectionSteps]
 }
 
+type HomepageAboutSectionPhoto {
+  url: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  title: String
+  alt: String
+}
+
+type HomepageAboutSectionFacts {
+  label: String
+  value: String
+}
+
+type HomepageAboutSection {
+  eyebrow: String
+  title: String
+  description: String
+  photo: HomepageAboutSectionPhoto
+  facts: [HomepageAboutSectionFacts]
+}
+
 type HomepageTestimonialsSectionItems {
   quote: String
   name: String
@@ -201,6 +251,63 @@ type HomepageTestimonialsSection {
   items: [HomepageTestimonialsSectionItems]
 }
 
+type HomepagePartnersSectionLogosLogo {
+  url: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  title: String
+  alt: String
+}
+
+type HomepagePartnersSectionLogos {
+  name: String
+  href: String
+  logo: HomepagePartnersSectionLogosLogo
+}
+
+type HomepagePartnersSection {
+  eyebrow: String
+  title: String
+  logos: [HomepagePartnersSectionLogos]
+}
+
+type HomepageContactSectionBackgroundImage {
+  url: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  title: String
+  alt: String
+}
+
+type HomepageContactSectionBackgroundVideo {
+  sourceType: String
+  url: String
+  vimeoUrl: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  duration: Float
+  posterUrl: String
+  title: String
+  alt: String
+}
+
+type HomepageContactSectionSocialLinks {
+  label: String
+  href: String
+}
+
 type HomepageContactSection {
   eyebrow: String
   titleLead: String
@@ -209,7 +316,10 @@ type HomepageContactSection {
   description: String
   ctaLabel: String
   email: String
-  socialHandle: String
+  backgroundType: String
+  backgroundImage: HomepageContactSectionBackgroundImage
+  backgroundVideo: HomepageContactSectionBackgroundVideo
+  socialLinks: [HomepageContactSectionSocialLinks]
 }
 
 type HomepageFooter {
@@ -226,13 +336,16 @@ type HomepageFooter {
 
 type Homepage implements Node & Document {
   siteName: String!
+  logo: HomepageLogo
   navCtaLabel: String!
   navLinks: [HomepageNavLinks]
   hero: HomepageHero
   marqueeItems: [String]
   servicesSection: HomepageServicesSection
   processSection: HomepageProcessSection
+  aboutSection: HomepageAboutSection
   testimonialsSection: HomepageTestimonialsSection
+  partnersSection: HomepagePartnersSection
   contactSection: HomepageContactSection
   footer: HomepageFooter
   id: ID!
@@ -247,11 +360,6 @@ input StringFilter {
   in: [String]
 }
 
-input HomepageNavLinksFilter {
-  label: StringFilter
-  href: StringFilter
-}
-
 input NumberFilter {
   lt: Float
   lte: Float
@@ -262,8 +370,27 @@ input NumberFilter {
   in: [Float]
 }
 
-input HomepageHeroBackgroundVideoFilter {
+input HomepageLogoFilter {
   url: StringFilter
+  path: StringFilter
+  bucket: StringFilter
+  mimeType: StringFilter
+  size: NumberFilter
+  width: NumberFilter
+  height: NumberFilter
+  title: StringFilter
+  alt: StringFilter
+}
+
+input HomepageNavLinksFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
+input HomepageHeroBackgroundVideoFilter {
+  sourceType: StringFilter
+  url: StringFilter
+  vimeoUrl: StringFilter
   path: StringFilter
   bucket: StringFilter
   mimeType: StringFilter
@@ -277,7 +404,9 @@ input HomepageHeroBackgroundVideoFilter {
 }
 
 input HomepageHeroShowreelVideoFilter {
+  sourceType: StringFilter
   url: StringFilter
+  vimeoUrl: StringFilter
   path: StringFilter
   bucket: StringFilter
   mimeType: StringFilter
@@ -308,8 +437,15 @@ input HomepageHeroFilter {
   scrollLabel: StringFilter
 }
 
+input HomepageServicesSectionServicesItemsLinksFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
 input HomepageServicesSectionServicesItemsVideoFilter {
+  sourceType: StringFilter
   url: StringFilter
+  vimeoUrl: StringFilter
   path: StringFilter
   bucket: StringFilter
   mimeType: StringFilter
@@ -325,6 +461,8 @@ input HomepageServicesSectionServicesItemsVideoFilter {
 input HomepageServicesSectionServicesItemsFilter {
   tag: StringFilter
   title: StringFilter
+  description: StringFilter
+  links: HomepageServicesSectionServicesItemsLinksFilter
   video: HomepageServicesSectionServicesItemsVideoFilter
 }
 
@@ -357,6 +495,31 @@ input HomepageProcessSectionFilter {
   steps: HomepageProcessSectionStepsFilter
 }
 
+input HomepageAboutSectionPhotoFilter {
+  url: StringFilter
+  path: StringFilter
+  bucket: StringFilter
+  mimeType: StringFilter
+  size: NumberFilter
+  width: NumberFilter
+  height: NumberFilter
+  title: StringFilter
+  alt: StringFilter
+}
+
+input HomepageAboutSectionFactsFilter {
+  label: StringFilter
+  value: StringFilter
+}
+
+input HomepageAboutSectionFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+  photo: HomepageAboutSectionPhotoFilter
+  facts: HomepageAboutSectionFactsFilter
+}
+
 input HomepageTestimonialsSectionItemsFilter {
   quote: StringFilter
   name: StringFilter
@@ -371,6 +534,63 @@ input HomepageTestimonialsSectionFilter {
   items: HomepageTestimonialsSectionItemsFilter
 }
 
+input HomepagePartnersSectionLogosLogoFilter {
+  url: StringFilter
+  path: StringFilter
+  bucket: StringFilter
+  mimeType: StringFilter
+  size: NumberFilter
+  width: NumberFilter
+  height: NumberFilter
+  title: StringFilter
+  alt: StringFilter
+}
+
+input HomepagePartnersSectionLogosFilter {
+  name: StringFilter
+  href: StringFilter
+  logo: HomepagePartnersSectionLogosLogoFilter
+}
+
+input HomepagePartnersSectionFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  logos: HomepagePartnersSectionLogosFilter
+}
+
+input HomepageContactSectionBackgroundImageFilter {
+  url: StringFilter
+  path: StringFilter
+  bucket: StringFilter
+  mimeType: StringFilter
+  size: NumberFilter
+  width: NumberFilter
+  height: NumberFilter
+  title: StringFilter
+  alt: StringFilter
+}
+
+input HomepageContactSectionBackgroundVideoFilter {
+  sourceType: StringFilter
+  url: StringFilter
+  vimeoUrl: StringFilter
+  path: StringFilter
+  bucket: StringFilter
+  mimeType: StringFilter
+  size: NumberFilter
+  width: NumberFilter
+  height: NumberFilter
+  duration: NumberFilter
+  posterUrl: StringFilter
+  title: StringFilter
+  alt: StringFilter
+}
+
+input HomepageContactSectionSocialLinksFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
 input HomepageContactSectionFilter {
   eyebrow: StringFilter
   titleLead: StringFilter
@@ -379,7 +599,10 @@ input HomepageContactSectionFilter {
   description: StringFilter
   ctaLabel: StringFilter
   email: StringFilter
-  socialHandle: StringFilter
+  backgroundType: StringFilter
+  backgroundImage: HomepageContactSectionBackgroundImageFilter
+  backgroundVideo: HomepageContactSectionBackgroundVideoFilter
+  socialLinks: HomepageContactSectionSocialLinksFilter
 }
 
 input HomepageFooterFilter {
@@ -396,13 +619,16 @@ input HomepageFooterFilter {
 
 input HomepageFilter {
   siteName: StringFilter
+  logo: HomepageLogoFilter
   navCtaLabel: StringFilter
   navLinks: HomepageNavLinksFilter
   hero: HomepageHeroFilter
   marqueeItems: StringFilter
   servicesSection: HomepageServicesSectionFilter
   processSection: HomepageProcessSectionFilter
+  aboutSection: HomepageAboutSectionFilter
   testimonialsSection: HomepageTestimonialsSectionFilter
+  partnersSection: HomepagePartnersSectionFilter
   contactSection: HomepageContactSectionFilter
   footer: HomepageFooterFilter
 }
@@ -437,13 +663,27 @@ input DocumentMutation {
   homepage: HomepageMutation
 }
 
+input HomepageLogoMutation {
+  url: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  title: String
+  alt: String
+}
+
 input HomepageNavLinksMutation {
   label: String
   href: String
 }
 
 input HomepageHeroBackgroundVideoMutation {
+  sourceType: String
   url: String
+  vimeoUrl: String
   path: String
   bucket: String
   mimeType: String
@@ -457,7 +697,9 @@ input HomepageHeroBackgroundVideoMutation {
 }
 
 input HomepageHeroShowreelVideoMutation {
+  sourceType: String
   url: String
+  vimeoUrl: String
   path: String
   bucket: String
   mimeType: String
@@ -488,8 +730,15 @@ input HomepageHeroMutation {
   scrollLabel: String
 }
 
+input HomepageServicesSectionServicesItemsLinksMutation {
+  label: String
+  href: String
+}
+
 input HomepageServicesSectionServicesItemsVideoMutation {
+  sourceType: String
   url: String
+  vimeoUrl: String
   path: String
   bucket: String
   mimeType: String
@@ -505,6 +754,8 @@ input HomepageServicesSectionServicesItemsVideoMutation {
 input HomepageServicesSectionServicesItemsMutation {
   tag: String
   title: String
+  description: String
+  links: [HomepageServicesSectionServicesItemsLinksMutation]
   video: HomepageServicesSectionServicesItemsVideoMutation
 }
 
@@ -537,6 +788,31 @@ input HomepageProcessSectionMutation {
   steps: [HomepageProcessSectionStepsMutation]
 }
 
+input HomepageAboutSectionPhotoMutation {
+  url: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  title: String
+  alt: String
+}
+
+input HomepageAboutSectionFactsMutation {
+  label: String
+  value: String
+}
+
+input HomepageAboutSectionMutation {
+  eyebrow: String
+  title: String
+  description: String
+  photo: HomepageAboutSectionPhotoMutation
+  facts: [HomepageAboutSectionFactsMutation]
+}
+
 input HomepageTestimonialsSectionItemsMutation {
   quote: String
   name: String
@@ -551,6 +827,63 @@ input HomepageTestimonialsSectionMutation {
   items: [HomepageTestimonialsSectionItemsMutation]
 }
 
+input HomepagePartnersSectionLogosLogoMutation {
+  url: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  title: String
+  alt: String
+}
+
+input HomepagePartnersSectionLogosMutation {
+  name: String
+  href: String
+  logo: HomepagePartnersSectionLogosLogoMutation
+}
+
+input HomepagePartnersSectionMutation {
+  eyebrow: String
+  title: String
+  logos: [HomepagePartnersSectionLogosMutation]
+}
+
+input HomepageContactSectionBackgroundImageMutation {
+  url: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  title: String
+  alt: String
+}
+
+input HomepageContactSectionBackgroundVideoMutation {
+  sourceType: String
+  url: String
+  vimeoUrl: String
+  path: String
+  bucket: String
+  mimeType: String
+  size: Float
+  width: Float
+  height: Float
+  duration: Float
+  posterUrl: String
+  title: String
+  alt: String
+}
+
+input HomepageContactSectionSocialLinksMutation {
+  label: String
+  href: String
+}
+
 input HomepageContactSectionMutation {
   eyebrow: String
   titleLead: String
@@ -559,7 +892,10 @@ input HomepageContactSectionMutation {
   description: String
   ctaLabel: String
   email: String
-  socialHandle: String
+  backgroundType: String
+  backgroundImage: HomepageContactSectionBackgroundImageMutation
+  backgroundVideo: HomepageContactSectionBackgroundVideoMutation
+  socialLinks: [HomepageContactSectionSocialLinksMutation]
 }
 
 input HomepageFooterMutation {
@@ -576,13 +912,16 @@ input HomepageFooterMutation {
 
 input HomepageMutation {
   siteName: String
+  logo: HomepageLogoMutation
   navCtaLabel: String
   navLinks: [HomepageNavLinksMutation]
   hero: HomepageHeroMutation
   marqueeItems: [String]
   servicesSection: HomepageServicesSectionMutation
   processSection: HomepageProcessSectionMutation
+  aboutSection: HomepageAboutSectionMutation
   testimonialsSection: HomepageTestimonialsSectionMutation
+  partnersSection: HomepagePartnersSectionMutation
   contactSection: HomepageContactSectionMutation
   footer: HomepageFooterMutation
 }
