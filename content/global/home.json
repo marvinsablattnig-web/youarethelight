@@ -1,579 +1,585 @@
 {
-	"siteName": "you are the light",
-	"maintenanceMode": true,
-	"logo": {
-		"url": "",
-		"path": "",
-		"bucket": "",
-		"mimeType": "",
-		"size": 0,
-		"width": null,
-		"height": null,
-		"title": "you are the light",
-		"alt": "you are the light"
-	},
-	"navCtaLabel": "Projekt anfragen",
-	"navLinks": [
-		{
-			"label": "Leistungen",
-			"href": "#leistungen"
-		},
-		{
-			"label": "Ablauf",
-			"href": "#ablauf"
-		},
-		{
-			"label": "Über mich",
-			"href": "#ueber-mich"
-		},
-		{
-			"label": "Kontakt",
-			"href": "#kontakt"
-		}
-	],
-	"hero": {
-		"kicker": "Filmproduktion",
-		"eyebrow": "Image · Event · Produkt · Social",
-		"titleLead": "you are",
-		"titleAccent": "light",
-		"description": "Ich halte fest, was zählt - von Hochzeiten bis Dokumentationen, von Social Media bis Unternehmensvideos. Jeder Frame ist eine Chance, etwas Echtes zu zeigen.",
-		"primaryCtaLabel": "Arbeiten ansehen",
-		"secondaryCtaLabel": "Projekt anfragen",
-		"cursorLabel": "Showreel",
-		"cursorYear": "2025",
-		"modalTag": "Showreel",
-		"modalTitle": "2025",
-		"modalDescription": "Ein Querschnitt durch meine Arbeit der letzten Saison - Imagefilme, Events, Produkte und Social-Media-Clips, verdichtet zu einem Reel.",
-		"backgroundVideo": {
-			"sourceType": "upload",
-			"url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/videos/uploads/2026-07-01T07-10-40-396Z-ua24iy-website-homescreen_zuhkimqs.mp4",
-			"vimeoUrl": "",
-			"path": "videos/uploads/2026-07-01T07-10-40-396Z-ua24iy-website-homescreen_zuhkimqs.mp4",
-			"bucket": "videos",
-			"mimeType": "video/mp4",
-			"size": 8947992,
-			"width": 1920,
-			"height": 1080,
-			"duration": 52.997,
-			"posterUrl": null,
-			"title": "website-homescreen_zuhKImQs",
-			"alt": null
-		},
-		"showreelVideo": {
-			"sourceType": "upload",
-			"url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/videos/uploads/2026-07-01T07-10-47-668Z-ks289p-website-homescreen_zuhkimqs.mp4",
-			"vimeoUrl": "",
-			"path": "videos/uploads/2026-07-01T07-10-47-668Z-ks289p-website-homescreen_zuhkimqs.mp4",
-			"bucket": "videos",
-			"mimeType": "video/mp4",
-			"size": 8947992,
-			"width": 1920,
-			"height": 1080,
-			"duration": 52.997,
-			"posterUrl": null,
-			"title": "website-homescreen_zuhKImQs",
-			"alt": null
-		},
-		"scrollLabel": "Scroll"
-	},
-	"marqueeItems": ["Imagefilm", "Eventfilm", "Produktfilm", "Social Media", "Dokumentation"],
-	"servicesSection": {
-		"eyebrow": "Leistungen & Werke",
-		"titleLine1": "Was ich für",
-		"titleLine2": "Sie tun kann",
-		"description": "Klappen Sie eine Leistung auf und sehen Sie direkt passende Arbeiten dazu. Jede Reihe lässt sich durchscrollen, ein Klick öffnet den Film groß.",
-		"watchLabel": "Ansehen ↗",
-		"services": [
-			{
-				"num": "01",
-				"name": "Imagefilm",
-				"count": "08 Filme",
-				"desc": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
-				"items": [
-					{
-						"tag": "Test",
-						"title": "Lorem ipsum ",
-						"description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebuLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.m. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-						"links": [
-							{
-								"label": "Kooperation mit VMA",
-								"href": "vma.tv"
-							}
-						],
-						"video": {
-							"url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/videos/uploads/2026-06-27T19-39-29-248Z-luuql4-website-homescreen.webm",
-							"path": "videos/uploads/2026-06-27T19-39-29-248Z-luuql4-website-homescreen.webm",
-							"bucket": "videos",
-							"mimeType": "video/webm",
-							"size": 4564941,
-							"width": 854,
-							"height": 481,
-							"duration": 53.026,
-							"posterUrl": null,
-							"title": "Website Homescreen",
-							"alt": null
-						}
-					},
-					{
-						"tag": "Studio Nord",
-						"title": "Markenporträt",
-						"description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
-						"video": {
-							"sourceType": "vimeo",
-							"url": "",
-							"vimeoUrl": "https://player.vimeo.com/video/955523170?autoplay=0&muted=0&loop=0&title=0&byline=0&portrait=0&controls=0",
-							"path": "",
-							"bucket": "",
-							"mimeType": "video/vimeo",
-							"size": 0,
-							"width": null,
-							"height": null,
-							"duration": null,
-							"posterUrl": "",
-							"title": "Imagefilm Markenporträt",
-							"alt": "Studio Nord Markenporträt"
-						}
-					},
-					{
-						"tag": "Manufaktur",
-						"title": "Handwerk",
-						"description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/imagefilm-handwerk.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Imagefilm Handwerk",
-							"alt": "Manufaktur Handwerk"
-						}
-					},
-					{
-						"tag": "Tech Lab",
-						"title": "Innovation",
-						"description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/imagefilm-innovation.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Imagefilm Innovation",
-							"alt": "Tech Lab Innovation"
-						}
-					},
-					{
-						"tag": "Heritage",
-						"title": "Tradition",
-						"description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/imagefilm-tradition.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Imagefilm Tradition",
-							"alt": "Heritage Tradition"
-						}
-					}
-				]
-			},
-			{
-				"num": "02",
-				"name": "Eventfilm",
-				"count": "06 Filme",
-				"desc": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
-				"items": [
-					{
-						"tag": "Open Air",
-						"title": "Sommerfest",
-						"description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/eventfilm-sommerfest.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Eventfilm Sommerfest",
-							"alt": "Open Air Sommerfest"
-						}
-					},
-					{
-						"tag": "Award Night",
-						"title": "Gala",
-						"description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/eventfilm-gala.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Eventfilm Gala",
-							"alt": "Award Night Gala"
-						}
-					},
-					{
-						"tag": "Keynote",
-						"title": "Konferenz",
-						"description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/eventfilm-konferenz.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Eventfilm Konferenz",
-							"alt": "Keynote Konferenz"
-						}
-					},
-					{
-						"tag": "Launch",
-						"title": "Release",
-						"description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/eventfilm-release.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Eventfilm Release",
-							"alt": "Launch Release"
-						}
-					}
-				]
-			},
-			{
-				"num": "03",
-				"name": "Produktfilm",
-				"count": "05 Filme",
-				"desc": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
-				"items": [
-					{
-						"tag": "Closeup",
-						"title": "Objekt 01",
-						"description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/produktfilm-objekt-01.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Produktfilm Objekt 01",
-							"alt": "Closeup Objekt 01"
-						}
-					},
-					{
-						"tag": "Lineup",
-						"title": "Serie",
-						"description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/produktfilm-serie.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Produktfilm Serie",
-							"alt": "Lineup Serie"
-						}
-					},
-					{
-						"tag": "Makro",
-						"title": "Detail",
-						"description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/produktfilm-detail.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Produktfilm Detail",
-							"alt": "Makro Detail"
-						}
-					},
-					{
-						"tag": "Reveal",
-						"title": "Unboxing",
-						"description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/produktfilm-unboxing.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Produktfilm Unboxing",
-							"alt": "Reveal Unboxing"
-						}
-					}
-				]
-			},
-			{
-				"num": "04",
-				"name": "Social Media",
-				"count": "12 Reels",
-				"desc": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
-				"items": [
-					{
-						"tag": "Atelier",
-						"title": "Reel",
-						"description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/social-reel.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Social Media Reel",
-							"alt": "Atelier Reel"
-						}
-					},
-					{
-						"tag": "BTS",
-						"title": "Behind",
-						"description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/social-behind.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Social Media Behind",
-							"alt": "BTS Behind"
-						}
-					},
-					{
-						"tag": "Hook",
-						"title": "Teaser",
-						"description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/social-teaser.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Social Media Teaser",
-							"alt": "Hook Teaser"
-						}
-					},
-					{
-						"tag": "Cut",
-						"title": "Trend",
-						"description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
-						"video": {
-							"url": "https://www.pexels.com/de-de/download/video/4763086/",
-							"path": "videos/services/social-trend.mp4",
-							"bucket": "public",
-							"mimeType": "video/mp4",
-							"size": 0,
-							"width": 1920,
-							"height": 1080,
-							"duration": 0,
-							"posterUrl": "",
-							"title": "Social Media Trend",
-							"alt": "Cut Trend"
-						}
-					}
-				]
-			}
-		]
-	},
-	"processSection": {
-		"eyebrow": "Ablauf",
-		"title": "So entsteht Ihr Film",
-		"steps": [
-			{
-				"num": "01",
-				"title": "Kennenlernen",
-				"text": "Wir sprechen über Ihre Idee, Ihr Ziel und Ihre Geschichte. Daraus entsteht ein klares Konzept."
-			},
-			{
-				"num": "02",
-				"title": "Konzept & Dreh",
-				"text": "Vom Storyboard bis zum Set: Jeder Frame wird vorbereitet und vor Ort mit Blick für das Echte eingefangen."
-			},
-			{
-				"num": "03",
-				"title": "Schnitt & Übergabe",
-				"text": "Farbe, Schnitt und Ton geben dem Film seinen letzten Schliff. Sie erhalten alle benötigten Formate."
-			}
-		]
-	},
-	"aboutSection": {
-		"eyebrow": "Über mich",
-		"title": "Wer hinter der Kamera steht - Benjamin Petrovici",
-		"description": "Filmemachen ist für mich mehr als ein Beruf – es ist meine Art, Geschichten visuell umzusetzen. So entstehen Filme mit Substanz, die ehrlich wirken und eine klare Wirkung entfalten.\n\nAls Videograf aus Kärnten arbeite ich österreichweit mit Unternehmen, Marken und Persönlichkeiten, die Wert auf Individualität und eine klare visuelle Sprache legen. Jede Marke hat ihre eigene Geschichte – diese Identität übersetze ich in Video-Content, der Vertrauen aufbaut und Menschen erreicht.",
-		"photo": {
-			"url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/images/uploads/2026-07-01T20-23-48-626Z-1uut2a-whatsapp-image-2026-06-23-at-16.38.09.jpeg",
-			"path": "images/uploads/2026-07-01T20-23-48-626Z-1uut2a-whatsapp-image-2026-06-23-at-16.38.09.jpeg",
-			"bucket": "videos",
-			"mimeType": "image/jpeg",
-			"size": 85012,
-			"width": 945,
-			"height": 2048,
-			"title": "WhatsApp Image 2026-06-23 at 16.38.09",
-			"alt": "WhatsApp Image 2026-06-23 at 16.38.09"
-		},
-		"facts": [
-			{
-				"label": "Erfahrung",
-				"value": "+3 Jahre"
-			},
-			{
-				"label": "Projekte",
-				"value": "80+"
-			},
-			{
-				"label": "Standort",
-				"value": "Kärnten"
-			}
-		]
-	},
-	"testimonialsSection": {
-		"eyebrow": "Stimmen",
-		"title": "Kundenstimmen",
-		"badge": "Platzhalter",
-		"items": [
-			{
-				"quote": "Beni hat unsere Vision in Bewegung übersetzt. Das Ergebnis war ehrlicher und stärker, als wir es uns vorgestellt hatten.",
-				"name": "Marvin Sablattnig",
-				"role": "Malte Media",
-				"badge": "10/10"
-			},
-			{
-				"quote": "Professionell von der ersten Minute an. Jeder Frame sitzt - und genau das spüren Sie im fertigen Film.",
-				"name": "Vorname Nachname",
-				"role": "Position · Unternehmen",
-				"badge": "Platzhalter"
-			}
-		]
-	},
-	"partnersSection": {
-		"eyebrow": "Vertrauen von",
-		"title": "Partner & Kunden",
-		"logos": [
-			{
-				"name": "[Partner 1]",
-				"href": "https://vma.tv",
-				"logo": {
-					"url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/images/uploads/2026-07-01T18-52-22-355Z-e3e39d-vma-header-logo.png",
-					"path": "images/uploads/2026-07-01T18-52-22-355Z-e3e39d-vma-header-logo.png",
-					"bucket": "videos",
-					"mimeType": "image/png",
-					"size": 5080,
-					"width": 250,
-					"height": 101,
-					"title": "vma-header-logo",
-					"alt": "vma-header-logo"
-				}
-			}
-		]
-	},
-	"contactSection": {
-		"eyebrow": "Kontakt",
-		"titleLead": "Lassen Sie uns Ihre",
-		"titleAccent": "Geschichte",
-		"titleTrail": "erzählen",
-		"description": "Kontaktieren Sie mich für Ihr nächstes Projekt und wir schaffen etwas Echtes.",
-		"ctaLabel": "Projekt anfragen",
-		"email": "hello@youarethelight.at",
-		"backgroundType": "video",
-		"backgroundImage": {
-			"url": "",
-			"path": "",
-			"bucket": "",
-			"mimeType": "",
-			"size": 0,
-			"width": null,
-			"height": null,
-			"title": "Kontakt Hintergrund",
-			"alt": "Kontakt Hintergrund"
-		},
-		"backgroundVideo": {
-			"sourceType": "upload",
-			"url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/videos/uploads/2026-06-27T19-39-29-248Z-luuql4-website-homescreen.webm",
-			"vimeoUrl": "",
-			"path": "videos/uploads/2026-06-27T19-39-29-248Z-luuql4-website-homescreen.webm",
-			"bucket": "videos",
-			"mimeType": "video/webm",
-			"size": 4564941,
-			"width": null,
-			"height": null,
-			"duration": null,
-			"posterUrl": null,
-			"title": "2026-06-27T19-39-29-248Z-luuql4-website-homescreen",
-			"alt": null
-		},
-		"socialLinks": [
-			{
-				"label": "@youarethelight",
-				"href": "https://www.instagram.com/youarethelightmedia/"
-			}
-		]
-	},
-	"footer": {
-		"tagline": "you are the light",
-		"menuTitle": "Menü",
-		"legalTitle": "Rechtliches",
-		"imprintLabel": "Impressum",
-		"imprintHref": "/impressum",
-		"privacyLabel": "Datenschutz",
-		"privacyHref": "/datenschutz",
-		"copyright": "© 2026 youarethelight media - Alle Rechte vorbehalten",
-		"credits": "Gestaltet & umgesetzt von Marvin Sablattnig"
-	}
+  "siteName": "you are the light",
+  "maintenanceMode": false,
+  "logo": {
+    "url": "",
+    "path": "",
+    "bucket": "",
+    "mimeType": "",
+    "size": 0,
+    "width": null,
+    "height": null,
+    "title": "you are the light",
+    "alt": "you are the light"
+  },
+  "navCtaLabel": "Projekt anfragen",
+  "navLinks": [
+    {
+      "label": "Leistungen",
+      "href": "#leistungen"
+    },
+    {
+      "label": "Ablauf",
+      "href": "#ablauf"
+    },
+    {
+      "label": "Über mich",
+      "href": "#ueber-mich"
+    },
+    {
+      "label": "Kontakt",
+      "href": "#kontakt"
+    }
+  ],
+  "hero": {
+    "kicker": "Filmproduktion",
+    "eyebrow": "Image · Event · Produkt · Social",
+    "titleLead": "you are",
+    "titleAccent": "light",
+    "description": "Ich halte fest, was zählt - von Hochzeiten bis Dokumentationen, von Social Media bis Unternehmensvideos. Jeder Frame ist eine Chance, etwas Echtes zu zeigen.",
+    "primaryCtaLabel": "Arbeiten ansehen",
+    "secondaryCtaLabel": "Projekt anfragen",
+    "cursorLabel": "Showreel",
+    "cursorYear": "2025",
+    "modalTag": "Showreel",
+    "modalTitle": "2025",
+    "modalDescription": "Ein Querschnitt durch meine Arbeit der letzten Saison - Imagefilme, Events, Produkte und Social-Media-Clips, verdichtet zu einem Reel.",
+    "backgroundVideo": {
+      "sourceType": "upload",
+      "url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/videos/uploads/2026-07-01T07-10-40-396Z-ua24iy-website-homescreen_zuhkimqs.mp4",
+      "vimeoUrl": "",
+      "path": "videos/uploads/2026-07-01T07-10-40-396Z-ua24iy-website-homescreen_zuhkimqs.mp4",
+      "bucket": "videos",
+      "mimeType": "video/mp4",
+      "size": 8947992,
+      "width": 1920,
+      "height": 1080,
+      "duration": 52.997,
+      "posterUrl": null,
+      "title": "website-homescreen_zuhKImQs",
+      "alt": null
+    },
+    "showreelVideo": {
+      "sourceType": "upload",
+      "url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/videos/uploads/2026-07-01T07-10-47-668Z-ks289p-website-homescreen_zuhkimqs.mp4",
+      "vimeoUrl": "",
+      "path": "videos/uploads/2026-07-01T07-10-47-668Z-ks289p-website-homescreen_zuhkimqs.mp4",
+      "bucket": "videos",
+      "mimeType": "video/mp4",
+      "size": 8947992,
+      "width": 1920,
+      "height": 1080,
+      "duration": 52.997,
+      "posterUrl": null,
+      "title": "website-homescreen_zuhKImQs",
+      "alt": null
+    },
+    "scrollLabel": "Scroll"
+  },
+  "marqueeItems": [
+    "Imagefilm",
+    "Eventfilm",
+    "Produktfilm",
+    "Social Media",
+    "Dokumentation"
+  ],
+  "servicesSection": {
+    "eyebrow": "Leistungen & Werke",
+    "titleLine1": "Was ich für",
+    "titleLine2": "Sie tun kann",
+    "description": "Klappen Sie eine Leistung auf und sehen Sie direkt passende Arbeiten dazu. Jede Reihe lässt sich durchscrollen, ein Klick öffnet den Film groß.",
+    "watchLabel": "Ansehen ↗",
+    "services": [
+      {
+        "num": "01",
+        "name": "Imagefilm",
+        "count": "08 Filme",
+        "desc": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
+        "items": [
+          {
+            "tag": "Test",
+            "title": "Lorem ipsum ",
+            "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebuLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.m. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+            "links": [
+              {
+                "label": "Kooperation mit VMA",
+                "href": "vma.tv"
+              }
+            ],
+            "video": {
+              "url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/videos/uploads/2026-06-27T19-39-29-248Z-luuql4-website-homescreen.webm",
+              "path": "videos/uploads/2026-06-27T19-39-29-248Z-luuql4-website-homescreen.webm",
+              "bucket": "videos",
+              "mimeType": "video/webm",
+              "size": 4564941,
+              "width": 854,
+              "height": 481,
+              "duration": 53.026,
+              "posterUrl": null,
+              "title": "Website Homescreen",
+              "alt": null
+            }
+          },
+          {
+            "tag": "Studio Nord",
+            "title": "Markenporträt",
+            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
+            "video": {
+              "sourceType": "vimeo",
+              "url": "",
+              "vimeoUrl": "https://player.vimeo.com/video/955523170?autoplay=0&muted=0&loop=0&title=0&byline=0&portrait=0&controls=0",
+              "path": "",
+              "bucket": "",
+              "mimeType": "video/vimeo",
+              "size": 0,
+              "width": null,
+              "height": null,
+              "duration": null,
+              "posterUrl": "",
+              "title": "Imagefilm Markenporträt",
+              "alt": "Studio Nord Markenporträt"
+            }
+          },
+          {
+            "tag": "Manufaktur",
+            "title": "Handwerk",
+            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/imagefilm-handwerk.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Imagefilm Handwerk",
+              "alt": "Manufaktur Handwerk"
+            }
+          },
+          {
+            "tag": "Tech Lab",
+            "title": "Innovation",
+            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/imagefilm-innovation.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Imagefilm Innovation",
+              "alt": "Tech Lab Innovation"
+            }
+          },
+          {
+            "tag": "Heritage",
+            "title": "Tradition",
+            "description": "Macht sichtbar, was Ihr Unternehmen besonders macht - wofür es arbeitet und wie es wahrgenommen werden soll.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/imagefilm-tradition.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Imagefilm Tradition",
+              "alt": "Heritage Tradition"
+            }
+          }
+        ]
+      },
+      {
+        "num": "02",
+        "name": "Eventfilm",
+        "count": "06 Filme",
+        "desc": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+        "items": [
+          {
+            "tag": "Open Air",
+            "title": "Sommerfest",
+            "description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/eventfilm-sommerfest.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Eventfilm Sommerfest",
+              "alt": "Open Air Sommerfest"
+            }
+          },
+          {
+            "tag": "Award Night",
+            "title": "Gala",
+            "description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/eventfilm-gala.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Eventfilm Gala",
+              "alt": "Award Night Gala"
+            }
+          },
+          {
+            "tag": "Keynote",
+            "title": "Konferenz",
+            "description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/eventfilm-konferenz.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Eventfilm Konferenz",
+              "alt": "Keynote Konferenz"
+            }
+          },
+          {
+            "tag": "Launch",
+            "title": "Release",
+            "description": "Hält nicht nur fest, was passiert ist, sondern was es bedeutet hat. Stimmung, Dynamik und besondere Momente bleiben erlebbar.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/eventfilm-release.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Eventfilm Release",
+              "alt": "Launch Release"
+            }
+          }
+        ]
+      },
+      {
+        "num": "03",
+        "name": "Produktfilm",
+        "count": "05 Filme",
+        "desc": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
+        "items": [
+          {
+            "tag": "Closeup",
+            "title": "Objekt 01",
+            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/produktfilm-objekt-01.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Produktfilm Objekt 01",
+              "alt": "Closeup Objekt 01"
+            }
+          },
+          {
+            "tag": "Lineup",
+            "title": "Serie",
+            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/produktfilm-serie.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Produktfilm Serie",
+              "alt": "Lineup Serie"
+            }
+          },
+          {
+            "tag": "Makro",
+            "title": "Detail",
+            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/produktfilm-detail.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Produktfilm Detail",
+              "alt": "Makro Detail"
+            }
+          },
+          {
+            "tag": "Reveal",
+            "title": "Unboxing",
+            "description": "Bringt auf den Punkt, was ein Produkt leistet und welchen Mehrwert es bietet. Relevanz schlägt technische Lautstärke.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/produktfilm-unboxing.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Produktfilm Unboxing",
+              "alt": "Reveal Unboxing"
+            }
+          }
+        ]
+      },
+      {
+        "num": "04",
+        "name": "Social Media",
+        "count": "12 Reels",
+        "desc": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
+        "items": [
+          {
+            "tag": "Atelier",
+            "title": "Reel",
+            "description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/social-reel.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Social Media Reel",
+              "alt": "Atelier Reel"
+            }
+          },
+          {
+            "tag": "BTS",
+            "title": "Behind",
+            "description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/social-behind.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Social Media Behind",
+              "alt": "BTS Behind"
+            }
+          },
+          {
+            "tag": "Hook",
+            "title": "Teaser",
+            "description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/social-teaser.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Social Media Teaser",
+              "alt": "Hook Teaser"
+            }
+          },
+          {
+            "tag": "Cut",
+            "title": "Trend",
+            "description": "Lebt von Präsenz, nicht von Zufall. Klar, wiedererkennbar und passend zur Plattform, damit Ihre Marke regelmäßig sichtbar bleibt.",
+            "video": {
+              "url": "https://www.pexels.com/de-de/download/video/4763086/",
+              "path": "videos/services/social-trend.mp4",
+              "bucket": "public",
+              "mimeType": "video/mp4",
+              "size": 0,
+              "width": 1920,
+              "height": 1080,
+              "duration": 0,
+              "posterUrl": "",
+              "title": "Social Media Trend",
+              "alt": "Cut Trend"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "processSection": {
+    "eyebrow": "Ablauf",
+    "title": "So entsteht Ihr Film",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Kennenlernen",
+        "text": "Wir sprechen über Ihre Idee, Ihr Ziel und Ihre Geschichte. Daraus entsteht ein klares Konzept."
+      },
+      {
+        "num": "02",
+        "title": "Konzept & Dreh",
+        "text": "Vom Storyboard bis zum Set: Jeder Frame wird vorbereitet und vor Ort mit Blick für das Echte eingefangen."
+      },
+      {
+        "num": "03",
+        "title": "Schnitt & Übergabe",
+        "text": "Farbe, Schnitt und Ton geben dem Film seinen letzten Schliff. Sie erhalten alle benötigten Formate."
+      }
+    ]
+  },
+  "aboutSection": {
+    "eyebrow": "Über mich",
+    "title": "Wer hinter der Kamera steht - Benjamin Petrovici",
+    "description": "Filmemachen ist für mich mehr als ein Beruf – es ist meine Art, Geschichten visuell umzusetzen. So entstehen Filme mit Substanz, die ehrlich wirken und eine klare Wirkung entfalten.\n\nAls Videograf aus Kärnten arbeite ich österreichweit mit Unternehmen, Marken und Persönlichkeiten, die Wert auf Individualität und eine klare visuelle Sprache legen. Jede Marke hat ihre eigene Geschichte – diese Identität übersetze ich in Video-Content, der Vertrauen aufbaut und Menschen erreicht.",
+    "photo": {
+      "url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/images/uploads/2026-07-01T20-23-48-626Z-1uut2a-whatsapp-image-2026-06-23-at-16.38.09.jpeg",
+      "path": "images/uploads/2026-07-01T20-23-48-626Z-1uut2a-whatsapp-image-2026-06-23-at-16.38.09.jpeg",
+      "bucket": "videos",
+      "mimeType": "image/jpeg",
+      "size": 85012,
+      "width": 945,
+      "height": 2048,
+      "title": "WhatsApp Image 2026-06-23 at 16.38.09",
+      "alt": "WhatsApp Image 2026-06-23 at 16.38.09"
+    },
+    "facts": [
+      {
+        "label": "Erfahrung",
+        "value": "+3 Jahre"
+      },
+      {
+        "label": "Projekte",
+        "value": "80+"
+      },
+      {
+        "label": "Standort",
+        "value": "Kärnten"
+      }
+    ]
+  },
+  "testimonialsSection": {
+    "eyebrow": "Stimmen",
+    "title": "Kundenstimmen",
+    "badge": "Platzhalter",
+    "items": [
+      {
+        "quote": "Beni hat unsere Vision in Bewegung übersetzt. Das Ergebnis war ehrlicher und stärker, als wir es uns vorgestellt hatten.",
+        "name": "Marvin Sablattnig",
+        "role": "Malte Media",
+        "badge": "10/10"
+      },
+      {
+        "quote": "Professionell von der ersten Minute an. Jeder Frame sitzt - und genau das spüren Sie im fertigen Film.",
+        "name": "Vorname Nachname",
+        "role": "Position · Unternehmen",
+        "badge": "Platzhalter"
+      }
+    ]
+  },
+  "partnersSection": {
+    "eyebrow": "Vertrauen von",
+    "title": "Partner & Kunden",
+    "logos": [
+      {
+        "name": "[Partner 1]",
+        "href": "https://vma.tv",
+        "logo": {
+          "url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/images/uploads/2026-07-01T18-52-22-355Z-e3e39d-vma-header-logo.png",
+          "path": "images/uploads/2026-07-01T18-52-22-355Z-e3e39d-vma-header-logo.png",
+          "bucket": "videos",
+          "mimeType": "image/png",
+          "size": 5080,
+          "width": 250,
+          "height": 101,
+          "title": "vma-header-logo",
+          "alt": "vma-header-logo"
+        }
+      }
+    ]
+  },
+  "contactSection": {
+    "eyebrow": "Kontakt",
+    "titleLead": "Lassen Sie uns Ihre",
+    "titleAccent": "Geschichte",
+    "titleTrail": "erzählen",
+    "description": "Kontaktieren Sie mich für Ihr nächstes Projekt und wir schaffen etwas Echtes.",
+    "ctaLabel": "Projekt anfragen",
+    "email": "hello@youarethelight.at",
+    "backgroundType": "video",
+    "backgroundImage": {
+      "url": "",
+      "path": "",
+      "bucket": "",
+      "mimeType": "",
+      "size": 0,
+      "width": null,
+      "height": null,
+      "title": "Kontakt Hintergrund",
+      "alt": "Kontakt Hintergrund"
+    },
+    "backgroundVideo": {
+      "sourceType": "upload",
+      "url": "https://gjhidpymyzoyxyqdphtc.supabase.co/storage/v1/object/public/videos/videos/uploads/2026-06-27T19-39-29-248Z-luuql4-website-homescreen.webm",
+      "vimeoUrl": "",
+      "path": "videos/uploads/2026-06-27T19-39-29-248Z-luuql4-website-homescreen.webm",
+      "bucket": "videos",
+      "mimeType": "video/webm",
+      "size": 4564941,
+      "width": null,
+      "height": null,
+      "duration": null,
+      "posterUrl": null,
+      "title": "2026-06-27T19-39-29-248Z-luuql4-website-homescreen",
+      "alt": null
+    },
+    "socialLinks": [
+      {
+        "label": "@youarethelight",
+        "href": "https://www.instagram.com/youarethelightmedia/"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "you are the light",
+    "menuTitle": "Menü",
+    "legalTitle": "Rechtliches",
+    "imprintLabel": "Impressum",
+    "imprintHref": "/impressum",
+    "privacyLabel": "Datenschutz",
+    "privacyHref": "/datenschutz",
+    "copyright": "© 2026 youarethelight media - Alle Rechte vorbehalten",
+    "credits": "Gestaltet & umgesetzt von Marvin Sablattnig"
+  }
 }
