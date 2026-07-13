@@ -166,6 +166,13 @@ export class SupabaseTinaAuthProvider extends AbstractAuthProvider {
       throw new Error("Es wurde keine gültige Session zurückgegeben.");
     }
 
+    // Force a full reload instead of letting Tina swap the login screen for the
+    // authenticated app in place: that in-place transition is untested for this
+    // provider (the previous magic-link flow only ever became "authenticated" via
+    // a fresh page load after the email redirect) and crashes with a React hooks
+    // error when triggered live.
+    window.location.reload();
+
     return {
       id_token: data.session.access_token,
     };

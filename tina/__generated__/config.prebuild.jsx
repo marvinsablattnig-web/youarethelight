@@ -438,6 +438,7 @@ var SupabaseTinaAuthProvider = class extends AbstractAuthProvider {
     if (!data.session?.access_token) {
       throw new Error("Es wurde keine g\xFCltige Session zur\xFCckgegeben.");
     }
+    window.location.reload();
     return {
       id_token: data.session.access_token
     };
