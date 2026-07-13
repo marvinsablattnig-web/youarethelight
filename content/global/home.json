@@ -1,5 +1,6 @@
 {
   "siteName": "you are the light",
+  "maintenanceMode": false,
   "logo": {
     "url": "",
     "path": "",
@@ -535,7 +536,7 @@
     "titleTrail": "erzählen",
     "description": "Kontaktieren Sie mich für Ihr nächstes Projekt und wir schaffen etwas Echtes.",
     "ctaLabel": "Projekt anfragen",
-    "email": "office@youarehtelight.at",
+    "email": "hello@youarethelight.at",
     "backgroundType": "video",
     "backgroundImage": {
       "url": "",
@@ -566,7 +567,7 @@
     "socialLinks": [
       {
         "label": "@youarethelight",
-        "href": "https://instagram.com/youarethelight"
+        "href": "https://www.instagram.com/youarethelightmedia/"
       }
     ]
   },
@@ -579,6 +580,6 @@
     "privacyLabel": "Datenschutz",
     "privacyHref": "/datenschutz",
     "copyright": "© 2026 youarethelight media - Alle Rechte vorbehalten",
-    "credits": "Gestaltet & umgesetzt von Malte Media"
+    "credits": "Gestaltet & umgesetzt von Marvin Sablattnig"
   }
 }

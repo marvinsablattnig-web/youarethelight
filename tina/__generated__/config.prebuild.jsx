@@ -1278,6 +1278,12 @@ var config_default = defineConfig({
             label: "Seitenname",
             required: true
           },
+          {
+            type: "boolean",
+            name: "maintenanceMode",
+            label: 'Wartungsmodus ("Coming soon"-Seite anzeigen)',
+            description: 'Wenn aktiv, sehen Besucher anstelle der vollst\xE4ndigen Website nur eine "Coming soon"-Seite.'
+          },
           imageAssetField("logo", "Logo"),
           {
             type: "string",

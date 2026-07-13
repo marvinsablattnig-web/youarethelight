@@ -336,6 +336,7 @@ type HomepageFooter {
 
 type Homepage implements Node & Document {
   siteName: String!
+  maintenanceMode: Boolean
   logo: HomepageLogo
   navCtaLabel: String!
   navLinks: [HomepageNavLinks]
@@ -358,6 +359,11 @@ input StringFilter {
   eq: String
   exists: Boolean
   in: [String]
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
 }
 
 input NumberFilter {
@@ -619,6 +625,7 @@ input HomepageFooterFilter {
 
 input HomepageFilter {
   siteName: StringFilter
+  maintenanceMode: BooleanFilter
   logo: HomepageLogoFilter
   navCtaLabel: StringFilter
   navLinks: HomepageNavLinksFilter
@@ -912,6 +919,7 @@ input HomepageFooterMutation {
 
 input HomepageMutation {
   siteName: String
+  maintenanceMode: Boolean
   logo: HomepageLogoMutation
   navCtaLabel: String
   navLinks: [HomepageNavLinksMutation]

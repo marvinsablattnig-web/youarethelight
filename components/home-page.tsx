@@ -2,6 +2,7 @@
 
 import { useTina } from "tinacms/dist/react";
 
+import { ComingSoon } from "@/components/coming-soon";
 import { PortfolioSite } from "@/components/portfolio-site";
 import { normalizeHomepageDocument } from "@/lib/home-content";
 import type { HomepageQuery, HomepageQueryVariables } from "@/tina/__generated__/types";
@@ -19,10 +20,11 @@ export function HomePage({ data, query, variables }: HomePageProps) {
     data,
   });
 
-  return (
-    <PortfolioSite
-      tinaDocument={tina.data.homepage}
-      content={normalizeHomepageDocument(tina.data.homepage)}
-    />
-  );
+  const content = normalizeHomepageDocument(tina.data.homepage);
+
+  if (content.maintenanceMode) {
+    return <ComingSoon content={content} />;
+  }
+
+  return <PortfolioSite tinaDocument={tina.data.homepage} content={content} />;
 }

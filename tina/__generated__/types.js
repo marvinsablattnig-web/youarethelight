@@ -9,6 +9,7 @@ export const HomepagePartsFragmentDoc = gql`
     fragment HomepageParts on Homepage {
   __typename
   siteName
+  maintenanceMode
   logo {
     __typename
     url

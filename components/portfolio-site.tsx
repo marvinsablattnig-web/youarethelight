@@ -122,6 +122,39 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 		openServiceModal(modalService, modalService.items[index], index);
 	};
 
+	const modalTouchStart = useRef<{ x: number; y: number } | null>(null);
+
+	const handleModalTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+		const touch = event.touches[0];
+		if (!touch) {
+			return;
+		}
+		modalTouchStart.current = { x: touch.clientX, y: touch.clientY };
+	};
+
+	const handleModalTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+		const start = modalTouchStart.current;
+		modalTouchStart.current = null;
+
+		if (!start || !modalHasItemNavigation) {
+			return;
+		}
+
+		const touch = event.changedTouches[0];
+		if (!touch) {
+			return;
+		}
+
+		const deltaX = touch.clientX - start.x;
+		const deltaY = touch.clientY - start.y;
+
+		if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY) * 1.5) {
+			return;
+		}
+
+		stepModalItem(deltaX < 0 ? 1 : -1);
+	};
+
 	const switchModalService = (serviceName: string) => {
 		const nextService = content.servicesSection.services.find((service) => service.name === serviceName) ?? null;
 
@@ -558,7 +591,7 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 				<div className="menu-fade fixed inset-0 z-[110] flex flex-col bg-[var(--bg)] px-[clamp(20px,7vw,40px)] pb-10 pt-[18px] lg:hidden">
 					<div className="flex items-center justify-between">
 						<span className="font-mono-ui text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--ink)]" data-tina-field={tinaField(tinaDocument, "logo")}>
-							{renderLogo("h-8 w-auto max-w-[160px] object-contain", "/logo-wide.svg")}
+							{renderLogo("h-8 w-auto max-w-[180px] scale-150 object-contain", "/logo-wide.svg")}
 						</span>
 						<button
 							type="button"
@@ -1027,7 +1060,7 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 				</div>
 			</section>
 
-			<footer className="relative z-10 bg-[var(--bg)] px-[clamp(20px,5vw,64px)] pb-10 pt-[clamp(48px,6vw,72px)]">
+			<footer className="relative z-10 bg-[var(--bg)] px-[clamp(20px,5vw,64px)] pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] pt-[clamp(48px,6vw,72px)]">
 				<div className="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-10">
 					<div data-reveal className="reveal flex max-w-[360px] items-center" data-tina-field={tinaField(tinaDocument, "logo")}>
 						{renderLogo("h-full max-h-[220px] w-auto object-contain")}
@@ -1055,10 +1088,10 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 					</div>
 				</div>
 
-				<div data-reveal className="reveal font-mono-ui mx-auto mt-[clamp(40px,5vw,60px)] flex max-w-[1240px] flex-wrap justify-between gap-4 border-t border-[var(--line)] pt-6 text-[11px] font-medium tracking-[0.06em] text-[var(--faint)]" style={{ transitionDelay: "0.14s" }}>
+				<div className="font-mono-ui mx-auto mt-[clamp(40px,5vw,60px)] flex max-w-[1240px] flex-wrap justify-between gap-4 border-t border-[var(--line)] pt-6 text-[11px] font-medium tracking-[0.06em] text-[var(--faint)]">
 					<span>{content.footer.copyright}</span>
 					<div className="flex flex-wrap items-center gap-4">
-						<button type="button" onClick={openCookieSettings} className="underline underline-offset-4 hover:text-[var(--gold)]">
+						<button type="button" onClick={openCookieSettings} className="text-[var(--ink)] underline underline-offset-4 hover:text-[var(--gold)]">
 							Cookie-Einstellungen
 						</button>
 						<span>{content.footer.credits}</span>
@@ -1070,8 +1103,10 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 				<div className="menu-fade fixed inset-0 z-[200] overflow-y-auto bg-[color-mix(in_srgb,#0c0c0c_72%,transparent)] px-[clamp(16px,4vw,52px)] py-5 backdrop-blur-[10px]" onClick={() => setModal(null)}>
 					<div className="flex min-h-full items-start justify-center">
 						<div
-							className="modal-in flex min-h-[min(640px,calc(100svh-40px))] max-h-[calc(100svh-40px)] w-full max-w-[1080px] flex-col overflow-hidden rounded-[24px] border border-[var(--line)] bg-[color-mix(in_srgb,var(--bg)_94%,black)] shadow-[0_30px_80px_-34px_rgba(0,0,0,0.8)]"
+							className="modal-in flex min-h-[min(640px,calc(100svh-40px))] max-h-[calc(100svh-40px)] w-full max-w-[1080px] touch-pan-y flex-col overflow-hidden rounded-[24px] border border-[var(--line)] bg-[color-mix(in_srgb,var(--bg)_94%,black)] shadow-[0_30px_80px_-34px_rgba(0,0,0,0.8)]"
 							onClick={(event) => event.stopPropagation()}
+							onTouchStart={handleModalTouchStart}
+							onTouchEnd={handleModalTouchEnd}
 						>
 							<div className="relative border-b border-[var(--line)] px-[clamp(18px,3vw,28px)] pb-5 pt-[clamp(18px,3vw,24px)]">
 										<button
@@ -1110,44 +1145,29 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 										<h3 className="font-display mt-1.5 text-[clamp(34px,5vw,64px)] tracking-[0.02em] text-[var(--ink)]">{modal.title}</h3>
 									</div>
 									{modalHasItemNavigation && modalService ? (
-										<>
-											<div className="ml-auto hidden items-center gap-2.5 sm:flex">
-												<button
-													type="button"
-													onClick={() => stepModalItem(-1)}
-													disabled={(modal?.itemIndex ?? 0) <= 0}
-													aria-label="Zurück"
-													className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[var(--line)] text-[18px] leading-none text-[var(--ink)] transition hover:border-[var(--gold)] hover:text-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-35"
-												>
-													<ChevronLeft className="h-[18px] w-[18px]" />
-												</button>
-												<span className="font-mono-ui px-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--muted)]">
-													{modalItemPosition} / {modalItemCount}
-												</span>
-												<button
-													type="button"
-													onClick={() => stepModalItem(1)}
-													disabled={(modal?.itemIndex ?? 0) >= modalItemCount - 1}
-													aria-label="Weiter"
-													className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[var(--line)] text-[18px] leading-none text-[var(--ink)] transition hover:border-[var(--gold)] hover:text-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-35"
-												>
-													<ChevronRight className="h-[18px] w-[18px]" />
-												</button>
-											</div>
-
-											<div className="ml-auto flex flex-wrap items-center gap-2 sm:hidden">
-												{modalService.items.map((item, index) => (
-													<button
-														key={`${item.title}-${index}`}
-														type="button"
-														onClick={() => goToModalItem(index)}
-														aria-label={`Video ${index + 1} von ${modalItemCount}`}
-														aria-current={index === (modal?.itemIndex ?? -1)}
-														className={`h-2.5 rounded-full transition-all duration-300 ${index === (modal?.itemIndex ?? -1) ? "w-6 bg-[var(--gold)]" : "w-2.5 bg-[color-mix(in_srgb,var(--ink)_25%,transparent)]"}`}
-													/>
-												))}
-											</div>
-										</>
+										<div className="ml-auto hidden items-center gap-2.5 sm:flex">
+											<button
+												type="button"
+												onClick={() => stepModalItem(-1)}
+												disabled={(modal?.itemIndex ?? 0) <= 0}
+												aria-label="Zurück"
+												className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[var(--line)] text-[18px] leading-none text-[var(--ink)] transition hover:border-[var(--gold)] hover:text-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-35"
+											>
+												<ChevronLeft className="h-[18px] w-[18px]" />
+											</button>
+											<span className="font-mono-ui px-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--muted)]">
+												{modalItemPosition} / {modalItemCount}
+											</span>
+											<button
+												type="button"
+												onClick={() => stepModalItem(1)}
+												disabled={(modal?.itemIndex ?? 0) >= modalItemCount - 1}
+												aria-label="Weiter"
+												className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[var(--line)] text-[18px] leading-none text-[var(--ink)] transition hover:border-[var(--gold)] hover:text-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-35"
+											>
+												<ChevronRight className="h-[18px] w-[18px]" />
+											</button>
+										</div>
 									) : null}
 								</div>
 							</div>
@@ -1170,6 +1190,20 @@ export function PortfolioSite({ content, tinaDocument }: PortfolioSiteProps) {
 												<span className="font-mono-ui text-xs font-medium uppercase tracking-[0.16em] text-[var(--muted)]">Kein Video hinterlegt</span>
 											</div>
 										)}
+										{modalHasItemNavigation && modalService ? (
+											<div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:hidden">
+												{modalService.items.map((item, index) => (
+													<button
+														key={`${item.title}-${index}`}
+														type="button"
+														onClick={() => goToModalItem(index)}
+														aria-label={`Video ${index + 1} von ${modalItemCount}`}
+														aria-current={index === (modal?.itemIndex ?? -1)}
+														className={`h-2.5 rounded-full transition-all duration-300 ${index === (modal?.itemIndex ?? -1) ? "w-6 bg-[var(--gold)]" : "w-2.5 bg-[color-mix(in_srgb,var(--ink)_25%,transparent)]"}`}
+													/>
+												))}
+											</div>
+										) : null}
 									</div>
 									<div className="mx-auto mt-[clamp(22px,3vw,30px)] w-full max-w-[920px]">
 										<p className="m-0 text-[clamp(15px,1.18vw,17px)] leading-[1.75] text-[var(--muted)]">{modal.desc}</p>

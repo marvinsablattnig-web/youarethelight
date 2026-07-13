@@ -188,6 +188,13 @@ export default defineConfig({
             label: "Seitenname",
             required: true,
           },
+          {
+            type: "boolean",
+            name: "maintenanceMode",
+            label: "Wartungsmodus (\"Coming soon\"-Seite anzeigen)",
+            description:
+              "Wenn aktiv, sehen Besucher anstelle der vollständigen Website nur eine \"Coming soon\"-Seite.",
+          },
           imageAssetField("logo", "Logo"),
           {
             type: "string",

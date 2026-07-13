@@ -13,7 +13,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
 	const logoUrl = getImageUrl(content.logo);
 
 	return (
-		<footer className="relative z-10 bg-[var(--bg)] px-[clamp(20px,5vw,64px)] pb-10 pt-[clamp(48px,6vw,72px)]">
+		<footer className="relative z-10 bg-[var(--bg)] px-[clamp(20px,5vw,64px)] pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] pt-[clamp(48px,6vw,72px)]">
 			<div className="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-10">
 				<div className="flex max-w-[360px] items-center">
 					<img src={logoUrl || "/logo.svg"} alt={content.logo?.alt || content.siteName} className="h-full max-h-[220px] w-auto object-contain" />
@@ -44,7 +44,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
 			<div className="font-mono-ui mx-auto mt-[clamp(40px,5vw,60px)] flex max-w-[1240px] flex-wrap justify-between gap-4 border-t border-[var(--line)] pt-6 text-[11px] font-medium tracking-[0.06em] text-[var(--faint)]">
 				<span>{content.footer.copyright}</span>
 				<div className="flex flex-wrap items-center gap-4">
-					<button type="button" onClick={openSettings} className="underline underline-offset-4 hover:text-[var(--gold)]">
+					<button type="button" onClick={openSettings} className="text-[var(--ink)] underline underline-offset-4 hover:text-[var(--gold)]">
 						Cookie-Einstellungen
 					</button>
 					<span>{content.footer.credits}</span>

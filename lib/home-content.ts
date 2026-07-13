@@ -75,6 +75,7 @@ export type PartnerLogo = {
 
 export type HomeContent = {
   siteName: string;
+  maintenanceMode: boolean;
   logo: ImageAsset | null;
   navCtaLabel: string;
   navLinks: NavLink[];
@@ -219,6 +220,7 @@ const normalizeVideoAsset = (asset: VideoAssetLike): VideoAsset => {
 
 export const normalizeHomepageDocument = (document: HomepageDocument): HomeContent => ({
   siteName: document.siteName ?? "",
+  maintenanceMode: document.maintenanceMode ?? false,
   logo: normalizeImageAsset(document.logo),
   navCtaLabel: document.navCtaLabel ?? "",
   navLinks: (document.navLinks ?? [])
