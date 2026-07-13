@@ -318,6 +318,7 @@ var getAccessToken = async () => {
 };
 var SupabaseLoginScreen = ({ handleAuthenticate }) => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -354,13 +355,13 @@ var SupabaseLoginScreen = ({ handleAuthenticate }) => {
     setStatus("sending");
     try {
       await handleAuthenticate({
-        email
+        email,
+        password
       });
-      setStatus("sent");
     } catch (submitError) {
       setStatus("idle");
       setError(
-        submitError instanceof Error ? submitError.message : "Der Magic Link konnte nicht versendet werden."
+        submitError instanceof Error ? submitError.message : "Die Anmeldung ist fehlgeschlagen."
       );
     }
   };
@@ -368,7 +369,7 @@ var SupabaseLoginScreen = ({ handleAuthenticate }) => {
     jsxs("div", { className: "mb-8", children: [
       jsx("p", { className: "text-xs font-semibold uppercase tracking-[0.28em] text-amber-300", children: "Tina Admin" }),
       jsx("h1", { className: "mt-3 text-3xl font-semibold tracking-tight text-white", children: "Editor Login" }),
-      jsx("p", { className: "mt-3 text-sm leading-6 text-slate-300", children: "Melde dich mit deinem freigeschalteten Supabase-Konto an. Du bekommst einen Magic Link per E-Mail." })
+      jsx("p", { className: "mt-3 text-sm leading-6 text-slate-300", children: "Melde dich mit deinem freigeschalteten Supabase-Konto an." })
     ] }),
     jsxs("form", { className: "space-y-4", onSubmit, children: [
       jsxs("label", { className: "block", children: [
@@ -386,17 +387,31 @@ var SupabaseLoginScreen = ({ handleAuthenticate }) => {
           }
         )
       ] }),
+      jsxs("label", { className: "block", children: [
+        jsx("span", { className: "mb-2 block text-sm font-medium text-slate-200", children: "Passwort" }),
+        jsx(
+          "input",
+          {
+            type: "password",
+            required: true,
+            autoComplete: "current-password",
+            value: password,
+            onChange: (event) => setPassword(event.target.value),
+            className: "w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-base text-white outline-none transition focus:border-amber-300",
+            placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+          }
+        )
+      ] }),
       jsx(
         "button",
         {
           type: "submit",
           disabled: status === "sending",
           className: "w-full rounded-2xl bg-amber-300 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-200 disabled:cursor-not-allowed disabled:opacity-70",
-          children: status === "sending" ? "Link wird gesendet..." : "Magic Link senden"
+          children: status === "sending" ? "Wird angemeldet..." : "Anmelden"
         }
       )
     ] }),
-    status === "sent" ? jsx("p", { className: "mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200", children: "Der Link wurde verschickt. \xD6ffne die E-Mail auf diesem Ger\xE4t und folge dem Login-Link zur\xFCck in den Admin." }) : null,
     error ? jsx("p", { className: "mt-4 rounded-2xl border border-rose-400/20 bg-rose-400/10 px-4 py-3 text-sm text-rose-200", children: error }) : null
   ] }) });
 };
@@ -406,22 +421,25 @@ TinaSessionProvider.displayName = "TinaSessionProvider";
 var SupabaseTinaAuthProvider = class extends AbstractAuthProvider {
   async authenticate(props) {
     const email = props?.email?.trim().toLowerCase();
+    const password = props?.password;
     if (!email) {
       throw new Error("Bitte gib eine E-Mail-Adresse ein.");
     }
-    const redirectTo = new URL("/admin/index.html", window.location.origin).toString();
-    const { error } = await getSupabaseBrowserClient().auth.signInWithOtp({
+    if (!password) {
+      throw new Error("Bitte gib dein Passwort ein.");
+    }
+    const { data, error } = await getSupabaseBrowserClient().auth.signInWithPassword({
       email,
-      options: {
-        emailRedirectTo: redirectTo,
-        shouldCreateUser: false
-      }
+      password
     });
     if (error) {
       throw new Error(error.message);
     }
+    if (!data.session?.access_token) {
+      throw new Error("Es wurde keine g\xFCltige Session zur\xFCckgegeben.");
+    }
     return {
-      id_token: "pending"
+      id_token: data.session.access_token
     };
   }
   async getUser() {
