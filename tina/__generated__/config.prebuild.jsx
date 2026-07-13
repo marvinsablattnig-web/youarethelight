@@ -307,7 +307,6 @@ import { defineConfig, LocalAuthProvider } from "tinacms";
 
 // tina/auth/provider.tsx
 init_browser();
-import { useEffect, useState } from "react";
 import { AbstractAuthProvider } from "tinacms";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 var getAccessToken = async () => {
@@ -317,52 +316,33 @@ var getAccessToken = async () => {
   return session?.access_token ?? null;
 };
 var SupabaseLoginScreen = ({ handleAuthenticate }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("idle");
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    let isMounted = true;
-    const checkAuthorization = async () => {
-      try {
-        const token = await getAccessToken();
-        if (!token) {
-          return;
-        }
-        const response = await fetch("/api/admin/session", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        if (!response.ok && isMounted) {
-          const body = await response.json().catch(() => null);
-          setError(body?.error || "Dieses Konto darf den Admin-Bereich nicht verwalten.");
-        }
-      } catch {
-        if (isMounted) {
-          setError("Die aktuelle Session konnte nicht gepr\xFCft werden.");
-        }
-      }
-    };
-    void checkAuthorization();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    setError(null);
-    setStatus("sending");
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const email = String(formData.get("email") || "");
+    const password = String(formData.get("password") || "");
+    const submitButton = form.querySelector('button[type="submit"]');
+    const errorEl = form.parentElement?.querySelector('[data-role="login-error"]') ?? null;
+    if (errorEl) {
+      errorEl.hidden = true;
+      errorEl.textContent = "";
+    }
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Wird angemeldet...";
+    }
     try {
-      await handleAuthenticate({
-        email,
-        password
-      });
+      await handleAuthenticate({ email, password });
     } catch (submitError) {
-      setStatus("idle");
-      setError(
-        submitError instanceof Error ? submitError.message : "Die Anmeldung ist fehlgeschlagen."
-      );
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Anmelden";
+      }
+      if (errorEl) {
+        errorEl.hidden = false;
+        errorEl.textContent = submitError instanceof Error ? submitError.message : "Die Anmeldung ist fehlgeschlagen.";
+      }
     }
   };
   return jsx("div", { className: "min-h-screen bg-slate-950 px-6 py-10 text-slate-100", children: jsxs("div", { className: "mx-auto max-w-md rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl shadow-black/40 backdrop-blur", children: [
@@ -378,10 +358,9 @@ var SupabaseLoginScreen = ({ handleAuthenticate }) => {
           "input",
           {
             type: "email",
+            name: "email",
             required: true,
             autoComplete: "email",
-            value: email,
-            onChange: (event) => setEmail(event.target.value),
             className: "w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-base text-white outline-none transition focus:border-amber-300",
             placeholder: "editor@example.com"
           }
@@ -393,10 +372,9 @@ var SupabaseLoginScreen = ({ handleAuthenticate }) => {
           "input",
           {
             type: "password",
+            name: "password",
             required: true,
             autoComplete: "current-password",
-            value: password,
-            onChange: (event) => setPassword(event.target.value),
             className: "w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-base text-white outline-none transition focus:border-amber-300",
             placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
           }
@@ -406,13 +384,12 @@ var SupabaseLoginScreen = ({ handleAuthenticate }) => {
         "button",
         {
           type: "submit",
-          disabled: status === "sending",
           className: "w-full rounded-2xl bg-amber-300 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-200 disabled:cursor-not-allowed disabled:opacity-70",
-          children: status === "sending" ? "Wird angemeldet..." : "Anmelden"
+          children: "Anmelden"
         }
       )
     ] }),
-    error ? jsx("p", { className: "mt-4 rounded-2xl border border-rose-400/20 bg-rose-400/10 px-4 py-3 text-sm text-rose-200", children: error }) : null
+    jsx("p", { "data-role": "login-error", hidden: true, className: "mt-4 rounded-2xl border border-rose-400/20 bg-rose-400/10 px-4 py-3 text-sm text-rose-200" })
   ] }) });
 };
 SupabaseLoginScreen.displayName = "SupabaseLoginScreen";
@@ -438,7 +415,6 @@ var SupabaseTinaAuthProvider = class extends AbstractAuthProvider {
     if (!data.session?.access_token) {
       throw new Error("Es wurde keine g\xFCltige Session zur\xFCckgegeben.");
     }
-    window.location.reload();
     return {
       id_token: data.session.access_token
     };
@@ -500,7 +476,7 @@ var SupabaseTinaAuthProvider = class extends AbstractAuthProvider {
 init_media_browser();
 init_media();
 init_browser();
-import { useState as useState2 } from "react";
+import { useState } from "react";
 import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
 var formatFileSize = (size) => {
   if (size >= 1024 * 1024) {
@@ -531,10 +507,10 @@ var readImageMetadata = (file) => new Promise((resolve) => {
   image.src = objectUrl;
 });
 var ImageAssetField = ({ field, input }) => {
-  const [isUploading, setIsUploading] = useState2(false);
-  const [isLoadingLibrary, setIsLoadingLibrary] = useState2(false);
-  const [library, setLibrary] = useState2([]);
-  const [error, setError] = useState2(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [isLoadingLibrary, setIsLoadingLibrary] = useState(false);
+  const [library, setLibrary] = useState([]);
+  const [error, setError] = useState(null);
   const currentAsset = input.value ?? null;
   const directory = getDefaultImageDirectory(field.name);
   const loadLibrary = async () => {
@@ -750,7 +726,7 @@ var ImageAssetField = ({ field, input }) => {
 init_media_browser();
 init_media();
 init_browser();
-import { useState as useState3 } from "react";
+import { useState as useState2 } from "react";
 import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 var formatFileSize2 = (size) => {
   if (size >= 1024 * 1024) {
@@ -797,10 +773,10 @@ var readVideoMetadata = (file) => new Promise((resolve) => {
   };
 });
 var VideoAssetField = ({ field, input }) => {
-  const [isUploading, setIsUploading] = useState3(false);
-  const [isLoadingLibrary, setIsLoadingLibrary] = useState3(false);
-  const [library, setLibrary] = useState3([]);
-  const [error, setError] = useState3(null);
+  const [isUploading, setIsUploading] = useState2(false);
+  const [isLoadingLibrary, setIsLoadingLibrary] = useState2(false);
+  const [library, setLibrary] = useState2([]);
+  const [error, setError] = useState2(null);
   const currentAsset = input.value ?? null;
   const currentSourceType = getVideoSourceType(currentAsset) ?? "upload";
   const directory = getDefaultMediaDirectory(field.name);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AbstractAuthProvider } from "tinacms";
 import type { LoginScreenProps } from "tinacms";
 
@@ -12,64 +12,48 @@ const getAccessToken = async () => {
   return session?.access_token ?? null;
 };
 
+// Tina's AuthWallInner invokes the login screen as a plain function call
+// (loginScreen({...})) instead of rendering it as JSX. That means any hooks
+// used in here run against AuthWallInner's own fiber, not a fiber of their
+// own - and since this function is only called on renders where the user
+// isn't authenticated yet, using hooks here causes a hook-count mismatch
+// the moment auth state flips ("Rendered fewer hooks than expected"). This
+// component must stay hook-free; state is handled via plain DOM updates.
 const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending">("idle");
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const checkAuthorization = async () => {
-      try {
-        const token = await getAccessToken();
-
-        if (!token) {
-          return;
-        }
-
-        const response = await fetch("/api/admin/session", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok && isMounted) {
-          const body = (await response.json().catch(() => null)) as { error?: string } | null;
-          setError(body?.error || "Dieses Konto darf den Admin-Bereich nicht verwalten.");
-        }
-      } catch {
-        if (isMounted) {
-          setError("Die aktuelle Session konnte nicht geprüft werden.");
-        }
-      }
-    };
-
-    void checkAuthorization();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError(null);
-    setStatus("sending");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const email = String(formData.get("email") || "");
+    const password = String(formData.get("password") || "");
+
+    const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const errorEl = form.parentElement?.querySelector<HTMLParagraphElement>('[data-role="login-error"]') ?? null;
+
+    if (errorEl) {
+      errorEl.hidden = true;
+      errorEl.textContent = "";
+    }
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Wird angemeldet...";
+    }
 
     try {
-      await handleAuthenticate({
-        email,
-        password,
-      });
+      await handleAuthenticate({ email, password });
     } catch (submitError) {
-      setStatus("idle");
-      setError(
-        submitError instanceof Error
-          ? submitError.message
-          : "Die Anmeldung ist fehlgeschlagen.",
-      );
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Anmelden";
+      }
+
+      if (errorEl) {
+        errorEl.hidden = false;
+        errorEl.textContent =
+          submitError instanceof Error ? submitError.message : "Die Anmeldung ist fehlgeschlagen.";
+      }
     }
   };
 
@@ -93,10 +77,9 @@ const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
             <span className="mb-2 block text-sm font-medium text-slate-200">E-Mail</span>
             <input
               type="email"
+              name="email"
               required
               autoComplete="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
               className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-base text-white outline-none transition focus:border-amber-300"
               placeholder="editor@example.com"
             />
@@ -106,10 +89,9 @@ const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
             <span className="mb-2 block text-sm font-medium text-slate-200">Passwort</span>
             <input
               type="password"
+              name="password"
               required
               autoComplete="current-password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
               className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-base text-white outline-none transition focus:border-amber-300"
               placeholder="••••••••"
             />
@@ -117,18 +99,13 @@ const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
 
           <button
             type="submit"
-            disabled={status === "sending"}
             className="w-full rounded-2xl bg-amber-300 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-200 disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {status === "sending" ? "Wird angemeldet..." : "Anmelden"}
+            Anmelden
           </button>
         </form>
 
-        {error ? (
-          <p className="mt-4 rounded-2xl border border-rose-400/20 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
-            {error}
-          </p>
-        ) : null}
+        <p data-role="login-error" hidden className="mt-4 rounded-2xl border border-rose-400/20 bg-rose-400/10 px-4 py-3 text-sm text-rose-200" />
       </div>
     </div>
   );
@@ -165,13 +142,6 @@ export class SupabaseTinaAuthProvider extends AbstractAuthProvider {
     if (!data.session?.access_token) {
       throw new Error("Es wurde keine gültige Session zurückgegeben.");
     }
-
-    // Force a full reload instead of letting Tina swap the login screen for the
-    // authenticated app in place: that in-place transition is untested for this
-    // provider (the previous magic-link flow only ever became "authenticated" via
-    // a fresh page load after the email redirect) and crashes with a React hooks
-    // error when triggered live.
-    window.location.reload();
 
     return {
       id_token: data.session.access_token,
