@@ -14,7 +14,8 @@ const getAccessToken = async () => {
 
 const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [password, setPassword] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending">("idle");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -60,15 +61,14 @@ const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
     try {
       await handleAuthenticate({
         email,
+        password,
       });
-
-      setStatus("sent");
     } catch (submitError) {
       setStatus("idle");
       setError(
         submitError instanceof Error
           ? submitError.message
-          : "Der Magic Link konnte nicht versendet werden.",
+          : "Die Anmeldung ist fehlgeschlagen.",
       );
     }
   };
@@ -84,8 +84,7 @@ const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
             Editor Login
           </h1>
           <p className="mt-3 text-sm leading-6 text-slate-300">
-            Melde dich mit deinem freigeschalteten Supabase-Konto an. Du bekommst einen
-            Magic Link per E-Mail.
+            Melde dich mit deinem freigeschalteten Supabase-Konto an.
           </p>
         </div>
 
@@ -103,21 +102,27 @@ const SupabaseLoginScreen = ({ handleAuthenticate }: LoginScreenProps) => {
             />
           </label>
 
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-slate-200">Passwort</span>
+            <input
+              type="password"
+              required
+              autoComplete="current-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-base text-white outline-none transition focus:border-amber-300"
+              placeholder="••••••••"
+            />
+          </label>
+
           <button
             type="submit"
             disabled={status === "sending"}
             className="w-full rounded-2xl bg-amber-300 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-200 disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {status === "sending" ? "Link wird gesendet..." : "Magic Link senden"}
+            {status === "sending" ? "Wird angemeldet..." : "Anmelden"}
           </button>
         </form>
-
-        {status === "sent" ? (
-          <p className="mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200">
-            Der Link wurde verschickt. Öffne die E-Mail auf diesem Gerät und folge dem
-            Login-Link zurück in den Admin.
-          </p>
-        ) : null}
 
         {error ? (
           <p className="mt-4 rounded-2xl border border-rose-400/20 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
@@ -138,26 +143,31 @@ TinaSessionProvider.displayName = "TinaSessionProvider";
 export class SupabaseTinaAuthProvider extends AbstractAuthProvider {
   async authenticate(props?: Record<string, string>) {
     const email = props?.email?.trim().toLowerCase();
+    const password = props?.password;
 
     if (!email) {
       throw new Error("Bitte gib eine E-Mail-Adresse ein.");
     }
 
-    const redirectTo = new URL("/admin/index.html", window.location.origin).toString();
-    const { error } = await getSupabaseBrowserClient().auth.signInWithOtp({
+    if (!password) {
+      throw new Error("Bitte gib dein Passwort ein.");
+    }
+
+    const { data, error } = await getSupabaseBrowserClient().auth.signInWithPassword({
       email,
-      options: {
-        emailRedirectTo: redirectTo,
-        shouldCreateUser: false,
-      },
+      password,
     });
 
     if (error) {
       throw new Error(error.message);
     }
 
+    if (!data.session?.access_token) {
+      throw new Error("Es wurde keine gültige Session zurückgegeben.");
+    }
+
     return {
-      id_token: "pending",
+      id_token: data.session.access_token,
     };
   }
 
