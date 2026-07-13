@@ -1,6 +1,6 @@
 {
   "siteName": "you are the light",
-  "maintenanceMode": false,
+  "maintenanceMode": true,
   "logo": {
     "url": "",
     "path": "",
